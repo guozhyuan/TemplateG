@@ -63,6 +63,7 @@ public class MainFragment extends BaseFragment {
         RecyclerView holder = view.findViewById(R.id.holder);
         holder.setLayoutManager(new LinearLayoutManager(getActivity()));
         holder.setAdapter(adapter);
+
     }
 
     @Override
