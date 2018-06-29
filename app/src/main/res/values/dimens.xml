@@ -1,3 +1,12 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="fab_margin">16dp</dimen>
+    <!-- BottomNavigationView  Start -->
+    <!--第一设置图片和文字之间的距离-->
+    <!--<dimen name="design_bottom_navigation_margin" tools:override="true">5dp</dimen>-->
+    <!--设置选中后字体不变大-->
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">12sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
+    <!--增加底部导航栏的高度,默认的底部导航栏的高度是 56dp-->
+    <!--<dimen name="design_bottom_navigation_height" tools:override="true">70dp</dimen>-->
+    <!-- BottomNavigationView  End -->
 </resources>

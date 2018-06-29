@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navi_main"
+        android:icon="@mipmap/favorite"
+        android:title="Favorite" />
+    <item
+        android:id="@+id/navi_msg"
+        android:icon="@mipmap/message"
+        android:title="Message" />
+    <item
+        android:id="@+id/navi_me"
+        android:icon="@mipmap/me"
+        android:title="Me" />
+    <!--<item-->
+        <!--android:id="@+id/navi_test"-->
+        <!--android:icon="@mipmap/me"-->
+        <!--android:title="Me" />-->
+
+</menu>
