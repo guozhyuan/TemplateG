@@ -3,4 +3,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="main_bottom_text_press">#FF8439</color>
+    <color name="main_bottom_text_release">#585858</color>
+    <color name="main_top_search_bg">#E9E9E9</color>
+    <color name="main_top_search_holder_bg">#F8F8F8</color>
+    <color name="main_bg">#ECECEC</color>
+
+
+    <!-- DropDownMenu  start -->
+    <color name="gray">#cccccc</color>
+    <color name="drop_down_selected">#7B1FA2</color>
+    <color name="drop_down_unselected">#111111</color>
+    <color name="mask_color">#88888888</color>
+    <color name="check_bg">#f2f2f2</color>
+    <color name="un_press_color">#9C27B0</color>
+    <!-- DropDownMenu  end -->
 </resources>

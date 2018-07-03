@@ -1,9 +1,15 @@
-package com.guo.projectg.util;
+package com.guo.projectg.ui.view;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.graphics.Point;
+import android.os.Build;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.view.Display;
+import android.view.WindowManager;
 
 import java.lang.reflect.Field;
 

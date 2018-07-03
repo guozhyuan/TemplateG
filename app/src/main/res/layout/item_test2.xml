@@ -10,5 +10,4 @@
         android:background="#888"
         android:padding="10dp"
         android:text="ViewType = 2;ViewType = 2;ViewType = 2" />
-
 </LinearLayout>
