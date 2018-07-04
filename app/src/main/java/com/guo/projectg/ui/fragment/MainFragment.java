@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,8 +67,19 @@ public class MainFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dropdownMenus = view.findViewById(R.id.dropdownMenus);
-
+        SwipeRefreshLayout swipe = view.findViewById(R.id.swipe);
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
+        swipe.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
+            @Override
+            public boolean canChildScrollUp(SwipeRefreshLayout parent, @Nullable View child) {
+                if (recyclerView == null) {
+                    return false;
+                }
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                return linearLayoutManager.findFirstCompletelyVisibleItemPosition() != 0;
+            }
+        });
+
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), 100);
         recyclerView.setAdapter(gridAdapter);
