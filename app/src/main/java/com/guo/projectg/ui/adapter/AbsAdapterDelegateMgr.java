@@ -1,7 +1,7 @@
 package com.guo.projectg.ui.adapter;
 
 
-import java.util.HashMap;
+import android.util.SparseArray;
 
 /**
  * Author : jugg
@@ -12,7 +12,7 @@ public class AbsAdapterDelegateMgr {
     private AbsAdapterDelegateMgr() {
     }
 
-    private HashMap<Integer, AbsAdapterDelegate> map;
+    private SparseArray<AbsAdapterDelegate> map;
 
     public AbsAdapterDelegate routing(int viewType) {
         return map.get(viewType);
@@ -20,13 +20,14 @@ public class AbsAdapterDelegateMgr {
 
 
     public static class Builder {
-        private HashMap<Integer, AbsAdapterDelegate> map;
+        private SparseArray<AbsAdapterDelegate> map;
 
         private AbsAdapterDelegateMgr mgr;
 
+        @SuppressWarnings("all")
         public Builder() {
             mgr = new AbsAdapterDelegateMgr();
-            map = new HashMap<>();
+            map = new SparseArray<AbsAdapterDelegate>();
         }
 
         public Builder regist(int viewType, AbsAdapterDelegate delegate) {

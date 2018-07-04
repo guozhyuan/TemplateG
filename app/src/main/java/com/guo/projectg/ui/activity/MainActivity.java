@@ -113,9 +113,10 @@ public class MainActivity extends BaseActivity {
         bean.setDetail("DETAIL");
         bean.setStatus(1);
         DBManager.getInstance().getDaoSession().getTestBeanDao().insert(bean);
-        Disposable disposable = ApiWrapper.getInstance().test().subscribe(
-                testBean -> Log.e("MainActivity", testBean.toString()),
-                throwable -> Log.e("MainActivity", throwable.getMessage()));
+        Disposable disposable = ApiWrapper.getInstance()
+                .test()
+                .subscribe(testBean -> Log.e("MainActivity", testBean.toString()),
+                        throwable -> Log.e("MainActivity", throwable.getMessage()));
 
         compositeDisposable.add(disposable);
     }
