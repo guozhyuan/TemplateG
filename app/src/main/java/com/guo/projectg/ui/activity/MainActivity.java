@@ -17,7 +17,6 @@ import com.guo.projectg.ui.adapter.MainVpAdapter;
 import com.guo.projectg.ui.fragment.MainFragment;
 import com.guo.projectg.ui.fragment.MeFragment;
 import com.guo.projectg.ui.fragment.MsgFragment;
-import com.guo.projectg.ui.view.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;

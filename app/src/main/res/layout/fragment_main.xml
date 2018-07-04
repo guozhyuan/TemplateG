@@ -1,56 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <!--SearchView-->
+    <RelativeLayout
+        android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="@color/main_top_search_holder_bg">
 
-        <RelativeLayout
-            android:id="@+id/rl"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp32"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginLeft="@dimen/dp14"
+            android:layout_marginRight="@dimen/dp14"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@drawable/shape_search_bg"
+            android:gravity="center"
+            android:text="@string/search" />
+    </RelativeLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_top_search_holder_bg">
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <TextView
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp43"
-                android:layout_marginBottom="@dimen/dp7"
-                android:layout_marginLeft="@dimen/dp19"
-                android:layout_marginRight="@dimen/dp19"
-                android:layout_marginTop="@dimen/dp7"
-                android:background="@drawable/shape_search_bg"
-                android:gravity="center"
-                android:text="@string/search" />
-        </RelativeLayout>
+                android:layout_height="@dimen/dp200"
+                android:background="#666"
+                app:layout_scrollFlags="scroll|enterAlways|snap" />
 
-        <View
+            <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/tablayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dp44"-->
+            <!--android:background="#ffffff"-->
+            <!--app:tabBackground="@color/white"-->
+            <!--app:tabIndicatorHeight="@dimen/dp0"-->
+            <!--app:tabMode="fixed"-->
+            <!--app:tabSelectedTextColor="#2e2e2e"-->
+            <!--app:tabTextColor="#2e2e2e">-->
+
+            <!--</android.support.design.widget.TabLayout>-->
+
+            <LinearLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp44"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_area"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="地区"
+                        android:textColor="#333"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/tv1"
+                        android:src="@mipmap/drop_down_unselected_icon" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_cate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="领域"
+                        android:textColor="#333"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/tv2"
+                        android:src="@mipmap/drop_down_unselected_icon" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="性别"
+                        android:textColor="#333"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/tv3"
+                        android:src="@mipmap/drop_down_unselected_icon" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/colorAccent"
-            app:layout_scrollFlags="scroll|enterAlways|snap" />
-    </android.support.design.widget.AppBarLayout>
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <RelativeLayout
+                    android:id="@+id/dropdownMenus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#80555555"
+                    android:visibility="visible" />
+            </FrameLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
 
 
-    <com.guo.projectg.ui.view.DropDownMenu
-        android:id="@+id/dropdown"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_width="match_parent"
-        android:layout_height="1000dp"
-        android:background="@color/white"
-        app:dddividerColor="@android:color/transparent"
-        app:ddmaskColor="@color/mask_color"
-        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
-        app:ddmenuTextSize="13sp"
-        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
-        app:ddtextSelectedColor="@color/drop_down_selected"
-        app:ddtextUnselectedColor="@color/drop_down_unselected"
-        app:ddunderlineColor="@color/gray">
-
-    </com.guo.projectg.ui.view.DropDownMenu>
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

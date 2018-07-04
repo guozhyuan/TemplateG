@@ -24,8 +24,9 @@ public class TestChat1 implements AbsAdapterDelegate {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(ctx).inflate(R.layout.item_test1, parent, false);
-        return new Holder(view);
+//        View view = LayoutInflater.from(ctx).inflate(R.layout.item_test1, parent, false);
+//        return new Holder(view);
+        return null;
     }
 
     @Override
@@ -34,14 +35,13 @@ public class TestChat1 implements AbsAdapterDelegate {
     }
 
 
-
     class Holder extends RecyclerView.ViewHolder {
 
-        private final TextView tv1;
+//        private final TextView tv1;
 
         public Holder(View itemView) {
             super(itemView);
-            tv1 = itemView.findViewById(R.id.tv1);
+//            tv1 = itemView.findViewById(R.id.tv1);
         }
     }
 

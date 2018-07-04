@@ -9,14 +9,8 @@
     <color name="main_top_search_bg">#E9E9E9</color>
     <color name="main_top_search_holder_bg">#F8F8F8</color>
     <color name="main_bg">#ECECEC</color>
+    <color name="dropdown_grid_checked">#FF9385</color>
+    <color name="dropdown_grid_unchecked">#FFFFFF</color>
 
 
-    <!-- DropDownMenu  start -->
-    <color name="gray">#cccccc</color>
-    <color name="drop_down_selected">#7B1FA2</color>
-    <color name="drop_down_unselected">#111111</color>
-    <color name="mask_color">#88888888</color>
-    <color name="check_bg">#f2f2f2</color>
-    <color name="un_press_color">#9C27B0</color>
-    <!-- DropDownMenu  end -->
 </resources>
