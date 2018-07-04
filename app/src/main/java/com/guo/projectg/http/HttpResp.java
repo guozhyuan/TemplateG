@@ -7,6 +7,6 @@ package com.guo.projectg.http;
 public class HttpResp<T> {
     public int code;
     public T data;
-    public String msg;
+    public String message;
 
 }

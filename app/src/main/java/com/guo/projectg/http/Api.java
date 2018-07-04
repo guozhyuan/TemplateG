@@ -4,7 +4,6 @@ package com.guo.projectg.http;
 import com.guo.projectg.bean.TestBean;
 
 import io.reactivex.Observable;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -13,8 +12,7 @@ import retrofit2.http.POST;
  */
 public interface Api {
 
-    @Headers("Accept: application/json")
-    @POST("test")
+    @POST("/")
     Observable<HttpResp<TestBean>> test();
 
 }

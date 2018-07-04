@@ -23,4 +23,3 @@ public class HttpScheduler {
     }
 }
 
-// upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
