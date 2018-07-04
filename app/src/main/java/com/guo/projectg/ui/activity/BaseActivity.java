@@ -21,7 +21,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
 
     public CompositeDisposable compositeDisposable;
-    private LinearLayout statusbarCover;
+    public LinearLayout statusbarCover;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

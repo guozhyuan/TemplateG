@@ -4,16 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg"
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
     <include layout="@layout/statusbar_cover" />
-
-    <android.support.v7.widget.SearchView
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#4192c4" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
@@ -25,11 +20,10 @@
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/colorPrimary"
+        app:itemBackground="@color/white"
         app:itemIconTint="@color/selector_item_color"
         app:itemTextColor="@color/selector_item_color"
         app:menu="@menu/menu_main_bottom_navi" />
 
-    <!--app:itemIconTint="@color/selector_item_color"-->
 
 </LinearLayout>

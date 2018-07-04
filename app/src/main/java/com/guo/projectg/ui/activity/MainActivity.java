@@ -6,11 +6,8 @@ import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Gravity;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.guo.projectg.R;
 import com.guo.projectg.bean.TestBean;
@@ -20,8 +17,10 @@ import com.guo.projectg.ui.adapter.MainVpAdapter;
 import com.guo.projectg.ui.fragment.MainFragment;
 import com.guo.projectg.ui.fragment.MeFragment;
 import com.guo.projectg.ui.fragment.MsgFragment;
+import com.guo.projectg.ui.view.DropDownMenu;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -34,9 +33,7 @@ public class MainActivity extends BaseActivity {
     private BottomNavigationView bottomView;
     private Badge badge;
     private ViewPager vp;
-    private Button btn;
-    private SearchView search;
-    private LinearLayout statusbarCover;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +46,16 @@ public class MainActivity extends BaseActivity {
         MainFragment mainFragment = new MainFragment();
         MsgFragment msgFragment = new MsgFragment();
         MeFragment meFragment = new MeFragment();
+//        MainFragment mainFragment = new MainFragment();
+//        MainFragment msgFragment = new MainFragment();
+//        MainFragment meFragment = new MainFragment();
         List<Fragment> list = new ArrayList<>();
         list.add(mainFragment);
         list.add(msgFragment);
         list.add(meFragment);
         MainVpAdapter adapter = new MainVpAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(adapter);
+        vp.setOffscreenPageLimit(2);
     }
 
 
@@ -68,7 +69,8 @@ public class MainActivity extends BaseActivity {
         statusbarCover = findViewById(R.id.statusbar_cover);
         bottomView = findViewById(R.id.bottom);
         vp = findViewById(R.id.vp);
-        search = findViewById(R.id.search);
+
+
     }
 
     @Override

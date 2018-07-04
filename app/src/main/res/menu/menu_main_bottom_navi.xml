@@ -4,18 +4,14 @@
     <item
         android:id="@+id/navi_main"
         android:icon="@mipmap/favorite"
-        android:title="Favorite" />
+        android:title="@string/main" />
     <item
         android:id="@+id/navi_msg"
         android:icon="@mipmap/message"
-        android:title="Message" />
+        android:title="@string/message" />
     <item
         android:id="@+id/navi_me"
         android:icon="@mipmap/me"
-        android:title="Me" />
-    <!--<item-->
-        <!--android:id="@+id/navi_test"-->
-        <!--android:icon="@mipmap/me"-->
-        <!--android:title="Me" />-->
+        android:title="@string/me" />
 
 </menu>

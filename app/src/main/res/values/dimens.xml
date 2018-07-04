@@ -9,4 +9,15 @@
     <!--增加底部导航栏的高度,默认的底部导航栏的高度是 56dp-->
     <!--<dimen name="design_bottom_navigation_height" tools:override="true">70dp</dimen>-->
     <!-- BottomNavigationView  End -->
+
+    <dimen name="dp5">5dp</dimen>
+    <dimen name="dp6">6dp</dimen>
+    <dimen name="dp7">7dp</dimen>
+    <dimen name="dp14">14dp</dimen>
+    <dimen name="dp19">19dp</dimen>
+    <dimen name="dp32">32dp</dimen>
+    <dimen name="dp43">43dp</dimen>
+    <dimen name="dp60">60dp</dimen>
+    <dimen name="dp254">254dp</dimen>
+
 </resources>
