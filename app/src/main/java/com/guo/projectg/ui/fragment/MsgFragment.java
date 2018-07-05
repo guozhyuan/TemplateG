@@ -31,7 +31,11 @@ public class MsgFragment extends BaseFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_main, container, false);
         return view;
     }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

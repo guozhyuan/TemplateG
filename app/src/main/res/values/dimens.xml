@@ -24,5 +24,15 @@
     <dimen name="dp254">254dp</dimen>
     <dimen name="dp8">8dp</dimen>
     <dimen name="dp30">30dp</dimen>
+    <dimen name="sp14">14sp</dimen>
+    <dimen name="dp10">10dp</dimen>
+    <dimen name="dp105">105dp</dimen>
+    <dimen name="dp33">33dp</dimen>
+    <dimen name="dp25">25dp</dimen>
+    <dimen name="dp45">45dp</dimen>
+    <dimen name="dp1">1dp</dimen>
+    <dimen name="dp196">196dp</dimen>
+    <dimen name="dp191">191dp</dimen>
+    <dimen name="dp104">104dp</dimen>
 
 </resources>

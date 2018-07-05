@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_bg"
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
@@ -21,8 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemBackground="@color/white"
-        app:itemIconTint="@color/selector_item_color"
-        app:itemTextColor="@color/selector_item_color"
+        app:itemIconTint="@color/seletor_main_menu_color"
+        app:itemTextColor="@color/seletor_main_menu_color"
         app:menu="@menu/menu_main_bottom_navi" />
 
 

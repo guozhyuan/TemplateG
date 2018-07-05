@@ -11,6 +11,7 @@
     <color name="main_bg">#ECECEC</color>
     <color name="dropdown_grid_checked">#FF9385</color>
     <color name="dropdown_grid_unchecked">#FFFFFF</color>
+    <color name="stroke_gray">#bcbcbc</color>
 
 
 </resources>

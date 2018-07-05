@@ -15,13 +15,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp32"
-            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginBottom="@dimen/dp6"
             android:layout_marginLeft="@dimen/dp14"
             android:layout_marginRight="@dimen/dp14"
-            android:layout_marginTop="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp6"
             android:background="@drawable/shape_search_bg"
             android:gravity="center"
-            android:text="@string/search" />
+            android:text="@string/search"
+            android:textSize="@dimen/sp14" />
     </RelativeLayout>
 
     <android.support.design.widget.CoordinatorLayout
@@ -31,31 +32,21 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/main_bg"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp200"
+                android:layout_marginBottom="10dp"
                 android:background="#666"
                 app:layout_scrollFlags="scroll|enterAlways" />
-
-            <!--<android.support.design.widget.TabLayout-->
-            <!--android:id="@+id/tablayout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dp44"-->
-            <!--android:background="#ffffff"-->
-            <!--app:tabBackground="@color/white"-->
-            <!--app:tabIndicatorHeight="@dimen/dp0"-->
-            <!--app:tabMode="fixed"-->
-            <!--app:tabSelectedTextColor="#2e2e2e"-->
-            <!--app:tabTextColor="#2e2e2e">-->
-
-            <!--</android.support.design.widget.TabLayout>-->
 
             <LinearLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp44"
+                android:background="@color/white"
                 android:orientation="horizontal">
 
                 <RelativeLayout
@@ -153,14 +144,15 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:background="@color/main_bg" />
 
                 <RelativeLayout
                     android:id="@+id/dropdownMenus"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#80555555"
-                    android:visibility="visible" />
+                    android:background="#50555555"
+                    android:visibility="invisible" />
             </FrameLayout>
 
         </android.support.v4.widget.SwipeRefreshLayout>

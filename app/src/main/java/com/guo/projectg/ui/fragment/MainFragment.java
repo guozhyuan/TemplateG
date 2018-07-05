@@ -1,33 +1,26 @@
 package com.guo.projectg.ui.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.guo.projectg.R;
 import com.guo.projectg.ui.adapter.DropDownGridAdapter;
+import com.guo.projectg.ui.adapter.DropDownLinearAdapter;
+import com.guo.projectg.ui.adapter.MainListAdapter;
 import com.guo.projectg.util.DeviceUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Author : jugg
@@ -69,6 +62,7 @@ public class MainFragment extends BaseFragment {
         dropdownMenus = view.findViewById(R.id.dropdownMenus);
         SwipeRefreshLayout swipe = view.findViewById(R.id.swipe);
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
+        //解决滑动冲突
         swipe.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
             @Override
             public boolean canChildScrollUp(SwipeRefreshLayout parent, @Nullable View child) {
@@ -80,8 +74,14 @@ public class MainFragment extends BaseFragment {
             }
         });
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), 100);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                outRect.top = DeviceUtils.dip2px(getActivity(), 5);
+            }
+        });
+        MainListAdapter gridAdapter = new MainListAdapter(getActivity());
         recyclerView.setAdapter(gridAdapter);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
@@ -107,47 +107,6 @@ public class MainFragment extends BaseFragment {
                 setDropDownMenus(2);
             }
         });
-
-
-//        TabLayout tabLayout = view.findViewById(R.id.tablayout);
-//        tabLayout.addTab(tabLayout.newTab().setCustomView(getCustomTabView("地区")));
-//        tabLayout.addTab(tabLayout.newTab().setCustomView(getCustomTabView("领域")));
-//        tabLayout.addTab(tabLayout.newTab().setCustomView(getCustomTabView("性别")));
-//        tabLayout.setSelected(false);
-//        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                tab.getPosition();
-//                TextView tv = tab.getCustomView().findViewById(R.id.tv);
-//                Log.e(TAG, "onTabSelected: " + tv.getText().toString());
-//                Log.e(TAG, "getPosition: " +   tab.getPosition());
-//                if (tab.isSelected()) {
-//                    dropdownMenus.setVisibility(View.INVISIBLE);
-//                } else {
-//                    dropdownMenus.removeAllViews();
-//                    dropdownMenus.setVisibility(View.VISIBLE);
-//                    View popWindows = LayoutInflater.from(getActivity()).inflate(R.layout.view_dropdown_content, null, false);
-//                    RecyclerView dropdownRecycler = popWindows.findViewById(R.id.dropdownRecycler);
-//                    dropdownRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-//                    DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), citys);
-//                    dropdownRecycler.setAdapter(gridAdapter);
-//                    dropdownMenus.addView(popWindows);
-//                }
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//                TextView tv = tab.getCustomView().findViewById(R.id.tv);
-//                Log.e(TAG, "onTabUnselected: " + tv.getText().toString());
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-
-
     }
 
     @Override
@@ -165,14 +124,9 @@ public class MainFragment extends BaseFragment {
         super.onDetach();
     }
 
-    private View getCustomTabView(String text) {
-        View tabView = LayoutInflater.from(getActivity()).inflate(R.layout.view_main_tabitem, null, false);
-        TextView textView = tabView.findViewById(R.id.tv);
-        textView.setText(text);
-        return tabView;
-    }
 
     private void setDropDownMenus(int pos) {
+        Log.e(TAG, "setDropDownMenus: " + pos);
         if (pos == currentSelectedPos) {
             dropdownMenus.setVisibility(View.INVISIBLE);
             currentSelectedPos = -1;
@@ -180,13 +134,76 @@ public class MainFragment extends BaseFragment {
         } else {
             dropdownMenus.removeAllViews();
             dropdownMenus.setVisibility(View.VISIBLE);
-            View popWindows = LayoutInflater.from(getActivity()).inflate(R.layout.view_dropdown_content, dropdownMenus, false);
-            RecyclerView dropdownRecycler = popWindows.findViewById(R.id.dropdownRecycler);
-            dropdownRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), 10);
-            dropdownRecycler.setAdapter(gridAdapter);
-            dropdownMenus.addView(popWindows);
+
+            switch (pos) {
+                case 0:
+                    setupAreaLayout();
+                    break;
+                case 1:
+                    setupCateLayout();
+                    break;
+                case 2:
+                    setupGenderLayout();
+                    break;
+            }
         }
         currentSelectedPos = pos;
+    }
+
+    private void setupAreaLayout() {
+        View popWindows = LayoutInflater.from(getActivity()).inflate(R.layout.view_dropdown_content, dropdownMenus, false);
+        RecyclerView dropdownRecycler = popWindows.findViewById(R.id.dropdownRecycler);
+        dropdownRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        dropdownRecycler.addItemDecoration(new SpacesItemDecoration(DeviceUtils.dip2px(getActivity(), 15)));
+        DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), citys);
+        dropdownRecycler.setAdapter(gridAdapter);
+        dropdownMenus.addView(popWindows);
+    }
+
+    private void setupCateLayout() {
+        View popWindows = LayoutInflater.from(getActivity()).inflate(R.layout.view_dropdown_content, dropdownMenus, false);
+        RecyclerView dropdownRecycler = popWindows.findViewById(R.id.dropdownRecycler);
+        dropdownRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        dropdownRecycler.addItemDecoration(new SpacesItemDecoration(DeviceUtils.dip2px(getActivity(), 15)));
+        DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), ages);
+        dropdownRecycler.setAdapter(gridAdapter);
+        dropdownMenus.addView(popWindows);
+    }
+
+    private void setupGenderLayout() {
+        View popWindows = LayoutInflater.from(getActivity()).inflate(R.layout.view_dropdown_content, dropdownMenus, false);
+        RecyclerView dropdownRecycler = popWindows.findViewById(R.id.dropdownRecycler);
+        dropdownRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        DropDownLinearAdapter gridAdapter = new DropDownLinearAdapter(getActivity(), sexs);
+        dropdownRecycler.setAdapter(gridAdapter);
+        dropdownMenus.addView(popWindows);
+    }
+
+    class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+        private int space;
+
+        public SpacesItemDecoration(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view,
+                                   RecyclerView parent, RecyclerView.State state) {
+            outRect.left = space;
+            outRect.bottom = space;
+            // Add top margin only for the first item to avoid double space between items
+            if (parent.getChildLayoutPosition(view) % 3 == 2) {
+                outRect.right = space;
+            } else {
+                outRect.right = 0;
+            }
+            if (parent.getChildAdapterPosition(view) < 3) {
+                outRect.top = space;
+            } else {
+                outRect.top = 0;
+            }
+
+        }
+
     }
 }
