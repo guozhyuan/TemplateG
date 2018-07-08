@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <color name="tagview_green">#47bb44</color>
+    <color name="tagview_gray">#bcbcbc</color>
+    <color name="tagview_white">#ffffff</color>
+
+</resources>

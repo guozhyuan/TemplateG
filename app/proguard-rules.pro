@@ -27,7 +27,6 @@
 ##---------------End:   Custom  ----------
 
 
-
 ##>>---------------------------  Gson  --------------------------------
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
@@ -90,3 +89,14 @@ public static java.lang.String TABLENAME;
 ##>>---------------------------  BadgeView  --------------------------------
 -keep q.rorbin.badgeview.** {*;}
 ##---------------------------  BadgeView  --------------------------------<<
+
+##>>---------------------------  Glide  --------------------------------
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+
+##---------------------------  Glide  --------------------------------<<

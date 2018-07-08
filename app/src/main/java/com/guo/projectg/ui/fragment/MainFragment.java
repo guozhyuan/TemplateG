@@ -1,6 +1,7 @@
 package com.guo.projectg.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.guo.projectg.R;
+import com.guo.projectg.ui.activity.SearchActivity;
 import com.guo.projectg.ui.adapter.DropDownGridAdapter;
 import com.guo.projectg.ui.adapter.DropDownLinearAdapter;
 import com.guo.projectg.ui.adapter.MainListAdapter;
@@ -29,12 +31,14 @@ import com.guo.projectg.util.DeviceUtils;
  */
 public class MainFragment extends BaseFragment {
     private static final String TAG = "MainFragment";
-    private String headers[] = {"地区", "领域", "性别"};
     private String citys[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
     private String ages[] = {"不限", "18岁以下", "18-22岁", "23-26岁", "27-35岁", "35岁以上"};
     private String sexs[] = {"不限", "男", "女"};
     private int currentSelectedPos = -1;
     private RelativeLayout dropdownMenus;
+    private SwipeRefreshLayout swipe;
+    private RecyclerView recyclerView;
+    private RelativeLayout search;
 
 
     @Override
@@ -59,9 +63,15 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        search = view.findViewById(R.id.rl);
+        search.setOnClickListener((v) -> {
+            startActivity(new Intent(getActivity(), SearchActivity.class));
+        });
         dropdownMenus = view.findViewById(R.id.dropdownMenus);
-        SwipeRefreshLayout swipe = view.findViewById(R.id.swipe);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler);
+        dropdownMenus.setOnClickListener((v) -> {
+        });
+        swipe = view.findViewById(R.id.swipe);
+        recyclerView = view.findViewById(R.id.recycler);
         //解决滑动冲突
         swipe.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
             @Override

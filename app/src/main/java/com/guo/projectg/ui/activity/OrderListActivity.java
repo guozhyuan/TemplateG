@@ -9,6 +9,10 @@ import android.support.v4.view.ViewPager;
 import com.guo.projectg.R;
 import com.guo.projectg.ui.adapter.OrderVpAdapter;
 import com.guo.projectg.ui.fragment.MeFragment;
+import com.guo.projectg.ui.fragment.OrderAllFragment;
+import com.guo.projectg.ui.fragment.OrderCompleteFragment;
+import com.guo.projectg.ui.fragment.OrderDoubtFragment;
+import com.guo.projectg.ui.fragment.OrderNotPayFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +26,17 @@ public class OrderListActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         List<Fragment> list = new ArrayList<>();
-        MeFragment meFragment1 = new MeFragment();
-        MeFragment meFragment2 = new MeFragment();
-        MeFragment meFragment3 = new MeFragment();
-        MeFragment meFragment4 = new MeFragment();
-        list.add(meFragment1);
-        list.add(meFragment2);
-        list.add(meFragment3);
-        list.add(meFragment4);
+        OrderAllFragment allFragment = new OrderAllFragment();
+        OrderNotPayFragment notPayFragment = new OrderNotPayFragment();
+        OrderDoubtFragment doubtFragment = new OrderDoubtFragment();
+        OrderCompleteFragment completeFragment = new OrderCompleteFragment();
+        list.add(allFragment);
+        list.add(notPayFragment);
+        list.add(doubtFragment);
+        list.add(completeFragment);
         OrderVpAdapter adapter = new OrderVpAdapter(getSupportFragmentManager(), list, titles);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
         tabs.addTab(tabs.newTab().setText("全部"));
         tabs.addTab(tabs.newTab().setText("待付款"));
         tabs.addTab(tabs.newTab().setText("待咨询"));

@@ -8,10 +8,17 @@
     <color name="main_bottom_text_release">#585858</color>
     <color name="main_top_search_bg">#E9E9E9</color>
     <color name="main_top_search_holder_bg">#F8F8F8</color>
-    <color name="main_bg">#ECECEC</color>
+    <color name="main_bg">#DEDEDE</color>
     <color name="dropdown_grid_checked">#FF9385</color>
     <color name="dropdown_grid_unchecked">#FFFFFF</color>
     <color name="stroke_gray">#bcbcbc</color>
+    <color name="make_an_appointment">#FF9385</color>
+    <color name="green">#FF9385</color>
 
+    <!-- StepView -->
+    <color name="completed_color">#47bb44</color>
+    <color name="uncompleted_color">#bcbcbc</color>
+    <color name="completed_text_color">#47bb44</color>
+    <color name="uncompleted_text_color">#585858</color>
 
 </resources>

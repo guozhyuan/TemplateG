@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.guo.projectg">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".App"
@@ -21,7 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.OrderListActivity"/>
+        <activity android:name=".ui.activity.OrderListActivity" />
+        <activity android:name=".ui.activity.OrderDetailActivity" />
+        <activity android:name=".ui.activity.ExpertDetailActivity" />
+        <activity android:name=".ui.activity.EvaluateActivity" />
+        <activity android:name=".ui.activity.SearchActivity" />
     </application>
 
 </manifest>
