@@ -38,7 +38,7 @@
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/head"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_marginStart="15dp"
@@ -48,23 +48,23 @@
             app:srcCompat="@mipmap/ic_launcher_round" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/head"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="张三" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/addr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView11"
+            app:layout_constraintStart_toEndOf="@+id/head"
+            app:layout_constraintTop_toBottomOf="@+id/nick"
             tools:text="深圳" />
 
         <TextView
@@ -73,8 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            app:layout_constraintStart_toEndOf="@+id/head"
+            app:layout_constraintTop_toBottomOf="@+id/addr"
             tools:text="国家二级" />
 
         <TextView

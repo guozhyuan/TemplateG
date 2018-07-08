@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.guo.projectg.R;
+import com.guo.projectg.ui.activity.FavoriteActivity;
 import com.guo.projectg.ui.activity.OrderListActivity;
 
 /**
@@ -79,7 +80,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), OrderListActivity.class));
                 break;
             case R.id.ll_favorite:
-
+                startActivity(new Intent(getActivity(), FavoriteActivity.class));
                 break;
             case R.id.coupons:
 
