@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.guo.projectg.R;
+import com.guo.projectg.ui.activity.ChangePWDActivity;
+import com.guo.projectg.ui.activity.CouponsActivity;
 import com.guo.projectg.ui.activity.FavoriteActivity;
 import com.guo.projectg.ui.activity.OrderListActivity;
+import com.guo.projectg.ui.activity.VisitorsActivity;
 
 /**
  * Author : jugg
@@ -83,13 +86,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), FavoriteActivity.class));
                 break;
             case R.id.coupons:
-
+                startActivity(new Intent(getActivity(), CouponsActivity.class));
                 break;
             case R.id.resetpwd:
-
+                startActivity(new Intent(getActivity(), ChangePWDActivity.class));
                 break;
             case R.id.visitor:
-
+                startActivity(new Intent(getActivity(), VisitorsActivity.class));
                 break;
 
         }
