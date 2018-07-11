@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/statusbar_cover" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/peer_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="导航栏"
+            android:textColor="#2c2c2c"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="114dp">
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <co.lujun.androidtagview.TagContainerLayout
+        android:id="@+id/tagLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        app:container_background_color="@android:color/transparent"
+        app:container_border_radius="0dp"
+        app:container_enable_drag="false"
+        app:horizontal_interval="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView25"
+        app:tag_background_color="#47bb44"
+        app:tag_border_color="@android:color/transparent"
+        app:tag_clickable="true"
+        app:tag_corner_radius="4dp"
+        app:tag_text_color="#ffffff"
+        app:tag_theme="none"
+        app:vertical_interval="15dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

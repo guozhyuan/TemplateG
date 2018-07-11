@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/root"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
@@ -46,19 +47,6 @@
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-        <!--<TextView-->
-        <!--android:id="@+id/discount_code"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="140dp"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:text="优惠码：IUYKJB135465"-->
-        <!--android:textColor="#585858"-->
-        <!--android:textSize="14sp"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView18" />-->
 
         <View
             android:id="@+id/view"

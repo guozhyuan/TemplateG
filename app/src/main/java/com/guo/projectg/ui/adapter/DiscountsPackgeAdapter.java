@@ -39,7 +39,6 @@ public class DiscountsPackgeAdapter extends RecyclerView.Adapter<DiscountsPackge
         holder.expand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("TAG", "onClick: current position status = " + bean.isExpand());
                 if (bean.isExpand()) {
                     holder.discountContainer.removeAllViews();
                     bean.setExpand(false);
@@ -48,6 +47,8 @@ public class DiscountsPackgeAdapter extends RecyclerView.Adapter<DiscountsPackge
                     for (int i = 0; i < bean.getSunTypeCnt(); i++) {
                         View discountsItem = LayoutInflater.from(ctx).inflate(R.layout.view_discount_packge_expand, holder.discountContainer, false);
                         holder.discountContainer.addView(discountsItem);
+                        TextView code = discountsItem.findViewById(R.id.discount_code);
+                        TextView state = discountsItem.findViewById(R.id.discount_state);
                     }
                 }
                 notifyDataSetChanged();

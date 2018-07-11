@@ -32,6 +32,7 @@
         <activity android:name=".ui.activity.ChangePWDActivity" />
         <activity android:name=".ui.activity.VisitorsActivity" />
         <activity android:name=".ui.activity.CouponsActivity" />
+        <activity android:name=".ui.activity.ConsumerEvaluateActivity" />
     </application>
 
 </manifest>

@@ -82,7 +82,8 @@ public class TagContainerLayout extends ViewGroup {
     /**
      * TagContainerLayout border color(default #22FF0000)
      */
-    private int mBorderColor = Color.parseColor("#22FF0000");
+//    private int mBorderColor = Color.parseColor("#22FF0000");
+    private int mBorderColor = Color.parseColor("#00000000");
 
     /**
      * TagContainerLayout background color(default #11FF0000)
