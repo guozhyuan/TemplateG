@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.guo.projectg.R;
 import com.guo.projectg.bean.DiscountsPackgeBean;
-import com.guo.projectg.ui.adapter.DiscountsCouponsAdapter;
 import com.guo.projectg.ui.adapter.DiscountsPackgeAdapter;
 import com.guo.projectg.util.DeviceUtils;
 
