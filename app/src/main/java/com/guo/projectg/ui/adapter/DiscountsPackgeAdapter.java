@@ -1,25 +1,19 @@
 package com.guo.projectg.ui.adapter;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.guo.projectg.R;
 import com.guo.projectg.bean.DiscountsPackgeBean;
-import com.guo.projectg.ui.activity.OrderDetailActivity;
-import com.guo.projectg.ui.view.ExpandLayout;
 
 import java.util.List;
 
-public class DiscountsPackgeAdapter extends RecyclerView.Adapter<DiscountsPackgeAdapter.VH> {
+public class DiscountsPackgeAdapter extends RecyclerView.Adapter {
 
     private Context ctx;
     private List<DiscountsPackgeBean> list;
@@ -31,35 +25,78 @@ public class DiscountsPackgeAdapter extends RecyclerView.Adapter<DiscountsPackge
     }
 
     @Override
-    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(ctx).inflate(R.layout.item_discounts_packge_list, parent, false);
-        return new VH(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = null;
+        RecyclerView.ViewHolder viewHolder = null;
+        switch (viewType) {
+            case 0:
+                view = LayoutInflater.from(ctx).inflate(R.layout.item_discounts_packge_list, parent, false);
+                viewHolder = new VH(view);
+                break;
+            case 1:
+                view = LayoutInflater.from(ctx).inflate(R.layout.item_discounts_packge_list, parent, false);
+                viewHolder = new VH2(view);
+                break;
+        }
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(VH holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DiscountsPackgeBean bean = list.get(position);
-        for (int i = 0; i < list.get(position).getSunTypeCnt(); i++) {
-            View discountsItem = LayoutInflater.from(ctx).inflate(R.layout.view_discount_packge_expand, null);
-            holder.discountContainer.addView(discountsItem);
-        }
-        viewHeight = holder.discountContainer.getMeasuredHeight();
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.discountContainer.getLayoutParams();
-        params.height = 0;
-        holder.expand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("", "点了EXPAND");
-                if (bean.isExpand()) {
-                    params.height = 0;
-                    bean.setExpand(false);
-                } else {
-                    params.height = viewHeight;
-                    bean.setExpand(true);
+        switch (holder.getItemViewType()) {
+            case 0:
+                VH vh = (VH) holder;
+                vh.expand.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bean.setExpand(true);
+                        notifyItemChanged(position);
+                    }
+                });
+                break;
+            case 1:
+                VH2 vh2 = (VH2) holder;
+                vh2.discountContainer.removeAllViews();
+                for (int i = 0; i < bean.getSunTypeCnt(); i++) {
+                    View discountsItem = LayoutInflater.from(ctx).inflate(R.layout.view_discount_packge_expand, vh2.discountContainer, false);
+                    vh2.discountContainer.addView(discountsItem);
                 }
-                notifyItemChanged(position);
-            }
-        });
+                vh2.expand.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bean.setExpand(false);
+                        notifyItemChanged(position);
+                    }
+                });
+                break;
+        }
+
+//        holder.expand.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.e("TAG", "onClick: current position status = " + bean.isExpand());
+//                if (bean.isExpand()) {
+//                    holder.discountContainer.removeAllViews();
+//                    bean.setExpand(false);
+//                } else {
+//                    bean.setExpand(true);
+//                    for (int i = 0; i < bean.getSunTypeCnt(); i++) {
+//                        View discountsItem = LayoutInflater.from(ctx).inflate(R.layout.view_discount_packge_expand, holder.discountContainer, false);
+//                        holder.discountContainer.addView(discountsItem);
+//                    }
+//                    holder.discountContainer.requestLayout();
+//                    holder.root.requestLayout();
+//                }
+//                notifyDataSetChanged();
+//            }
+//        });
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return list.get(position).isExpand() ? 1 : 0;
     }
 
     @Override
@@ -68,8 +105,8 @@ public class DiscountsPackgeAdapter extends RecyclerView.Adapter<DiscountsPackge
     }
 
     class VH extends RecyclerView.ViewHolder {
-        public LinearLayout discountContainer;
-        public TextView expand;
+        private LinearLayout discountContainer;
+        private TextView expand;
 
         public VH(View itemView) {
             super(itemView);
@@ -78,29 +115,15 @@ public class DiscountsPackgeAdapter extends RecyclerView.Adapter<DiscountsPackge
         }
     }
 
-    private void animateToggle(long animationDuration) {
-//        ValueAnimator heightAnimation = isExpand ? ValueAnimator.ofFloat(0f, viewHeight) : ValueAnimator.ofFloat(viewHeight, 0f);
-        ValueAnimator heightAnimation = ValueAnimator.ofFloat(0f, viewHeight);
-        heightAnimation.setDuration(animationDuration / 2);
-        heightAnimation.setStartDelay(animationDuration / 2);
+    class VH2 extends RecyclerView.ViewHolder {
+        private TextView expand;
+        private LinearLayout discountContainer;
 
-        heightAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float val = (float) animation.getAnimatedValue();
-
-            }
-        });
-        heightAnimation.start();
+        public VH2(View itemView) {
+            super(itemView);
+            expand = itemView.findViewById(R.id.tv_expand);
+            discountContainer = itemView.findViewById(R.id.discount_holder);
+        }
     }
 
-
-    public void collapse() {
-        animateToggle(300);
-    }
-
-
-    public void expand() {
-        animateToggle(300);
-    }
 }

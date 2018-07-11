@@ -32,8 +32,7 @@ public class DiscountsPackgeFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_discounts, container, false);
-        return view;
+        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_discounts, container, false);
     }
 
 
