@@ -31,8 +31,10 @@
         <activity android:name=".ui.activity.FavoriteActivity" />
         <activity android:name=".ui.activity.ChangePWDActivity" />
         <activity android:name=".ui.activity.VisitorsActivity" />
-        <activity android:name=".ui.activity.CouponsActivity" />
+        <activity android:name=".ui.activity.CouponsListActivity" />
         <activity android:name=".ui.activity.ConsumerEvaluateActivity" />
+        <activity android:name=".ui.activity.ReservationActivity" />
+        <activity android:name=".ui.activity.CouponsDetailActivity" />
     </application>
 
 </manifest>

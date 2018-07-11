@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.LinearLayout;
 
 import com.guo.projectg.R;
 import com.guo.projectg.ui.activity.ChangePWDActivity;
-import com.guo.projectg.ui.activity.CouponsActivity;
+import com.guo.projectg.ui.activity.CouponsListActivity;
 import com.guo.projectg.ui.activity.FavoriteActivity;
 import com.guo.projectg.ui.activity.OrderListActivity;
 import com.guo.projectg.ui.activity.VisitorsActivity;
@@ -86,7 +85,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), FavoriteActivity.class));
                 break;
             case R.id.coupons:
-                startActivity(new Intent(getActivity(), CouponsActivity.class));
+                startActivity(new Intent(getActivity(), CouponsListActivity.class));
                 break;
             case R.id.resetpwd:
                 startActivity(new Intent(getActivity(), ChangePWDActivity.class));

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -115,55 +116,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/star1"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginBottom="24dp"
+        <com.hedgehog.ratingbar.RatingBar
+            android:id="@+id/ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@mipmap/ic_launcher_round" />
-
-        <ImageView
-            android:id="@+id/star2"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/star1"
-            app:srcCompat="@mipmap/ic_launcher_round" />
-
-        <ImageView
-            android:id="@+id/star3"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/star2"
-            app:srcCompat="@mipmap/ic_launcher_round" />
-
-        <ImageView
-            android:id="@+id/star4"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/star3"
-            app:srcCompat="@mipmap/ic_launcher_round" />
-
-        <ImageView
-            android:id="@+id/star5"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/star4"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            hedgehog:starCount="5"
+            hedgehog:starEmpty="@mipmap/star_empty"
+            hedgehog:starFill="@mipmap/star_full"
+            hedgehog:starImageHeight="30dp"
+            hedgehog:starImagePadding="15dp"
+            hedgehog:starImageWidth="30dp" />
 
         <TextView
             android:id="@+id/evaluation"

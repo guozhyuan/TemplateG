@@ -11,9 +11,17 @@ import android.view.View;
 import com.guo.projectg.R;
 import com.guo.projectg.ui.adapter.ConsumerEvaluateAdapter;
 import com.guo.projectg.util.DeviceUtils;
+import com.hedgehog.ratingbar.RatingBar;
+
+import java.util.ArrayList;
+
+import co.lujun.androidtagview.TagContainerLayout;
 
 public class ConsumerEvaluateActivity extends BaseActivity {
 
+
+    private RecyclerView recyclerView;
+    private TagContainerLayout tagLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,13 +36,13 @@ public class ConsumerEvaluateActivity extends BaseActivity {
 
     @Override
     public void findView() {
-        RecyclerView recyclerView = findViewById(R.id.recycler);
+        recyclerView = findViewById(R.id.recycler);
         ConsumerEvaluateAdapter adapter = new ConsumerEvaluateAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                if (parent.getChildAdapterPosition(view) != 1) {
+                if (parent.getChildAdapterPosition(view) != 0) {
                     outRect.top = DeviceUtils.dip2px(ConsumerEvaluateActivity.this, 10);
                 } else {
                     outRect.top = 0;
@@ -42,6 +50,20 @@ public class ConsumerEvaluateActivity extends BaseActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        tagLayout = findViewById(R.id.tagLayout);
+        ArrayList<String> tagList = new ArrayList<>();
+        tagList.add("非常专业");
+        tagList.add("有耐心");
+        tagList.add("态度很好啊");
+        tagList.add("巴拉巴拉");
+        tagList.add("非常");
+        tagList.add("专业");
+        tagLayout.setTags(tagList);
+
+        RatingBar ratingBar = findViewById(R.id.ratingbar);
+        ratingBar.setStar(3);
+        ratingBar.setmClickable(false);
     }
 
     @Override

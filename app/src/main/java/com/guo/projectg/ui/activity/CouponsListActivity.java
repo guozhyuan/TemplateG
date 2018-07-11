@@ -14,7 +14,7 @@ import com.guo.projectg.ui.fragment.DiscountsPackgeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CouponsActivity extends BaseActivity {
+public class CouponsListActivity extends BaseActivity {
     private ViewPager viewPager;
     private TabLayout tabs;
     private String[] titles = {"优惠券", "优惠套餐"};
@@ -38,7 +38,7 @@ public class CouponsActivity extends BaseActivity {
 
     @Override
     public int setLayoutId() {
-        return R.layout.activity_coupons;
+        return R.layout.activity_list_coupons;
     }
 
     @Override

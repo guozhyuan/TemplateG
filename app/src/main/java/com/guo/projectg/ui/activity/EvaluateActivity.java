@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 import com.guo.projectg.R;
+import com.hedgehog.ratingbar.RatingBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class EvaluateActivity extends BaseActivity {
     private List<String> chosenTags;
     private TextView tvEvaluate;
     private TagContainerLayout tagLayout;
+    private RatingBar ratingBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class EvaluateActivity extends BaseActivity {
         tagList.add("专业");
         tagLayout.setTags(tagList);
 
+
     }
 
     @Override
@@ -42,6 +45,7 @@ public class EvaluateActivity extends BaseActivity {
     public void findView() {
         tvEvaluate = findViewById(R.id.tv_evaluate);
         tagLayout = findViewById(R.id.tagLayout);
+        ratingBar = findViewById(R.id.ratingbar);
     }
 
     @Override
@@ -68,6 +72,13 @@ public class EvaluateActivity extends BaseActivity {
 
             @Override
             public void onTagCrossClick(int position) {
+
+            }
+        });
+
+        ratingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float RatingCount) {
 
             }
         });
