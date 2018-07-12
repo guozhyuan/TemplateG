@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
@@ -28,10 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="密码修改"
+            android:text="预约时间"
             android:textColor="#2c2c2c"
             android:textSize="18sp" />
     </FrameLayout>
-
 
 </LinearLayout>

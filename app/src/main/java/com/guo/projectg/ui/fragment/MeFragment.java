@@ -14,7 +14,7 @@ import com.guo.projectg.ui.activity.ChangePWDActivity;
 import com.guo.projectg.ui.activity.CouponsListActivity;
 import com.guo.projectg.ui.activity.FavoriteActivity;
 import com.guo.projectg.ui.activity.OrderListActivity;
-import com.guo.projectg.ui.activity.VisitorsActivity;
+import com.guo.projectg.ui.activity.VisitorInfoActivity;
 
 /**
  * Author : jugg
@@ -91,7 +91,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), ChangePWDActivity.class));
                 break;
             case R.id.visitor:
-                startActivity(new Intent(getActivity(), VisitorsActivity.class));
+                startActivity(new Intent(getActivity(), VisitorInfoActivity.class));
                 break;
 
         }

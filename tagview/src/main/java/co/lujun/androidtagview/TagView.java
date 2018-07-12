@@ -607,4 +607,11 @@ public class TagView extends View {
         requestLayout();
     }
 
+    public void setChosen(int mTextColor, int mBorderColor) {
+        this.mTextColor = mTextColor;
+        this.mBorderColor = mBorderColor;
+        postInvalidate();
+        requestLayout();
+    }
+
 }

@@ -108,7 +108,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
                 break;
 
             case R.id.order:
-
+                startActivity(new Intent(ExpertDetailActivity.this, ReservationActivity.class));
                 break;
             case R.id.need_more:
                 startActivity(new Intent(ExpertDetailActivity.this, ConsumerEvaluateActivity.class));

@@ -55,5 +55,6 @@ dependencies {
     //    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation project(':tagview')
     implementation 'com.hedgehog.ratingbar:app:1.1.2'
+    implementation 'com.contrarywind:Android-PickerView:4.1.5'
 
 }

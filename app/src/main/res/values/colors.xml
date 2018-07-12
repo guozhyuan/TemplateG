@@ -13,7 +13,6 @@
     <color name="dropdown_grid_unchecked">#FFFFFF</color>
     <color name="stroke_gray">#bcbcbc</color>
     <color name="make_an_appointment">#FF9385</color>
-    <color name="green">#FF9385</color>
 
     <!-- StepView -->
     <color name="completed_color">#47bb44</color>

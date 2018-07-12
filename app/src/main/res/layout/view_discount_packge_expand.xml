@@ -21,6 +21,6 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="15dp"
         android:text="未使用"
-        android:textColor="@color/selector_discounts_enable_state"
+        android:textColor="@color/color_discounts_enable_state"
         android:textSize="14sp" />
 </RelativeLayout>

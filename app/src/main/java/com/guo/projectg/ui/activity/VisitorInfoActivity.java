@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.guo.projectg.R;
 
-public class VisitorsActivity extends BaseActivity {
+public class VisitorInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -13,7 +13,7 @@ public class VisitorsActivity extends BaseActivity {
 
     @Override
     public int setLayoutId() {
-        return R.layout.activity_visitors;
+        return R.layout.activity_visitor_info;
     }
 
     @Override

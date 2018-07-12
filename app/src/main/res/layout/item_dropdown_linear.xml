@@ -15,6 +15,6 @@
         android:layout_height="@dimen/dp45"
         android:gravity="center"
         android:text="@string/male"
-        android:textColor="@color/seletor_dropdown_gender_color" />
+        android:textColor="@color/color_dropdown_gender" />
 
 </LinearLayout>
