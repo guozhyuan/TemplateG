@@ -145,7 +145,7 @@
                     android:textSize="18sp" />
 
                 <RadioGroup
-                    android:id="@+id/radioGroup"
+                    android:id="@+id/radioGroup_gender"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -154,7 +154,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/btnMan"
+                        android:id="@+id/radio_male"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -162,7 +162,7 @@
                         android:text="男" />
 
                     <RadioButton
-                        android:id="@+id/btnWoman"
+                        android:id="@+id/radio_female"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -171,7 +171,7 @@
 
             </RelativeLayout>
 
-            <!-- 姓名 -->
+            <!-- 年龄 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -220,6 +220,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/national"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -251,6 +252,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/present_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -282,6 +284,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/marital_status"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -290,8 +293,9 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="end"
-                    android:text="请选择"
+                    android:hint="请选择"
                     android:textColor="#585858"
+                    android:textColorHint="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -313,6 +317,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/job"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -326,7 +331,7 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <!-- 婚姻状况 -->
+            <!-- 学历 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -343,6 +348,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/education"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -351,8 +357,9 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="end"
-                    android:text="请选择"
+                    android:hint="请选择"
                     android:textColor="#585858"
+                    android:textColorHint="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -373,6 +380,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/native_place"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -432,6 +440,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/postal_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -462,6 +471,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -493,6 +503,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/pressing_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -524,6 +535,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/pressing_phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -572,6 +584,7 @@
 
 
                 <EditText
+                    android:id="@+id/family_status"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
@@ -639,6 +652,7 @@
 
 
                 <EditText
+                    android:id="@+id/question"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
@@ -706,6 +720,7 @@
 
 
                 <EditText
+                    android:id="@+id/present_status"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
@@ -773,6 +788,7 @@
 
 
                 <EditText
+                    android:id="@+id/history"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
@@ -827,6 +843,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
+
                     android:id="@+id/view12"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -840,6 +857,7 @@
 
 
                 <EditText
+                    android:id="@+id/special"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
@@ -869,6 +887,140 @@
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <!-- 其他信息 -->
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="其他信息"
+                    android:textColor="#2c2c2c"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view13"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="67dp"
+                    android:background="@color/main_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="通过什么渠道了解我们的"
+                    android:textColor="#2c2c2c"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view13" />
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="是否365会员"
+                    android:textColor="#2c2c2c"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+                <TextView
+                    android:id="@+id/channel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="官网"
+                    android:textColor="#585858"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view13" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_vip"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/channel">
+
+                    <RadioButton
+                        android:id="@+id/yes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="是"
+                        android:textColor="#585858"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="否"
+                        android:textColor="#585858"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="133dp"
+                android:background="@color/main_bg">
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="同意《心理服务协议》"
+                    android:textColor="#ff9358"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/submit"
+                    android:layout_width="0dp"
+                    android:layout_height="37dp"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/shape_evaluate_btn"
+                    android:gravity="center"
+                    android:text="提交"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
 
