@@ -14,47 +14,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guo.projectg.R;
+import com.guo.projectg.ui.fragment.BaseFragment;
 
-public class EWorkspaceActivity extends BaseActivity {
+public class EWorkspaceFragment extends BaseFragment {
 
     private String[] actionNames = {"主页设置", "我的订单", "客户", "时间设置", "咨询室共享", "套餐设置", "优惠码", "收入", "咨询报告", "评价"};
     private int[] actionImgs = {R.drawable.ic_launcher_background};
 
+
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_e_workspace, container, false);
+
     }
 
     @Override
-    public int setLayoutId() {
-        return R.layout.activity_e_workspace;
-    }
-
-    @Override
-    public void findView() {
-        RecyclerView actions = findViewById(R.id.actions);
-        actions.setLayoutManager(new GridLayoutManager(this, 4));
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        RecyclerView actions = view.findViewById(R.id.actions);
+        actions.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         ActionAdapter actionAdapter = new ActionAdapter();
         actions.setAdapter(actionAdapter);
 
-
-        RecyclerView todo = findViewById(R.id.todo);
+        RecyclerView todo = view.findViewById(R.id.todo);
         TodoAdapter todoAdapter = new TodoAdapter();
-        todo.setLayoutManager(new LinearLayoutManager(this));
+        todo.setLayoutManager(new LinearLayoutManager(getActivity()));
         todo.setAdapter(todoAdapter);
     }
-
-    @Override
-    public void initListener() {
-
-    }
-
 
     class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.VH> {
 
         @Override
         public ActionAdapter.VH onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(EWorkspaceActivity.this).inflate(R.layout.item_action_list, parent, false);
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_action_list, parent, false);
             return new VH(view);
         }
 
@@ -66,28 +59,28 @@ public class EWorkspaceActivity extends BaseActivity {
                 // "主页设置", "我的订单", "客户", "时间设置", "咨询室共享", "套餐设置", "优惠码", "收入", "咨询报告", "评价"
                 switch (position) {
                     case 0: //主页设置
-
+                        startActivity(new Intent(getActivity(), EMyInfoActivity.class));
                         break;
                     case 1: //我的订单
-                        startActivity(new Intent(EWorkspaceActivity.this, EMyOrdersActivity.class));
+                        startActivity(new Intent(getActivity(), EMyOrdersActivity.class));
                         break;
                     case 2: // 客户
-                        startActivity(new Intent(EWorkspaceActivity.this, EMyCustomerActivity.class));
+                        startActivity(new Intent(getActivity(), EMyCustomerActivity.class));
                         break;
                     case 3:// 时间设置
-                        startActivity(new Intent(EWorkspaceActivity.this, EMySchedulerActivity.class));
+                        startActivity(new Intent(getActivity(), EMySchedulerActivity.class));
                         break;
                     case 4:// 咨询室共享
-                        startActivity(new Intent(EWorkspaceActivity.this, EZiXunShiShareActivity.class));
+                        startActivity(new Intent(getActivity(), EZiXunShiShareActivity.class));
                         break;
                     case 5:// 套餐设置
-                        startActivity(new Intent(EWorkspaceActivity.this, EPackgeMgrActivity.class));
+                        startActivity(new Intent(getActivity(), EMyPackgeActivity.class));
                         break;
                     case 6: // 优惠码
-                        startActivity(new Intent(EWorkspaceActivity.this, EDiscountCodeActivity.class));
+                        startActivity(new Intent(getActivity(), EDiscountCodeActivity.class));
                         break;
                     case 7:// 收入
-                        startActivity(new Intent(EWorkspaceActivity.this, EIncomeActivity.class));
+                        startActivity(new Intent(getActivity(), EIncomeActivity.class));
                         break;
                     case 8:// 咨询报告
 
@@ -125,7 +118,7 @@ public class EWorkspaceActivity extends BaseActivity {
 
         @Override
         public TodoAdapter.TodoVH onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(EWorkspaceActivity.this).inflate(R.layout.item_todo_list, parent, false);
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_todo_list, parent, false);
             return new TodoVH(view);
         }
 
@@ -148,7 +141,7 @@ public class EWorkspaceActivity extends BaseActivity {
                 super(itemView);
 
                 desc = itemView.findViewById(R.id.desc);
-                time = itemView.findViewById(R.id.time);
+                time = itemView.findViewById(R.id.price);
             }
         }
     }

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".ui.activity.EMainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.OrderListActivity" />
         <activity android:name=".ui.activity.OrderDetailActivity" />
         <activity android:name=".ui.activity.ExpertDetailActivity" />
@@ -37,14 +38,17 @@
         <activity android:name=".ui.activity.CouponsDetailActivity" />
         <activity android:name=".ui.activity.ChooseCouponsActivity" />
         <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.EWorkspaceActivity" />
+        <!--<activity android:name=".ui.activity.EMainActivity" />-->
         <activity android:name=".ui.activity.EMyOrdersActivity" />
         <activity android:name=".ui.activity.EMyCustomerActivity" />
         <activity android:name=".ui.activity.EMySchedulerActivity" />
         <activity android:name=".ui.activity.EZiXunShiShareActivity" />
-        <activity android:name=".ui.activity.EPackgeMgrActivity" />
+        <activity android:name=".ui.activity.EMyPackgeActivity" />
         <activity android:name=".ui.activity.EDiscountCodeActivity" />
         <activity android:name=".ui.activity.EIncomeActivity" />
+        <activity android:name=".ui.activity.ECustomerDetailActivity" />
+        <activity android:name=".ui.activity.EMyInfoActivity" />
+        <activity android:name=".ui.activity.EEditPackgeActivity" />
 
     </application>
 

@@ -9,8 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.guo.projectg.R;
-import com.guo.projectg.ui.fragment.EZiXunFragment;
-import com.guo.projectg.ui.fragment.EZiXunShiFragment;
+import com.guo.projectg.ui.fragment.EZiXunOrderFragment;
+import com.guo.projectg.ui.fragment.EZiXunShiOrderFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ public class EMyOrdersActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         fargmentList = new ArrayList<>();
-        EZiXunFragment f1 = new EZiXunFragment();
-        EZiXunShiFragment f2 = new EZiXunShiFragment();
+        EZiXunOrderFragment f1 = new EZiXunOrderFragment();
+        EZiXunShiOrderFragment f2 = new EZiXunShiOrderFragment();
         fargmentList.add(f1);
         fargmentList.add(f2);
         Adapter adapter = new Adapter(getSupportFragmentManager());

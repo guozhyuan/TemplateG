@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guo.projectg.R;
@@ -33,6 +34,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.VH> 
                 ctx.startActivity(new Intent(ctx, OrderDetailActivity.class));
             }
         });
+        holder.method.setText(String.format("咨询方式:%s", ""));
+        holder.time.setText(String.format("咨询时间:%s", ""));
+        holder.orderNum.setText(String.format("订单号:%s", ""));
     }
 
     @Override
@@ -42,10 +46,25 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.VH> 
 
     class VH extends RecyclerView.ViewHolder {
         private TextView detail;
+        private TextView orderNum;
+        private TextView time;
+        private TextView orderStatus;
+        private TextView method;
+        private TextView job;
+        private TextView nickname;
+        private ImageView head;
+
 
         public VH(View itemView) {
             super(itemView);
             detail = itemView.findViewById(R.id.detail);
+            orderNum = itemView.findViewById(R.id.orderNum);
+            time = itemView.findViewById(R.id.price);
+            orderStatus = itemView.findViewById(R.id.orderStatus);
+            method = itemView.findViewById(R.id.packge_name);
+            job = itemView.findViewById(R.id.job);
+            nickname = itemView.findViewById(R.id.nickname);
+            head = itemView.findViewById(R.id.head);
         }
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:hedgehog="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg"
@@ -27,69 +27,49 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="收入"
+            android:text="编辑套餐"
             android:textColor="#2c2c2c"
             android:textSize="18sp" />
     </FrameLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="115dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/white">
-
-        <TextView
-            android:id="@+id/textView34"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="账户余额"
-            android:textColor="#585858"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView35"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:text="99999.00元"
-            android:textColor="#585858"
-            android:textSize="36sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView34" />
-    </android.support.constraint.ConstraintLayout>
-
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:text="套餐一经发布只有一次修改机会"
+        android:textColor="#ff4c39"
+        android:textSize="14sp" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="51dp"
         android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
-            android:text="当前可提现余额"
-            android:textColor="#585858"
+            android:layout_marginTop="8dp"
+            android:text="套餐名称"
+            android:textColor="#2d2d2d"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView33"
+        <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
-            android:text="99.00元"
-            android:textColor="#ff8439"
+            android:background="@null"
+            android:gravity="end"
+            android:hint="请输入套餐名称"
+            android:inputType="text"
+            android:textColor="#585858"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,126 +78,195 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/history"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="51dp"
         android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
-            android:text="提现记录"
-            android:textColor="#585858"
+            android:layout_marginTop="8dp"
+            android:text="套餐价格"
+            android:textColor="#2d2d2d"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:background="@null"
+            android:gravity="end"
+            android:hint="请输入套餐价格"
+            android:inputType="text"
+            android:textColor="#585858"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            hedgehog:srcCompat="@mipmap/drop_down_selected_icon" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/desc"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="51dp"
         android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
-            android:text="收支明细"
-            android:textColor="#585858"
+            android:layout_marginTop="8dp"
+            android:text="使用次数"
+            android:textColor="#2d2d2d"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            hedgehog:srcCompat="@mipmap/drop_down_selected_icon" />
-
-    </android.support.constraint.ConstraintLayout>
-
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/rule"
-        android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="提现规则说明"
+            android:background="@null"
+            android:gravity="end"
+            android:hint="请输入使用次数"
+            android:inputType="text"
             android:textColor="#585858"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            hedgehog:srcCompat="@mipmap/drop_down_selected_icon" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/setting"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="51dp"
         android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
-            android:text="提现账号设置"
-            android:textColor="#585858"
+            android:layout_marginTop="8dp"
+            android:text="可用咨询方式"
+            android:textColor="#2d2d2d"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:gravity="end"
+            android:hint="选择可用咨询方式"
+            android:textColor="#585858"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            hedgehog:srcCompat="@mipmap/drop_down_selected_icon" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="有效期"
+            android:textColor="#2d2d2d"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:gravity="end"
+            android:hint="请输入有效期"
+            android:inputType="text"
+            android:textColor="#585858"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/publish_packge"
+            android:layout_width="345dp"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_evaluate_btn"
+            android:gravity="center"
+            android:text="发布套餐"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/edit_packge"
+            android:layout_width="310dp"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/update"
+                android:layout_width="140dp"
+                android:layout_height="44dp"
+                android:background="@drawable/shape_evaluate_btn"
+                android:gravity="center"
+                android:text="更新"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/xiajia"
+                android:layout_width="140dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/shape_xiajia_btn"
+                android:gravity="center"
+                android:text="下架"
+                android:textColor="#585858"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

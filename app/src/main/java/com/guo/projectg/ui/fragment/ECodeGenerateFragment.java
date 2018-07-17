@@ -6,19 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * 咨询室订单管理
- */
-public class EZiXunShiFragment extends BaseFragment {
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+import com.guo.projectg.R;
+
+public class ECodeGenerateFragment extends BaseFragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_e_code_generate, container, false);
     }
 
     @Override
