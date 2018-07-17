@@ -5,7 +5,7 @@
               android:background="@android:color/transparent"
               android:orientation="horizontal">
 
-    <com.guo.projectg.ui.view.stepview.VerticalStepViewIndicator
+    <com.psychological.cxks.ui.view.stepview.VerticalStepViewIndicator
         android:id="@+id/steps_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

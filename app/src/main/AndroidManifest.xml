@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.guo.projectg">
+    package="com.psychological.cxks">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".App"
+        android:name="com.psychological.cxks.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name="com.psychological.cxks.ui.activity.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,28 +23,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.OrderListActivity" />
-        <activity android:name=".ui.activity.OrderDetailActivity" />
-        <activity android:name=".ui.activity.ExpertDetailActivity" />
-        <activity android:name=".ui.activity.EvaluateActivity" />
-        <activity android:name=".ui.activity.SearchActivity" />
-        <activity android:name=".ui.activity.FavoriteActivity" />
-        <activity android:name=".ui.activity.ChangePWDActivity" />
-        <activity android:name=".ui.activity.VisitorInfoActivity" />
-        <activity android:name=".ui.activity.CouponsListActivity" />
-        <activity android:name=".ui.activity.ConsumerEvaluateActivity" />
-        <activity android:name=".ui.activity.ReservationActivity" />
-        <activity android:name=".ui.activity.CouponsDetailActivity" />
-        <activity android:name=".ui.activity.ChooseCouponsActivity" />
-        <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.EWorkspaceActivity" />
-        <activity android:name=".ui.activity.EMyOrdersActivity" />
-        <activity android:name=".ui.activity.EMyCustomerActivity" />
-        <activity android:name=".ui.activity.EMySchedulerActivity" />
-        <activity android:name=".ui.activity.EZiXunShiShareActivity" />
-        <activity android:name=".ui.activity.EPackgeMgrActivity" />
-        <activity android:name=".ui.activity.EDiscountCodeActivity" />
-        <activity android:name=".ui.activity.EIncomeActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.OrderListActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.OrderDetailActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.ExpertDetailActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EvaluateActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.SearchActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.FavoriteActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.ChangePWDActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.VisitorInfoActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.CouponsListActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.ConsumerEvaluateActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.ReservationActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.CouponsDetailActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.ChooseCouponsActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.MainActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EWorkspaceActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EMyOrdersActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EMyCustomerActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EMySchedulerActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EZiXunShiShareActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EPackgeMgrActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EDiscountCodeActivity" />
+        <activity android:name="com.psychological.cxks.ui.activity.EIncomeActivity" />
 
     </application>
 
