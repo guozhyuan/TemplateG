@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.guo.projectg.ui.view.stepview.HorizontalStepsViewIndicator
+    <com.psychological.cxks.ui.view.stepview.HorizontalStepsViewIndicator
         android:id="@+id/steps_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

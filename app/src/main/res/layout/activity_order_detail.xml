@@ -46,7 +46,7 @@
                 android:layout_height="141dp"
                 android:orientation="vertical">
 
-                <com.guo.projectg.ui.view.stepview.HorizontalStepView
+                <com.psychological.cxks.ui.view.stepview.HorizontalStepView
                     android:id="@+id/stepview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
