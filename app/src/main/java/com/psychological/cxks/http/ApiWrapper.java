@@ -62,8 +62,8 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    public Observable<RegAndLogBean> rgsAndLog(String mobile, String code) {
-        Observable<HttpResp<RegAndLogBean>> observable = HttpX.Instance().Api().rgsAndLog(mobile, code).compose(HttpScheduler.applyIO());
+    public Observable<String> rgsAndLog(String mobile, String code) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().rgsAndLog(mobile, code).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 

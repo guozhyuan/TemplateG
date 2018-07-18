@@ -30,7 +30,7 @@ public interface Api {
     // 3.1.1 短信验证码一键注册及登录(/rgsAndLog)
     @FormUrlEncoded
     @POST("rgsAndLog")
-    Observable<HttpResp<RegAndLogBean>> rgsAndLog(@Field("mobile") String mobile, @Field("code") String code);
+    Observable<HttpResp<String>> rgsAndLog(@Field("mobile") String mobile, @Field("code") String code);
 
     // 3.1.2 密码登录(/login_)
     @FormUrlEncoded
@@ -58,7 +58,6 @@ public interface Api {
     Observable<HttpResp<Boolean>> reset(@Field("mobile") String mobile, @Field("code") String code, @Field("password") String password);
 
     // 3.2.1 获取主页的banner图片(/banner/list)
-    @FormUrlEncoded
     @POST("banner/list")
     Observable<HttpResp<List<BannerBean>>> bannerList();
 

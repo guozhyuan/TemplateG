@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,15 +14,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.BannerBean;
+import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.activity.SearchActivity;
+import com.psychological.cxks.ui.adapter.BannerAdapter;
 import com.psychological.cxks.ui.adapter.DropDownGridAdapter;
 import com.psychological.cxks.ui.adapter.DropDownLinearAdapter;
 import com.psychological.cxks.ui.adapter.MainListAdapter;
 import com.psychological.cxks.util.DeviceUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Author : jugg
@@ -38,6 +49,7 @@ public class MainFragment extends BaseFragment {
     private SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
     private RelativeLayout search;
+    private ViewPager banner;
 
 
     @Override
@@ -62,6 +74,7 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        banner = view.findViewById(R.id.banner);
         search = view.findViewById(R.id.rl);
         search.setOnClickListener((v) -> {
             startActivity(new Intent(getActivity(), SearchActivity.class));
@@ -116,6 +129,23 @@ public class MainFragment extends BaseFragment {
                 setDropDownMenus(2);
             }
         });
+
+
+        getBannerList();
+    }
+
+    private void getBannerList() {
+        Disposable disposable = ApiWrapper.getInstance().bannerList().subscribe(bannerBeans -> {
+            List<ImageView> list = new ArrayList<>();
+            for (BannerBean bean : bannerBeans) {
+                ImageView img = new ImageView(getActivity());
+                Glide.with(getActivity()).load(bean.getUrl()).into(img);
+                list.add(img);
+            }
+            BannerAdapter adapter = new BannerAdapter(getActivity(), list);
+            banner.setAdapter(adapter);
+        });
+        compositeDisposable.add(disposable);
     }
 
     @Override

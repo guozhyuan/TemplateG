@@ -42,8 +42,9 @@ public class HttpX {
     }
 
     private OkHttpClient initOkHttp() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        okhttp3.logging.HttpLoggingInterceptor interceptor = new okhttp3.logging.HttpLoggingInterceptor();
+        interceptor.setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
                 .addInterceptor(headerInterceptor)
                 .addInterceptor(interceptor)
@@ -81,7 +82,12 @@ public class HttpX {
                     .addHeader("Accept", "application/json")
                     .method(origin.method(), origin.body())
                     .build();
-            return chain.proceed(request);
+            Response response = chain.proceed(request);
+   /*         if (response.code() == 404) {
+//                response = response.newBuilder().build();
+               return chain.proceed(origin);
+            }*/
+            return response;
         }
     };
 }
