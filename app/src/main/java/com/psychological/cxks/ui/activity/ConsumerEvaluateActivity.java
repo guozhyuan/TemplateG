@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.psychological.cxks.R;
+
 import com.psychological.cxks.ui.adapter.ConsumerEvaluateAdapter;
 import com.psychological.cxks.util.DeviceUtils;
 import com.hedgehog.ratingbar.RatingBar;

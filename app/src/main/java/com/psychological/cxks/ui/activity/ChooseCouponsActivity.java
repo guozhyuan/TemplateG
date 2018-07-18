@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.psychological.cxks.R;
+
 import com.psychological.cxks.ui.adapter.ChooseCouponsAdapter;
 import com.psychological.cxks.util.DeviceUtils;
 

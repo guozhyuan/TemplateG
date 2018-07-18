@@ -8,11 +8,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
+
 import com.psychological.cxks.R;
 import com.psychological.cxks.ui.fragment.ECodeGenerateFragment;
 import com.psychological.cxks.ui.fragment.ECodeListFragment;
 import com.psychological.cxks.ui.fragment.ECodeMyFragment;
-
 
 import java.util.ArrayList;
 import java.util.List;

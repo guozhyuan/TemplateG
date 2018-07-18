@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.psychological.cxks.R;
+
 import com.psychological.cxks.ui.adapter.DiscountsVPAdapter;
 import com.psychological.cxks.ui.fragment.DiscountsCouponsFragment;
 import com.psychological.cxks.ui.fragment.DiscountsPackgeFragment;

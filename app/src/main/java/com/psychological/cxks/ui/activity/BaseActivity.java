@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.psychological.cxks.R;
+
 import com.psychological.cxks.util.BarUtil;
 
 import io.reactivex.disposables.CompositeDisposable;

@@ -4,7 +4,7 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.guo.projectg"
+        applicationId "com.psychological.cxks"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
@@ -24,12 +24,17 @@ android {
     }
     dexOptions {
     }
+    lintOptions {
+        abortOnError false
+    }
+
+
 }
 
 greendao {
     schemaVersion 1
     targetGenDir 'src/main/java'
-    daoPackage 'com.guo.projectg.dao'
+    daoPackage 'com.psychological.cxks.dao'
 }
 
 dependencies {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.psychological.cxks.R;
+
 import com.psychological.cxks.ui.adapter.FavoriteAdapter;
 import com.psychological.cxks.util.DeviceUtils;
 
