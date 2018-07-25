@@ -1,11 +1,11 @@
 package com.psychological.cxks.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
-public class MessageBean {
+public class Message {
 
     /**
      * type : int
@@ -27,8 +27,8 @@ public class MessageBean {
     private Long time;
     private Boolean isRead;
 
-    @Generated(hash = 908622976)
-    public MessageBean(Long id, Integer type, String msg, String sender_name,
+    @Generated(hash = 1273655294)
+    public Message(Long id, Integer type, String msg, String sender_name,
             String sender_img, String receiver_name, Long time, Boolean isRead) {
         this.id = id;
         this.type = type;
@@ -40,8 +40,8 @@ public class MessageBean {
         this.isRead = isRead;
     }
 
-    @Generated(hash = 1588632019)
-    public MessageBean() {
+    @Generated(hash = 637306882)
+    public Message() {
     }
 
     public Integer getType() {
