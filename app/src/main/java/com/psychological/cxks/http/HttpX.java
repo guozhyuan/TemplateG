@@ -46,7 +46,7 @@ public class HttpX {
         okhttp3.logging.HttpLoggingInterceptor interceptor = new okhttp3.logging.HttpLoggingInterceptor();
         interceptor.setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
-                .addInterceptor(headerInterceptor)
+//                .addInterceptor(headerInterceptor)
                 .addInterceptor(interceptor)
                 .connectTimeout(HttpConstant.HTTP_TIME_OUT, TimeUnit.MILLISECONDS)
                 .readTimeout(HttpConstant.HTTP_READ_TIME_OUT, TimeUnit.MILLISECONDS)

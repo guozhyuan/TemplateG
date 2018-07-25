@@ -47,4 +47,7 @@ public class DBManager {
     public SQLiteDatabase getDb() {
         return db;
     }
+
+
+
 }
