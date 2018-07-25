@@ -70,5 +70,6 @@ dependencies {
     implementation project(':tagview')
     implementation 'com.hedgehog.ratingbar:app:1.1.2'
     implementation 'com.contrarywind:Android-PickerView:4.1.5'
+    implementation 'com.youth.banner:banner:1.4.10'  //最新版本
 
 }

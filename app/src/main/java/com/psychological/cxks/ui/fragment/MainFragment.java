@@ -27,7 +27,10 @@ import com.psychological.cxks.ui.adapter.BannerAdapter;
 import com.psychological.cxks.ui.adapter.DropDownGridAdapter;
 import com.psychological.cxks.ui.adapter.DropDownLinearAdapter;
 import com.psychological.cxks.ui.adapter.MainListAdapter;
+import com.psychological.cxks.ui.view.GlideImageLoader;
 import com.psychological.cxks.util.DeviceUtils;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +52,8 @@ public class MainFragment extends BaseFragment {
     private SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
     private RelativeLayout search;
-    private ViewPager banner;
+    private Banner banner;
+    private List<BannerBean> bannerBeans;
 
 
     @Override
@@ -111,39 +115,31 @@ public class MainFragment extends BaseFragment {
         RelativeLayout v1 = view.findViewById(R.id.rl_area);
         RelativeLayout v2 = view.findViewById(R.id.rl_cate);
         RelativeLayout v3 = view.findViewById(R.id.rl_gender);
-        v1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDropDownMenus(0);
-            }
+
+        v1.setOnClickListener(v -> {
+            setDropDownMenus(0);
         });
-        v2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDropDownMenus(1);
-            }
+        v2.setOnClickListener(v -> {
+            setDropDownMenus(1);
         });
-        v3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDropDownMenus(2);
-            }
+        v3.setOnClickListener(v -> {
+            setDropDownMenus(2);
         });
 
+        banner.setOnBannerListener(position -> {
 
+        });
         getBannerList();
     }
 
     private void getBannerList() {
         Disposable disposable = ApiWrapper.getInstance().bannerList().subscribe(bannerBeans -> {
-            List<ImageView> list = new ArrayList<>();
+            this.bannerBeans = bannerBeans;
+            List<String> images = new ArrayList<>();
             for (BannerBean bean : bannerBeans) {
-                ImageView img = new ImageView(getActivity());
-                Glide.with(getActivity()).load(bean.getUrl()).into(img);
-                list.add(img);
+                images.add(bean.getImg());
             }
-            BannerAdapter adapter = new BannerAdapter(getActivity(), list);
-            banner.setAdapter(adapter);
+            banner.setImageLoader(new GlideImageLoader()).setImages(images).start();
         });
         compositeDisposable.add(disposable);
     }
