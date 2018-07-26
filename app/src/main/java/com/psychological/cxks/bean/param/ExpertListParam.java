@@ -10,6 +10,6 @@ public class ExpertListParam {
     public int sex;
     public String addr;
     public String labels;
-    public int pageSize;
-    public int pageNo;
+    public int pageSize = 20;
+    public int pageNo = 1;
 }

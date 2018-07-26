@@ -17,9 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.ui.adapter.MainListAdapter;
 import com.psychological.cxks.util.DeviceUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class SearchActivity extends BaseActivity {
@@ -27,6 +30,7 @@ public class SearchActivity extends BaseActivity {
     private ImageView back;
     private RecyclerView recycler;
     private EditText et;
+    private List<ExpertBean> searchBeanList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +42,7 @@ public class SearchActivity extends BaseActivity {
                 outRect.top = DeviceUtils.dip2px(SearchActivity.this, 5);
             }
         });
-        MainListAdapter gridAdapter = new MainListAdapter(SearchActivity.this);
+        MainListAdapter gridAdapter = new MainListAdapter(SearchActivity.this, searchBeanList);
         recycler.setAdapter(gridAdapter);
 
     }

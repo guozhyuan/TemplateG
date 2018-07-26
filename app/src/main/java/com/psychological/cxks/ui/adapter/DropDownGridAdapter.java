@@ -29,12 +29,24 @@ public class DropDownGridAdapter extends RecyclerView.Adapter<DropDownGridAdapte
     @Override
     public void onBindViewHolder(VH holder, int position) {
         holder.tv.setText(list[position]);
+        holder.tv.setOnClickListener(view -> {
+            listener.onClick(list[position], position);
+        });
     }
 
     @Override
     public int getItemCount() {
-        Log.e("", "getItemCount : " + list.length);
         return list.length;
+    }
+
+    public interface OnItemClickListener {
+        void onClick(String txt, int position);
+    }
+
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     class VH extends RecyclerView.ViewHolder {

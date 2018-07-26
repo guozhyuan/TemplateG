@@ -3,12 +3,24 @@ package com.psychological.cxks.http;
 
 import com.psychological.cxks.bean.BannerBean;
 import com.psychological.cxks.bean.ExpertBean;
-import com.psychological.cxks.bean.RegAndLogBean;
 import com.psychological.cxks.bean.LoginBean;
+import com.psychological.cxks.bean.QueryOrderStateBean;
 import com.psychological.cxks.bean.TestBean;
 import com.psychological.cxks.bean.param.AddAllOrderParam;
+import com.psychological.cxks.bean.param.AddVisitorInfoParam;
+import com.psychological.cxks.bean.param.BuyPackgeParam;
+import com.psychological.cxks.bean.param.ChangeOrderStateParam;
+import com.psychological.cxks.bean.param.DisCodePayParam;
+import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.ExpertListParam;
+import com.psychological.cxks.bean.param.FirstCodePayParam;
+import com.psychological.cxks.bean.param.FreeCodePayParam;
+import com.psychological.cxks.bean.param.GeneDisCodeParam;
+import com.psychological.cxks.bean.param.LockParam;
+import com.psychological.cxks.bean.param.QueryOrderStateParam;
+import com.psychological.cxks.bean.param.PhoneCodePayParam;
 import com.psychological.cxks.bean.param.ReservationParam;
+import com.psychological.cxks.bean.param.UnlockParam;
 
 import java.util.List;
 
@@ -69,22 +81,30 @@ public interface Api {
     @POST("wxPay/order")
     Observable<HttpResp<String>> addAllOrder(@Body AddAllOrderParam param);
 
-    // 3.2.4 预约(/verify/expert/oder)
+    //3.2.4.1 锁定时间段(/expert/lock)
+    @POST("expert/lock")
+    Observable<HttpResp<Boolean>> lockTime(@Body LockParam param);
+
+    //3.2.4.2 解锁时间段(/expert/unlock)
+    @POST("expert/unlock")
+    Observable<HttpResp<Boolean>> unlockTime(@Body UnlockParam param);
+
+    // 3.2.4.3 预约(/verify/expert/oder)
     @POST("verify/expert/oder")
     Observable<HttpResp<String>> reservation(@Body ReservationParam param);
 
+    // 3.2.4.4 咨询师订单金额分成(/expert/recharge)
+    @FormUrlEncoded
+    @POST("expert/recharge")
+    Observable<HttpResp<Boolean>> cashDivid(@Field("serialId") String serialId);
+
+    // 3.2.4.5 更改预约订单状态(/cancelAppt)
+    @POST("cancelAppt")
+    Observable<HttpResp<Boolean>> cancelAppt(@Body ChangeOrderStateParam param);
 
     // 3.2.5.1 APP支付(折扣优惠码支付)(/wxPay/appPay)
-//    amount	√	double		商品价格
-//    title	√	string		商品名称
-//    orderId	√	string	30	订单号
-//    count	√	int		数量
-//    discount		string	10	如果是使用折扣优惠码就传值
-//    userId		string	32	如果是使用折扣优惠码就传值
-    @FormUrlEncoded
     @POST("wxPay/appPay")
-    Observable<HttpResp<String>> pay(@Field("amount") double amount, @Field("title") String title, @Field("orderId") String orderId,
-                                     @Field("count") int count, @Field("discount") String discount, @Field("userId") int userId);
+    Observable<HttpResp<String>> discountCodePay(@Body DisCodePayParam param);
 
 
     //    3.2.5.2 查询优惠券信息(/expert/disInfo) (注：用于展示优惠码的折扣)
@@ -95,38 +115,53 @@ public interface Api {
 
 
     //  3.2.5.3 免费优惠码支付(/mc/discountPay) (注：优惠码位数为10位)
-    //  discountCode	√	string	10	优惠码
-    //  userId	√	string	32	咨询师id
-    @FormUrlEncoded
     @POST("mc/discountPay")
-    Observable<HttpResp<String>> freeCouponPay(@Field("discountCode") String discountCode, @Field("userId") String userId);
+    Observable<HttpResp<Boolean>> freeCodePay(@Body FreeCodePayParam param);
 
     //    3.2.5.4 心理顾问套餐优惠码支付(/mc/mcPay)
-    // coupon	√	string	10	优惠码
-    // operator	√	string	30	用户id
-    // title	√	int		套餐价格
-    @FormUrlEncoded
     @POST("mc/mcPay")
-    Observable<HttpResp<String>> couponPackgePay(@Field("coupon") String coupon, @Field("operator") String operator, @Field("title") int title);
+    Observable<HttpResp<Boolean>> couponPackgePay(@Body DisPackgeParam param);
 
 
     // 3.2.5.5 电询、面询优惠码支付(/mc/couponPay)
+    @POST("mc/couponPay")
+    Observable<HttpResp<Boolean>> phoneCodePay(@Body PhoneCodePayParam param);
 
     // 3.2.5.6 首次优惠码支付(/mc/codePay)(注：优惠码位数为8位)
+    @POST("mc/codePay")
+    Observable<HttpResp<Boolean>> firstCodePay(@Body FirstCodePayParam param);
 
     // 3.2.5.7 查询订单状态(/wxPay/appPayState)
+    @POST("wxPay/appPayState")
+    Observable<HttpResp<QueryOrderStateBean>> queryOrderState(@Body QueryOrderStateParam param);
 
     //3.2.5.8 关闭订单(/wxPay/closeOrder)
+    @FormUrlEncoded
+    @POST("wxPay/closeOrder")
+    Observable<HttpResp<QueryOrderStateBean>> closeOrder(@Field("orderId") String orderId);
 
-    //3.2.6 来访者信息表
+    // 3.2.6.1 验证来访者信息是否重复添加(/client/selectClient)
+    // name 来访者姓名
+    @FormUrlEncoded
+    @POST("client/selectClient")
+    Observable<HttpResp<Boolean>> verifyVisitorInfo(@Field("name") String name);
 
     //3.2.6.2添加来访者信息(/client/addClient)
+    @POST("client/addClient")
+    Observable<HttpResp<Boolean>> addVisitorInfo(@Body AddVisitorInfoParam param);
 
     //3.2.7.1 购买套餐(/cp/addPackageOrder) (注：先添加总订单)
+    @POST("cp/addPackageOrder")
+    Observable<HttpResp<Boolean>> buyPackge(@Body BuyPackgeParam param);
 
     //3.2.7.2 生成优惠码(/cp/addPackageCoupon)
+    @POST("cp/addPackageCoupon")
+    Observable<HttpResp<String>> generateDisCode(@Body GeneDisCodeParam param);
 
     //3.3.1 搜索(/search)
+    @FormUrlEncoded
+    @POST("search")
+    Observable<HttpResp<String>> search(@Field("keyWord") String keyWord);
 
     //3.4.1 系统消息列表(/inform/query)
 

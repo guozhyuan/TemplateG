@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.BannerBean;
+import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.param.ExpertListParam;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.activity.SearchActivity;
 import com.psychological.cxks.ui.adapter.BannerAdapter;
@@ -41,16 +45,23 @@ import io.reactivex.disposables.Disposable;
  */
 public class MainFragment extends BaseFragment {
     private static final String TAG = "MainFragment";
-    private String citys[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
-    private String ages[] = {"不限", "18岁以下", "18-22岁", "23-26岁", "27-35岁", "35岁以上"};
-    private String sexs[] = {"不限", "男", "女"};
+    private String citys[] = {"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
+    private String cates[] = {"心理", "临床"};
+    private String sexs[] = {"男", "女"};
     private int currentSelectedPos = -1;
     private RelativeLayout dropdownMenus;
     private SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
     private RelativeLayout search;
     private ViewPager banner;
+    private TextView tv_area;
+    private TextView tv_cate;
+    private TextView tv_gender;
 
+
+    private ExpertListParam expertListParam = new ExpertListParam();
+    private MainListAdapter mainListAdapter;
+    private List<ExpertBean> expertBeanList = new ArrayList<>();
 
     @Override
     public void onAttach(Context context) {
@@ -74,6 +85,9 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tv_area = view.findViewById(R.id.tv_area);
+        tv_cate = view.findViewById(R.id.tv_cate);
+        tv_gender = view.findViewById(R.id.tv_gender);
         banner = view.findViewById(R.id.banner);
         search = view.findViewById(R.id.rl);
         search.setOnClickListener((v) -> {
@@ -103,35 +117,11 @@ public class MainFragment extends BaseFragment {
                 outRect.top = DeviceUtils.dip2px(getActivity(), 5);
             }
         });
-        MainListAdapter gridAdapter = new MainListAdapter(getActivity());
-        recyclerView.setAdapter(gridAdapter);
+        mainListAdapter = new MainListAdapter(getActivity(), expertBeanList);
+        recyclerView.setAdapter(mainListAdapter);
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
-        LinearLayout tabs = view.findViewById(R.id.tabs);
-        RelativeLayout v1 = view.findViewById(R.id.rl_area);
-        RelativeLayout v2 = view.findViewById(R.id.rl_cate);
-        RelativeLayout v3 = view.findViewById(R.id.rl_gender);
-        v1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDropDownMenus(0);
-            }
-        });
-        v2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDropDownMenus(1);
-            }
-        });
-        v3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDropDownMenus(2);
-            }
-        });
-
-
-        getBannerList();
+//        getBannerList();
+        getExpertList();
     }
 
     private void getBannerList() {
@@ -144,6 +134,14 @@ public class MainFragment extends BaseFragment {
             }
             BannerAdapter adapter = new BannerAdapter(getActivity(), list);
             banner.setAdapter(adapter);
+        });
+        compositeDisposable.add(disposable);
+    }
+
+    private void getExpertList() {
+        Disposable disposable = ApiWrapper.getInstance().expertList(expertListParam).subscribe(expertBeans -> {
+            expertBeanList = expertBeans;
+            mainListAdapter.notifyDataSetChanged();
         });
         compositeDisposable.add(disposable);
     }
@@ -195,6 +193,13 @@ public class MainFragment extends BaseFragment {
         dropdownRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         dropdownRecycler.addItemDecoration(new SpacesItemDecoration(DeviceUtils.dip2px(getActivity(), 15)));
         DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), citys);
+        gridAdapter.setOnItemClickListener((txt, position) -> {
+            setDropDownMenus(0);
+            tv_area.setText(txt);
+            expertListParam.addr = txt;
+            expertListParam.pageNo = 1;
+            //重新请求数据
+        });
         dropdownRecycler.setAdapter(gridAdapter);
         dropdownMenus.addView(popWindows);
     }
@@ -204,7 +209,13 @@ public class MainFragment extends BaseFragment {
         RecyclerView dropdownRecycler = popWindows.findViewById(R.id.dropdownRecycler);
         dropdownRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         dropdownRecycler.addItemDecoration(new SpacesItemDecoration(DeviceUtils.dip2px(getActivity(), 15)));
-        DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), ages);
+        DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), cates);
+        gridAdapter.setOnItemClickListener((txt, position) -> {
+            setDropDownMenus(1);
+            tv_cate.setText(txt);
+            expertListParam.labels = txt;
+            expertListParam.pageNo = 1;
+        });
         dropdownRecycler.setAdapter(gridAdapter);
         dropdownMenus.addView(popWindows);
     }
@@ -214,6 +225,12 @@ public class MainFragment extends BaseFragment {
         RecyclerView dropdownRecycler = popWindows.findViewById(R.id.dropdownRecycler);
         dropdownRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         DropDownLinearAdapter gridAdapter = new DropDownLinearAdapter(getActivity(), sexs);
+        gridAdapter.setOnItemClickListener((txt, position) -> {
+            setDropDownMenus(2);
+            tv_gender.setText(txt);
+            expertListParam.sex = TextUtils.equals(txt, "男") ? 1 : 2;
+            expertListParam.pageNo = 1;
+        });
         dropdownRecycler.setAdapter(gridAdapter);
         dropdownMenus.addView(popWindows);
     }

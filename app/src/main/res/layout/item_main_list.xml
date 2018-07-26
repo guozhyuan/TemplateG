@@ -54,7 +54,7 @@
         tools:text="国家二级心理咨询师" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/personalDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -65,32 +65,13 @@
         tools:text="国家二级心理咨询师/临床心理学研究生" />
 
     <LinearLayout
+        android:id="@+id/tagLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/imageView">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/shape_tag_bg_gray"
-            android:padding="6dp"
-            android:textSize="12sp"
-            tools:text="婚姻情感" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/shape_tag_bg_gray"
-            android:padding="6dp"
-            android:textSize="12sp"
-            tools:text="婚姻情感" />
 
         <TextView
             android:layout_width="wrap_content"

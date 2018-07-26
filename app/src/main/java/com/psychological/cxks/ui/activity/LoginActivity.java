@@ -24,7 +24,7 @@ public class LoginActivity extends BaseActivity {
         Button expert = findViewById(R.id.expert);
         Button reg = findViewById(R.id.reg);
         Button code = findViewById(R.id.code);
-        Button login = findViewById(R.id.code);
+        Button login = findViewById(R.id.login);
         user.setOnClickListener((v) -> {
 //            startActivity(new Intent(LoginActivity.this,));
         });
@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity {
 
         code.setOnClickListener((v) -> {
             ApiWrapper.getInstance().send("15550029982").subscribe(c -> {
+                Log.e(TAG, "send: " + c);
                 msgCode = c;
             });
         });
