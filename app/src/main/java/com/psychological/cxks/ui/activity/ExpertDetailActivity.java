@@ -9,11 +9,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.psychological.cxks.R;
 
+import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.ui.adapter.OnSalePackgeAdapter;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import co.lujun.androidtagview.TagContainerLayout;
 
@@ -38,9 +42,15 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
     private TextView consumerEvaluate;
 
 
+    private ExpertBean.ResultBean transData; //传递的咨询师信息
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        transData = (ExpertBean.ResultBean) getIntent().getSerializableExtra("expert");
+
 
         ArrayList<String> tagList = new ArrayList<>();
         tagList.add("非常专业");
@@ -50,6 +60,10 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
         tagList.add("非常");
         tagList.add("专业");
         tagLayout.setTags(tagList);
+
+        peer_name.setText(Objects.requireNonNull(transData).getName());
+        nick.setText(Objects.requireNonNull(transData).getName());
+        Glide.with(this).load(Objects.requireNonNull(transData).getImg()).apply(RequestOptions.circleCropTransform()).into(head);
 
         OnSalePackgeAdapter onSalePackgeAdapter = new OnSalePackgeAdapter(this);
         recyclerPackge.setLayoutManager(new LinearLayoutManager(this));
@@ -108,7 +122,11 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
                 break;
 
             case R.id.order:
-                startActivity(new Intent(ExpertDetailActivity.this, ReservationActivity.class));
+                Intent intent = new Intent(ExpertDetailActivity.this, ReservationActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("expert", transData);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case R.id.need_more:
                 startActivity(new Intent(ExpertDetailActivity.this, ConsumerEvaluateActivity.class));

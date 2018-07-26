@@ -39,4 +39,8 @@ public class BannerAdapter extends PagerAdapter {
         container.addView(list.get(position));
         return list.get(position);
     }
+
+    public interface  OnBannerClickListener{
+        void onBannerClick();
+    }
 }

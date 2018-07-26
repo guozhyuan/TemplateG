@@ -204,9 +204,9 @@
                     android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="选择优惠券>"
                     android:textColor="#585858"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="选择优惠券>" />
             </LinearLayout>
 
             <LinearLayout

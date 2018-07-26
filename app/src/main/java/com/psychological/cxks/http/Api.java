@@ -75,7 +75,7 @@ public interface Api {
 
     // 3.2.2 根据条件获取默认排序专家列表数据(/expert/list)
     @POST("expert/list")
-    Observable<HttpResp<List<ExpertBean>>> expertList(@Body ExpertListParam param);
+    Observable<HttpResp<ExpertBean>> expertList(@Body ExpertListParam param);
 
     // 3.2.3 添加总订单(/wxPay/order) (注：预约或购买产品之前都先调用此接口,以便获取订单号)
     @POST("wxPay/order")

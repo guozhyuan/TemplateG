@@ -31,7 +31,11 @@ import com.psychological.cxks.ui.adapter.BannerAdapter;
 import com.psychological.cxks.ui.adapter.DropDownGridAdapter;
 import com.psychological.cxks.ui.adapter.DropDownLinearAdapter;
 import com.psychological.cxks.ui.adapter.MainListAdapter;
+import com.psychological.cxks.ui.view.GlideImageLoader;
+import com.psychological.cxks.ui.view.RecyclerViewOnLoadHelper;
 import com.psychological.cxks.util.DeviceUtils;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +49,18 @@ import io.reactivex.disposables.Disposable;
  */
 public class MainFragment extends BaseFragment {
     private static final String TAG = "MainFragment";
+
     private String citys[] = {"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
-    private String cates[] = {"心理", "临床"};
+    private String cates[] = {"恋爱婚姻", "家庭关系","亲子教育","情绪压力","人际关系","职业发展","性心理"};
     private String sexs[] = {"男", "女"};
     private int currentSelectedPos = -1;
     private RelativeLayout dropdownMenus;
     private SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
     private RelativeLayout search;
-    private ViewPager banner;
+
+    private Banner banner;
+    private List<BannerBean> bannerBeans;
     private TextView tv_area;
     private TextView tv_cate;
     private TextView tv_gender;
@@ -61,7 +68,8 @@ public class MainFragment extends BaseFragment {
 
     private ExpertListParam expertListParam = new ExpertListParam();
     private MainListAdapter mainListAdapter;
-    private List<ExpertBean> expertBeanList = new ArrayList<>();
+    private List<ExpertBean.ResultBean> expertBeanList;
+    private boolean isRefreshData = false;
 
     @Override
     public void onAttach(Context context) {
@@ -109,7 +117,20 @@ public class MainFragment extends BaseFragment {
                 return linearLayoutManager.findFirstCompletelyVisibleItemPosition() != 0;
             }
         });
-
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isRefreshData = true;
+                expertListParam = new ExpertListParam();
+                getExpertList();
+            }
+        });
+        RecyclerViewOnLoadHelper.ins().regist(recyclerView);
+        RecyclerViewOnLoadHelper.ins().setOnLoadListener(() -> {
+            isRefreshData = false;
+            expertListParam.pageNo += 1;
+            getExpertList();
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -117,31 +138,53 @@ public class MainFragment extends BaseFragment {
                 outRect.top = DeviceUtils.dip2px(getActivity(), 5);
             }
         });
+        expertBeanList = new ArrayList<>();
         mainListAdapter = new MainListAdapter(getActivity(), expertBeanList);
         recyclerView.setAdapter(mainListAdapter);
+        RelativeLayout v1 = view.findViewById(R.id.rl_area);
+        RelativeLayout v2 = view.findViewById(R.id.rl_cate);
+        RelativeLayout v3 = view.findViewById(R.id.rl_gender);
 
-//        getBannerList();
+        v1.setOnClickListener(v -> {
+            setDropDownMenus(0);
+        });
+        v2.setOnClickListener(v -> {
+            setDropDownMenus(1);
+        });
+        v3.setOnClickListener(v -> {
+            setDropDownMenus(2);
+        });
+
+        banner.setOnBannerListener(position -> {
+
+        });
+
+        getBannerList();
         getExpertList();
     }
 
     private void getBannerList() {
         Disposable disposable = ApiWrapper.getInstance().bannerList().subscribe(bannerBeans -> {
-            List<ImageView> list = new ArrayList<>();
+            this.bannerBeans = bannerBeans;
+            List<String> images = new ArrayList<>();
             for (BannerBean bean : bannerBeans) {
-                ImageView img = new ImageView(getActivity());
-                Glide.with(getActivity()).load(bean.getUrl()).into(img);
-                list.add(img);
+                images.add(bean.getImg());
             }
-            BannerAdapter adapter = new BannerAdapter(getActivity(), list);
-            banner.setAdapter(adapter);
+            banner.setImageLoader(new GlideImageLoader()).setImages(images).start();
         });
         compositeDisposable.add(disposable);
     }
 
     private void getExpertList() {
         Disposable disposable = ApiWrapper.getInstance().expertList(expertListParam).subscribe(expertBeans -> {
-            expertBeanList = expertBeans;
+            if (isRefreshData) {
+                expertBeanList.clear();
+            }
+            swipe.setRefreshing(false);
+            expertBeanList.addAll(expertBeans.getResult());
             mainListAdapter.notifyDataSetChanged();
+        }, err -> {
+            swipe.setRefreshing(false);
         });
         compositeDisposable.add(disposable);
     }
@@ -198,7 +241,8 @@ public class MainFragment extends BaseFragment {
             tv_area.setText(txt);
             expertListParam.addr = txt;
             expertListParam.pageNo = 1;
-            //重新请求数据
+            clearDropdownMenus();
+            getExpertList();
         });
         dropdownRecycler.setAdapter(gridAdapter);
         dropdownMenus.addView(popWindows);
@@ -209,12 +253,17 @@ public class MainFragment extends BaseFragment {
         RecyclerView dropdownRecycler = popWindows.findViewById(R.id.dropdownRecycler);
         dropdownRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         dropdownRecycler.addItemDecoration(new SpacesItemDecoration(DeviceUtils.dip2px(getActivity(), 15)));
+
         DropDownGridAdapter gridAdapter = new DropDownGridAdapter(getActivity(), cates);
         gridAdapter.setOnItemClickListener((txt, position) -> {
             setDropDownMenus(1);
+            isRefreshData = true;
             tv_cate.setText(txt);
             expertListParam.labels = txt;
             expertListParam.pageNo = 1;
+            clearDropdownMenus();
+            getExpertList();
+
         });
         dropdownRecycler.setAdapter(gridAdapter);
         dropdownMenus.addView(popWindows);
@@ -227,12 +276,19 @@ public class MainFragment extends BaseFragment {
         DropDownLinearAdapter gridAdapter = new DropDownLinearAdapter(getActivity(), sexs);
         gridAdapter.setOnItemClickListener((txt, position) -> {
             setDropDownMenus(2);
+            isRefreshData = true;
             tv_gender.setText(txt);
             expertListParam.sex = TextUtils.equals(txt, "男") ? 1 : 2;
             expertListParam.pageNo = 1;
+            clearDropdownMenus();
+            getExpertList();
         });
         dropdownRecycler.setAdapter(gridAdapter);
         dropdownMenus.addView(popWindows);
+    }
+
+    private void clearDropdownMenus(){
+        dropdownMenus.removeAllViews();
     }
 
     class SpacesItemDecoration extends RecyclerView.ItemDecoration {

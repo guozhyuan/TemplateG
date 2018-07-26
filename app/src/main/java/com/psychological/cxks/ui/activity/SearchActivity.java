@@ -30,7 +30,7 @@ public class SearchActivity extends BaseActivity {
     private ImageView back;
     private RecyclerView recycler;
     private EditText et;
-    private List<ExpertBean> searchBeanList = new ArrayList<>();
+    private List<ExpertBean.ResultBean> searchBeanList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

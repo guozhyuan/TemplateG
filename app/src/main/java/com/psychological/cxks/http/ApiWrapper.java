@@ -1,5 +1,7 @@
 package com.psychological.cxks.http;
 
+import android.util.Log;
+
 import com.psychological.cxks.bean.BannerBean;
 import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.LoginBean;
@@ -24,6 +26,7 @@ import com.psychological.cxks.bean.param.UnlockParam;
 import org.greenrobot.greendao.annotation.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -52,9 +55,13 @@ public class ApiWrapper {
                 return Observable.create(new ObservableOnSubscribe<T>() {
                     @Override
                     public void subscribe(ObservableEmitter<T> emitter) throws Exception {
-                        // Log.e("ApiWrapper", "code: " + r.code +"  message:"+ r.message +"  data:"+ r.data.toString());
-                        if (r.code == -1) {
-                            emitter.onError(new Throwable("code : " + r.code));
+//                        Log.e("ApiWrapper", "code: " + r.code + "  message:" + r.message + "  data:" + r.data.toString());
+//                        if (r.code == 200) {
+//                            emitter.onError(new Throwable("code : " + r.code));
+//                        }
+                        if (r.data == null) {
+                            emitter.onError(new Throwable("httpResp data is null."));
+                            return;
                         }
                         emitter.onNext(r.data);
                     }
@@ -104,8 +111,8 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    public Observable<List<ExpertBean>> expertList(ExpertListParam param) {
-        Observable<HttpResp<List<ExpertBean>>> observable = HttpX.Instance().Api().expertList(param).compose(HttpScheduler.applyIO());
+    public Observable<ExpertBean> expertList(ExpertListParam param) {
+        Observable<HttpResp<ExpertBean>> observable = HttpX.Instance().Api().expertList(param).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 

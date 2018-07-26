@@ -33,9 +33,15 @@ public class LoginActivity extends BaseActivity {
         });
 
         reg.setOnClickListener((v) -> {
-            ApiWrapper.getInstance().rgsAndLog("15550029982", msgCode).subscribe(ret -> {
-                Log.e(TAG, "rgsAndLog: " + ret);
-                SPUtil.saveString(LoginActivity.this, "token", ret);
+            ApiWrapper.getInstance().rgsAndLog("15550029982", "5781").subscribe(ret -> {
+                if (ret == null) {
+                    Log.e(TAG, "rgsAndLog: ret = null");
+                } else {
+                    Log.e(TAG, "rgsAndLog: " + ret);
+                    SPUtil.saveString(LoginActivity.this, "token", ret);
+                }
+            }, err -> {
+                Log.e(TAG, "rgsAndLog: " + err.getMessage());
             });
         });
 

@@ -5,6 +5,7 @@ public class ReservationParam {
 //    orderId	√	string	50	订单号(总订单返回的订单号)
 //    csId	√	string	32	咨询师ID
 //    method	√	int		咨询方式(1-电询；2-面询；3-文字)
+//    state 状态，-1:已下单；0：已付款(已预约)；1：已取消；2：已确定接单；3：咨询结束；4：已评价
 //    field	√	int		咨询方面（标签）
 //    money	√	double	32	订单金额
 //    name	√	string	20	联系人
@@ -20,6 +21,7 @@ public class ReservationParam {
     public String orderId;
     public String csId;
     public int method;
+    public int state;
     public int field;
     public double money;
     public String name;

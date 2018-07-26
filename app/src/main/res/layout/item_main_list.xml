@@ -43,34 +43,29 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/desc"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
+        android:maxLines="3"
+        android:ellipsize="end"
         android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:text="国家二级心理咨询师" />
 
-    <TextView
-        android:id="@+id/personalDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:text="国家二级心理咨询师/临床心理学研究生" />
 
     <LinearLayout
         android:id="@+id/tagLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:layout_marginStart="20dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/view14"
         app:layout_constraintStart_toEndOf="@+id/imageView">
 
         <TextView
@@ -85,6 +80,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view14"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="44dp"
