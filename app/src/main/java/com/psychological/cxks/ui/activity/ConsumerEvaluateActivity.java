@@ -3,30 +3,52 @@ package com.psychological.cxks.ui.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.psychological.cxks.R;
 
+import com.psychological.cxks.bean.EvaluateBean;
+import com.psychological.cxks.bean.ExpertDetailBean;
+import com.psychological.cxks.bean.param.EvaluateParam;
+import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.ConsumerEvaluateAdapter;
+import com.psychological.cxks.ui.view.RecyclerViewOnLoadHelper;
 import com.psychological.cxks.util.DeviceUtils;
 import com.hedgehog.ratingbar.RatingBar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import co.lujun.androidtagview.TagContainerLayout;
+import io.reactivex.disposables.Disposable;
 
 public class ConsumerEvaluateActivity extends BaseActivity {
 
 
     private RecyclerView recyclerView;
     private TagContainerLayout tagLayout;
+    private ConsumerEvaluateAdapter adapter;
+    private List<EvaluateBean> list = new ArrayList<>();
+    private EvaluateParam param = new EvaluateParam();
+
+    private RatingBar ratingBar;
+    private SwipeRefreshLayout swipe;
+
+    private boolean isRefresh = false;
+    private String userId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        userId = getIntent().getStringExtra("userId");
+        getEvaluateList();
+        getScore();
     }
 
     @Override
@@ -37,7 +59,18 @@ public class ConsumerEvaluateActivity extends BaseActivity {
     @Override
     public void findView() {
         recyclerView = findViewById(R.id.recycler);
-        ConsumerEvaluateAdapter adapter = new ConsumerEvaluateAdapter(this);
+        swipe = findViewById(R.id.swipe);
+        swipe.setOnRefreshListener(() -> {
+            isRefresh = true;
+            param = new EvaluateParam();
+
+        });
+        RecyclerViewOnLoadHelper.ins().regist(recyclerView);
+        RecyclerViewOnLoadHelper.ins().setOnLoadListener(() -> {
+            isRefresh = false;
+            param.pageNo += 1;
+        });
+        adapter = new ConsumerEvaluateAdapter(this, list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -50,24 +83,36 @@ public class ConsumerEvaluateActivity extends BaseActivity {
             }
         });
         recyclerView.setAdapter(adapter);
-
         tagLayout = findViewById(R.id.tagLayout);
-        ArrayList<String> tagList = new ArrayList<>();
-        tagList.add("非常专业");
-        tagList.add("有耐心");
-        tagList.add("态度很好啊");
-        tagList.add("巴拉巴拉");
-        tagList.add("非常");
-        tagList.add("专业");
-        tagLayout.setTags(tagList);
+//        ArrayList<String> tagList = new ArrayList<>(Arrays.asList(detailBean.getLabels().split("\\s+")));
+//        tagLayout.setTags(tagList);
+        ratingBar = findViewById(R.id.ratingbar);
 
-        RatingBar ratingBar = findViewById(R.id.ratingbar);
-        ratingBar.setStar(3);
-        ratingBar.setmClickable(false);
     }
 
     @Override
     public void initListener() {
 
+    }
+
+    private void getEvaluateList() {
+        param.consultId = userId;
+        Disposable subscribe = ApiWrapper.getInstance().evaluateList(param).subscribe(ret -> {
+            if (isRefresh) {
+                list.clear();
+            }
+            list.addAll(ret);
+            adapter.notifyDataSetChanged();
+        });
+        compositeDisposable.add(subscribe);
+    }
+
+    private void getScore() {
+        Disposable d = ApiWrapper.getInstance().getScore(userId).subscribe(ret -> {
+            //TODO
+            ratingBar.setStar(3);
+            ratingBar.setmClickable(false);
+        });
+        compositeDisposable.add(d);
     }
 }

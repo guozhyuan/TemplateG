@@ -2,7 +2,9 @@ package com.psychological.cxks.http;
 
 
 import com.psychological.cxks.bean.BannerBean;
+import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.bean.QueryOrderStateBean;
 import com.psychological.cxks.bean.TestBean;
@@ -12,6 +14,7 @@ import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.DisPackgeParam;
+import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.bean.param.ExpertListParam;
 import com.psychological.cxks.bean.param.FirstCodePayParam;
 import com.psychological.cxks.bean.param.FreeCodePayParam;
@@ -77,6 +80,20 @@ public interface Api {
     // 3.2.2 根据条件获取默认排序专家列表数据(/expert/list)
     @POST("expert/list")
     Observable<HttpResp<ExpertBean>> expertList(@Body ExpertListParam param);
+
+    // 3.2.2.1 咨询师详情(/expert/detail)
+    @FormUrlEncoded
+    @POST("expert/detail")
+    Observable<HttpResp<ExpertDetailBean>> expertDetail(@Field("userId") String userId);
+
+    // 3.2.3.2 评价列表(/cmt/getCmtList)
+    @POST("cmt/getCmtList")
+    Observable<HttpResp<List<EvaluateBean>>> evaluateList(@Body EvaluateParam param);
+
+    // 3.2.3.3 咨询师总评分(/cmt/getScore)
+    @FormUrlEncoded
+    @POST("cmt/getScore")
+    Observable<HttpResp<String>> getScore(@Field("consultId") String consultId);
 
     // 3.2.3 添加总订单(/wxPay/order) (注：预约或购买产品之前都先调用此接口,以便获取订单号)
     @POST("wxPay/order")

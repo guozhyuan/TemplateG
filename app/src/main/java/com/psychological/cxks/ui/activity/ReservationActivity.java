@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -47,8 +48,9 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
     private static final int REQ_CODE_CITY = 3;
     private ExpertBean.ResultBean transData; //传递的咨询师信息
     private ArrayList<String> chosenTags;
-    private String chosenTag;
     private ReservationParam param = new ReservationParam();
+    private String chosenTag;
+    private int lastPos = -1;
 
 
     private ImageView back;
@@ -68,7 +70,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
     private TagContainerLayout tagLayout;
     private TextView feedbackLen;
     private TextView submit;
-
+    private CheckBox checkBox;
 
     private TextWatcher textWatcher = new TextWatcher() {
         private CharSequence content;
@@ -99,7 +101,6 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
         transData = (ExpertBean.ResultBean) getIntent().getSerializableExtra("expert");
         chosenTags = new ArrayList<>();
         ArrayList<String> tagList = new ArrayList<>();
-
         for (CategoryEnum e : CategoryEnum.values()) {
             tagList.add(e.getName());
         }
@@ -134,6 +135,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
         feedback = findViewById(R.id.feedback);
         feedbackLen = findViewById(R.id.descLength);
         submit = findViewById(R.id.submit);
+        checkBox = findViewById(R.id.checkBox);
     }
 
     @Override
@@ -151,16 +153,20 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
         tagLayout.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
             public void onTagClick(int position, String text) {
-                chosenTag = text;
-//                if (chosenTags.contains(text)) {
-//                    chosenTags.remove(text);
-//                    tagLayout.getTags().get(position).setChosen(ContextCompat.getColor(ReservationActivity.this, R.color.main_bottom_text_release),
-//                            ContextCompat.getColor(ReservationActivity.this, R.color.stroke_gray));
-//                } else {
-//                    chosenTags.add(text);
-//                    tagLayout.getTags().get(position).setChosen(ContextCompat.getColor(ReservationActivity.this, R.color.main_bottom_text_press),
-//                            ContextCompat.getColor(ReservationActivity.this, R.color.main_bottom_text_press));
-//                }
+                if (TextUtils.equals(text, chosenTag)) {
+                    chosenTag = "";
+                    tagLayout.getTags().get(position).setChosen(ContextCompat.getColor(ReservationActivity.this, R.color.main_bottom_text_release),
+                            ContextCompat.getColor(ReservationActivity.this, R.color.stroke_gray));
+                } else {
+                    if (lastPos != -1) {
+                        tagLayout.getTags().get(lastPos).setChosen(ContextCompat.getColor(ReservationActivity.this, R.color.main_bottom_text_release),
+                                ContextCompat.getColor(ReservationActivity.this, R.color.stroke_gray));
+                    }
+                    chosenTag = text;
+                    tagLayout.getTags().get(position).setChosen(ContextCompat.getColor(ReservationActivity.this, R.color.main_bottom_text_press),
+                            ContextCompat.getColor(ReservationActivity.this, R.color.main_bottom_text_press));
+                }
+                lastPos = position;
             }
 
             @Override
@@ -205,6 +211,10 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.submit:
+                if (!checkBox.isChecked()) return;
+
+
+                //TODO 先添加总订单,再锁定时间
                 param.token = "";
                 param.orderId = "";
                 param.csId = transData.getUserId();
@@ -226,11 +236,6 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                 param.name = "";
                 // 1：男，2：女
                 param.sex = btnMan.isChecked() ? 1 : btnWoman.isChecked() ? 2 : -1;
-                if (param.sex == -1) {
-                    Toast.makeText(ReservationActivity.this, "性别未选择", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 param.mobile = phone.getText().toString();
                 param.need = feedback.getText().toString();
                 param.time = -1;

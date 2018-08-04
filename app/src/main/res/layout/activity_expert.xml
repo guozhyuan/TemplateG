@@ -103,11 +103,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
-                    android:text="从业资质"
                     android:textColor="#2d2d2d"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+                    app:layout_constraintTop_toBottomOf="@+id/view2"
+                    android:text="从业资质" />
 
                 <TextView
                     android:id="@+id/jobTime"
@@ -121,14 +121,15 @@
                     tools:text="从业12年" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/rank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="国家二级咨询师  "
+                    android:maxLines="2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView21"
+                    tools:text="国家二级咨询师  " />
 
                 <View
                     android:id="@+id/view3"
@@ -140,7 +141,7 @@
                     android:background="@drawable/shape_line"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                    app:layout_constraintTop_toBottomOf="@+id/rank" />
 
                 <TextView
                     android:id="@+id/textView25"
@@ -198,17 +199,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view4" />
 
-                <View
+                <LinearLayout
                     android:id="@+id/view5"
                     android:layout_width="0dp"
                     android:layout_height="33dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_line"
+                    android:background="@drawable/shape_play_mic"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView26" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView26">
+
+                    <ImageView
+                        android:id="@+id/play"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="30dp"
+                        android:src="@mipmap/ic_launcher_round" />
+
+                    <ProgressBar
+                        android:id="@+id/progressbar"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="200dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="30dp"
+                        android:background="@color/white"
+                        android:max="5"
+                        android:progress="1" />
+                </LinearLayout>
+
 
                 <View
                     android:id="@+id/view6"
@@ -295,11 +318,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="教育资质"
+                        android:text="资质证书"
                         android:textColor="#000000"
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/diploma"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -328,6 +352,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/educationBackground"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -356,6 +381,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/trainingExperience"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -385,6 +411,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/workExprience"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -471,6 +498,24 @@
                     app:layout_constraintStart_toEndOf="@+id/consumer_head"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="JUGG" />
+
+                <com.hedgehog.ratingbar.RatingBar
+                    android:id="@+id/ratingbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="116dp"
+                    android:layout_marginStart="84dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/consumer_nick"
+                    app:starCount="5"
+                    app:starEmpty="@mipmap/star_empty"
+                    app:starFill="@mipmap/star_full"
+                    app:starImageHeight="30dp"
+                    app:starImagePadding="15dp"
+                    app:starImageWidth="30dp" />
 
                 <TextView
                     android:id="@+id/consumer_evaluate"

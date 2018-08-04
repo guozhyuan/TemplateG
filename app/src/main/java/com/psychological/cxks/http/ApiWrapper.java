@@ -1,7 +1,9 @@
 package com.psychological.cxks.http;
 
 import com.psychological.cxks.bean.BannerBean;
+import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.bean.QueryOrderStateBean;
 import com.psychological.cxks.bean.TestBean;
@@ -11,6 +13,7 @@ import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.DisPackgeParam;
+import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.bean.param.ExpertListParam;
 import com.psychological.cxks.bean.param.FirstCodePayParam;
 import com.psychological.cxks.bean.param.FreeCodePayParam;
@@ -106,13 +109,33 @@ public class ApiWrapper {
         return transform(observable);
     }
 
+    //主页Banner
     public Observable<List<BannerBean>> bannerList() {
         Observable<HttpResp<List<BannerBean>>> observable = HttpX.Instance().Api().bannerList().compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
+    // 咨询师列表
     public Observable<ExpertBean> expertList(ExpertListParam param) {
         Observable<HttpResp<ExpertBean>> observable = HttpX.Instance().Api().expertList(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    //咨询师详情
+    public Observable<ExpertDetailBean> expertDetail(String userId) {
+        Observable<HttpResp<ExpertDetailBean>> observable = HttpX.Instance().Api().expertDetail(userId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    //评价列表
+    public Observable<List<EvaluateBean>> evaluateList(EvaluateParam param) {
+        Observable<HttpResp<List<EvaluateBean>>> observable = HttpX.Instance().Api().evaluateList(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    //总评分
+    public Observable<String> getScore(String consultId) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().getScore(consultId).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 

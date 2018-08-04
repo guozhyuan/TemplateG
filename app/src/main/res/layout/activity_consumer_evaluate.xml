@@ -73,12 +73,12 @@
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            hedgehog:starCount="5"
-            hedgehog:starEmpty="@mipmap/star_empty"
-            hedgehog:starFill="@mipmap/star_full"
-            hedgehog:starImageHeight="30dp"
-            hedgehog:starImagePadding="15dp"
-            hedgehog:starImageWidth="30dp" />
+            app:starCount="5"
+            app:starEmpty="@mipmap/star_empty"
+            app:starFill="@mipmap/star_full"
+            app:starImageHeight="30dp"
+            app:starImagePadding="15dp"
+            app:starImageWidth="30dp" />
     </android.support.constraint.ConstraintLayout>
 
     <co.lujun.androidtagview.TagContainerLayout
@@ -103,9 +103,16 @@
         app:tag_theme="none"
         app:vertical_interval="15dp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

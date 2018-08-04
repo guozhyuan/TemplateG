@@ -7,7 +7,7 @@ public class ExpertListParam {
 //    pageSize	√	int		页面数量
 //    pageNo	√	int		页码
 
-    public int sex;
+    public Integer sex;
     public String addr;
     public String labels;
     public int pageSize = 20;
