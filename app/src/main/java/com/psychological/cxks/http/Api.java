@@ -3,7 +3,7 @@ package com.psychological.cxks.http;
 
 import com.psychological.cxks.bean.BannerBean;
 import com.psychological.cxks.bean.ExpertBean;
-import com.psychological.cxks.bean.LoginBean;
+import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.bean.QueryOrderStateBean;
 import com.psychological.cxks.bean.TestBean;
 import com.psychological.cxks.bean.param.AddAllOrderParam;
@@ -17,6 +17,7 @@ import com.psychological.cxks.bean.param.FirstCodePayParam;
 import com.psychological.cxks.bean.param.FreeCodePayParam;
 import com.psychological.cxks.bean.param.GeneDisCodeParam;
 import com.psychological.cxks.bean.param.LockParam;
+import com.psychological.cxks.bean.param.OrderDetailParam;
 import com.psychological.cxks.bean.param.QueryOrderStateParam;
 import com.psychological.cxks.bean.param.PhoneCodePayParam;
 import com.psychological.cxks.bean.param.ReservationParam;
@@ -42,12 +43,12 @@ public interface Api {
     // 3.1.1 短信验证码一键注册及登录(/rgsAndLog)
     @FormUrlEncoded
     @POST("rgsAndLog")
-    Observable<HttpResp<String>> rgsAndLog(@Field("mobile") String mobile, @Field("code") String code);
+    Observable<HttpResp<UserInfoBean>> rgsAndLog(@Field("mobile") String mobile, @Field("code") String code);
 
     // 3.1.2 密码登录(/login_)
     @FormUrlEncoded
     @POST("login_")
-    Observable<HttpResp<LoginBean>> login(@Field("account") String account, @Field("password") String password);
+    Observable<HttpResp<UserInfoBean>> login(@Field("account") String account, @Field("password") String password);
 
     // 3.1.4 退出登录(/index/logout_)
     @FormUrlEncoded
@@ -106,9 +107,7 @@ public interface Api {
     @POST("wxPay/appPay")
     Observable<HttpResp<String>> discountCodePay(@Body DisCodePayParam param);
 
-
-    //    3.2.5.2 查询优惠券信息(/expert/disInfo) (注：用于展示优惠码的折扣)
-    //    discountCode	√	string	10	优惠券内容
+    // 3.2.5.2 查询优惠券信息(/expert/disInfo) (注：用于展示优惠码的折扣)
     @FormUrlEncoded
     @POST("expert/disInfo")
     Observable<HttpResp<String>> couponInfo(@Field("discountCode") String discountCode);
@@ -161,7 +160,7 @@ public interface Api {
     //3.3.1 搜索(/search)
     @FormUrlEncoded
     @POST("search")
-    Observable<HttpResp<String>> search(@Field("keyWord") String keyWord);
+    Observable<HttpResp<List<ExpertBean.ResultBean>>> search(@Field("keyWord") String keyWord);
 
     //3.4.1 系统消息列表(/inform/query)
 
@@ -171,7 +170,8 @@ public interface Api {
 
 
     //3.5.1 用户获取预约订单列表(/verify/sAppt)
-
+    @POST("verify/sAppt")
+    Observable<HttpResp<String>> allOrder(@Body OrderDetailParam param);
     //3.5.3 用户获取购买的咨询师套餐订单列表(/cp/selectPoList)
 
     //3.5.4 用户获取购买的365心理顾问订单(/verify/morder)
@@ -181,6 +181,14 @@ public interface Api {
     //3.6.2 修改个人资料(/verify/save/s)
 
     //3.6.1 添加收藏(/addCollect)
+    @FormUrlEncoded
+    @POST("addCollect")
+    Observable<HttpResp<Boolean>> addCollect(@Field("uId") String uId, @Field("consultId") String consultId);
+
+    //3.6.2 收藏列表(/collecttList)
+    @FormUrlEncoded
+    @POST("collecttList")
+    Observable<HttpResp<Object>> collectList(@Field("uId") String uId);
 
     //3.7.1 获取365心理顾问产品(/mentality/getMentalityCst)
 

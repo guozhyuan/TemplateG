@@ -8,10 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 
+import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.FavoriteAdapter;
 import com.psychological.cxks.util.DeviceUtils;
+
+import io.reactivex.disposables.Disposable;
 
 public class FavoriteActivity extends BaseActivity {
 
@@ -31,6 +35,12 @@ public class FavoriteActivity extends BaseActivity {
         });
         FavoriteAdapter adapter = new FavoriteAdapter(this);
         recyclerView.setAdapter(adapter);
+        Disposable disposable = ApiWrapper.getInstance().collectList(App.Instance().info.getUserId()).subscribe(ret -> {
+
+        });
+        compositeDisposable.add(disposable);
+
+
     }
 
     @Override

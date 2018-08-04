@@ -1,8 +1,11 @@
 package com.psychological.cxks.ui.activity;
 
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 
 import com.psychological.cxks.http.ApiWrapper;
@@ -33,28 +36,26 @@ public class LoginActivity extends BaseActivity {
         });
 
         reg.setOnClickListener((v) -> {
-            ApiWrapper.getInstance().rgsAndLog("15550029982", "5781").subscribe(ret -> {
-                if (ret == null) {
-                    Log.e(TAG, "rgsAndLog: ret = null");
-                } else {
-                    Log.e(TAG, "rgsAndLog: " + ret);
-                    SPUtil.saveString(LoginActivity.this, "token", ret);
-                }
-            }, err -> {
-                Log.e(TAG, "rgsAndLog: " + err.getMessage());
+            ApiWrapper.getInstance().rgsAndLog("15550029982", "2150").subscribe(ret -> {
+                App.Instance().info = ret;
+                SPUtil.saveString(LoginActivity.this, "token", ret.getToken());
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             });
         });
 
         code.setOnClickListener((v) -> {
             ApiWrapper.getInstance().send("15550029982").subscribe(c -> {
-                Log.e(TAG, "send: " + c);
-                msgCode = c;
+                Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
+            }, err -> {
+                Toast.makeText(this, "验证码发送失败", Toast.LENGTH_SHORT).show();
             });
         });
 
         login.setOnClickListener((v) -> {
-            ApiWrapper.getInstance().login("15550029982", "").subscribe(c -> {
-                // ???
+            ApiWrapper.getInstance().login("15550029982", "123456").subscribe(ret -> {
+                App.Instance().info = ret;
+                SPUtil.saveString(LoginActivity.this, "token", ret.getToken());
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             });
         });
     }

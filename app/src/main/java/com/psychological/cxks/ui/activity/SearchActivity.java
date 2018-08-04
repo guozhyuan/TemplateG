@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.http.Api;
+import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.MainListAdapter;
 import com.psychological.cxks.util.DeviceUtils;
 
@@ -25,12 +27,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import io.reactivex.disposables.Disposable;
+
 public class SearchActivity extends BaseActivity {
 
     private ImageView back;
     private RecyclerView recycler;
     private EditText et;
     private List<ExpertBean.ResultBean> searchBeanList = new ArrayList<>();
+    private MainListAdapter gridAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,9 +47,8 @@ public class SearchActivity extends BaseActivity {
                 outRect.top = DeviceUtils.dip2px(SearchActivity.this, 5);
             }
         });
-        MainListAdapter gridAdapter = new MainListAdapter(SearchActivity.this, searchBeanList);
+        gridAdapter = new MainListAdapter(SearchActivity.this, searchBeanList);
         recycler.setAdapter(gridAdapter);
-
     }
 
     @Override
@@ -70,12 +74,15 @@ public class SearchActivity extends BaseActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     String content = et.getText().toString().trim();
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    Objects.requireNonNull(imm).hideSoftInputFromWindow(et.getWindowToken(), 0);
-                    if (TextUtils.isEmpty(content)) {
-                        return true;
+                    if (!TextUtils.isEmpty(content)) {
+                        search(content);
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        Objects.requireNonNull(imm).hideSoftInputFromWindow(et.getWindowToken(), 0);
+                        if (TextUtils.isEmpty(content)) {
+                            return true;
+                        }
+                        Log.e("Search : ", content);
                     }
-                    Log.e("Search : ", content);
                     return true;
                 }
                 return false;
@@ -83,5 +90,14 @@ public class SearchActivity extends BaseActivity {
         });
 
 
+    }
+
+    private void search(String key) {
+        Disposable disposable = ApiWrapper.getInstance().search(key).subscribe(ret -> {
+            searchBeanList.clear();
+            searchBeanList.addAll(ret);
+            gridAdapter.notifyDataSetChanged();
+        });
+        compositeDisposable.add(disposable);
     }
 }

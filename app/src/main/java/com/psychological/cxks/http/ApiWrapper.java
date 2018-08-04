@@ -1,10 +1,8 @@
 package com.psychological.cxks.http;
 
-import android.util.Log;
-
 import com.psychological.cxks.bean.BannerBean;
 import com.psychological.cxks.bean.ExpertBean;
-import com.psychological.cxks.bean.LoginBean;
+import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.bean.QueryOrderStateBean;
 import com.psychological.cxks.bean.TestBean;
 import com.psychological.cxks.bean.param.AddAllOrderParam;
@@ -18,6 +16,7 @@ import com.psychological.cxks.bean.param.FirstCodePayParam;
 import com.psychological.cxks.bean.param.FreeCodePayParam;
 import com.psychological.cxks.bean.param.GeneDisCodeParam;
 import com.psychological.cxks.bean.param.LockParam;
+import com.psychological.cxks.bean.param.OrderDetailParam;
 import com.psychological.cxks.bean.param.PhoneCodePayParam;
 import com.psychological.cxks.bean.param.QueryOrderStateParam;
 import com.psychological.cxks.bean.param.ReservationParam;
@@ -26,13 +25,14 @@ import com.psychological.cxks.bean.param.UnlockParam;
 import org.greenrobot.greendao.annotation.NotNull;
 
 import java.util.List;
-import java.util.Objects;
+
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
+import retrofit2.http.Field;
 
 
 /**
@@ -55,12 +55,12 @@ public class ApiWrapper {
                 return Observable.create(new ObservableOnSubscribe<T>() {
                     @Override
                     public void subscribe(ObservableEmitter<T> emitter) throws Exception {
-//                        Log.e("ApiWrapper", "code: " + r.code + "  message:" + r.message + "  data:" + r.data.toString());
-//                        if (r.code == 200) {
-//                            emitter.onError(new Throwable("code : " + r.code));
-//                        }
                         if (r.data == null) {
-                            emitter.onError(new Throwable("httpResp data is null."));
+                            try {
+                                throw new HttpDataNullException("httpResp data is null.");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             return;
                         }
                         emitter.onNext(r.data);
@@ -76,13 +76,13 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    public Observable<LoginBean> login(String account, String password) {
-        Observable<HttpResp<LoginBean>> observable = HttpX.Instance().Api().login(account, password).compose(HttpScheduler.<HttpResp<LoginBean>>applyIO());
+    public Observable<UserInfoBean> login(String account, String password) {
+        Observable<HttpResp<UserInfoBean>> observable = HttpX.Instance().Api().login(account, password).compose(HttpScheduler.<HttpResp<UserInfoBean>>applyIO());
         return transform(observable);
     }
 
-    public Observable<String> rgsAndLog(String mobile, String code) {
-        Observable<HttpResp<String>> observable = HttpX.Instance().Api().rgsAndLog(mobile, code).compose(HttpScheduler.applyIO());
+    public Observable<UserInfoBean> rgsAndLog(String mobile, String code) {
+        Observable<HttpResp<UserInfoBean>> observable = HttpX.Instance().Api().rgsAndLog(mobile, code).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -210,10 +210,27 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    public Observable<String> search(String keyWord) {
-        Observable<HttpResp<String>> observable = HttpX.Instance().Api().search(keyWord).compose(HttpScheduler.applyIO());
+    public Observable<List<ExpertBean.ResultBean>> search(String keyWord) {
+        Observable<HttpResp<List<ExpertBean.ResultBean>>> observable = HttpX.Instance().Api().search(keyWord).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
+    //所有订单
+    public Observable<String> allOrder(OrderDetailParam param) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().allOrder(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    //添加收藏
+    public Observable<Boolean> addCollect(String uId, String consultId) {
+        Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().addCollect(uId, consultId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    //收藏列表
+    public Observable<Object> collectList(String uId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().collectList(uId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
 
 }
