@@ -149,7 +149,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             diploma.setText(ret.getDiploma());
             Glide.with(ExpertDetailActivity.this).load(ret.getImg()).into(imgBig);
             introduction.setText(ret.getDetail());
-            ArrayList<String> tagList = new ArrayList<>(Arrays.asList(ret.getLabels().split("\\s+")));
+            ArrayList<String> tagList = new ArrayList<>(Arrays.asList(ret.getLabels().split(",")));
             tagLayout.setTags(tagList);
             recordUrl = ret.getPath();
         });
@@ -232,7 +232,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             case R.id.order:
                 intent = new Intent(ExpertDetailActivity.this, ReservationActivity.class);
                 bundle = new Bundle();
-                bundle.putSerializable("expert", transData);
+                bundle.putSerializable("expert", detailBean);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;

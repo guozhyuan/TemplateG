@@ -63,12 +63,13 @@ public class ConsumerEvaluateActivity extends BaseActivity {
         swipe.setOnRefreshListener(() -> {
             isRefresh = true;
             param = new EvaluateParam();
-
+            getEvaluateList();
         });
         RecyclerViewOnLoadHelper.ins().regist(recyclerView);
         RecyclerViewOnLoadHelper.ins().setOnLoadListener(() -> {
             isRefresh = false;
             param.pageNo += 1;
+            getEvaluateList();
         });
         adapter = new ConsumerEvaluateAdapter(this, list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -84,7 +85,7 @@ public class ConsumerEvaluateActivity extends BaseActivity {
         });
         recyclerView.setAdapter(adapter);
         tagLayout = findViewById(R.id.tagLayout);
-//        ArrayList<String> tagList = new ArrayList<>(Arrays.asList(detailBean.getLabels().split("\\s+")));
+//        ArrayList<String> tagList = new ArrayList<>(Arrays.asList(detailBean.getLabels().split(",")));
 //        tagLayout.setTags(tagList);
         ratingBar = findViewById(R.id.ratingbar);
 
@@ -98,6 +99,7 @@ public class ConsumerEvaluateActivity extends BaseActivity {
     private void getEvaluateList() {
         param.consultId = userId;
         Disposable subscribe = ApiWrapper.getInstance().evaluateList(param).subscribe(ret -> {
+            swipe.setRefreshing(false);
             if (isRefresh) {
                 list.clear();
             }

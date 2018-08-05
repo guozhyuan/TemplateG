@@ -55,6 +55,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.VH> {
         holder.addr.setText(bean.getAddr());
         holder.evaluation.setText(String.format("好评率:"));
         holder.desc.setText(bean.getPersonalDesc());
+        holder.vip.setVisibility(bean.getOnly() == 0 ? View.GONE : View.VISIBLE);
 
         holder.tagLayout.removeAllViews();
         for (String str : bean.getLabels().split(",")) {
@@ -78,6 +79,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.VH> {
     class VH extends RecyclerView.ViewHolder {
         private ConstraintLayout root;
         private ImageView imageView;
+        private ImageView vip;
         private TextView nickname;
         private TextView seniority;
         private TextView desc;
@@ -89,6 +91,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.VH> {
             super(itemView);
             root = itemView.findViewById(R.id.root);
             imageView = itemView.findViewById(R.id.imageView);
+            vip = itemView.findViewById(R.id.vip);
             nickname = itemView.findViewById(R.id.nickname);
             seniority = itemView.findViewById(R.id.seniority);
             desc = itemView.findViewById(R.id.desc);

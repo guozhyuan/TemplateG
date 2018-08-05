@@ -81,7 +81,7 @@
             android:layout_height="19dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="17dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/me_11" />
 
         <TextView
             android:id="@+id/textView8"
@@ -108,11 +108,11 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_order">
 
         <ImageView
-            android:layout_width="19dp"
-            android:layout_height="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="17dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/me_13" />
 
         <TextView
             android:id="@+id/textView9"
@@ -138,11 +138,11 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_favorite">
 
         <ImageView
-            android:layout_width="19dp"
-            android:layout_height="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="17dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/me_15" />
 
         <TextView
             android:id="@+id/textView10"
@@ -168,11 +168,11 @@
         app:layout_constraintTop_toBottomOf="@+id/coupons">
 
         <ImageView
-            android:layout_width="19dp"
-            android:layout_height="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="17dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/me_17" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -197,11 +197,11 @@
         app:layout_constraintTop_toBottomOf="@+id/resetpwd">
 
         <ImageView
-            android:layout_width="19dp"
-            android:layout_height="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="17dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/me_19" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -1,25 +1,51 @@
 package com.psychological.cxks.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.psychological.cxks.R;
 
+import com.psychological.cxks.bean.CouponPackgeBean;
+import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.ChooseCouponsAdapter;
 import com.psychological.cxks.util.DeviceUtils;
+import com.psychological.cxks.util.SPUtil;
 
-public class ChooseCouponsActivity extends BaseActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+
+public class ChooseCouponsActivity extends BaseActivity implements View.OnClickListener {
+    private static final String TAG = "ChooseCouponsActivity";
+
+
+    private ImageView back;
+    private CheckBox cb;
+    private TextView confirm;
+
+
+    private RecyclerView recyclerView;
+    private ChooseCouponsAdapter adapter;
+    private List<CouponPackgeBean> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getAllCoupnList();
     }
 
     @Override
@@ -29,9 +55,12 @@ public class ChooseCouponsActivity extends BaseActivity {
 
     @Override
     public void findView() {
-        ImageView back = findViewById(R.id.back);
-        CheckBox cb = findViewById(R.id.none);
-        RecyclerView recyclerView = findViewById(R.id.recycler);
+        back = findViewById(R.id.back);
+        cb = findViewById(R.id.none);
+        confirm = findViewById(R.id.confirm);
+
+
+        recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -43,12 +72,48 @@ public class ChooseCouponsActivity extends BaseActivity {
                 }
             }
         });
-        ChooseCouponsAdapter adapter = new ChooseCouponsAdapter(this);
+        adapter = new ChooseCouponsAdapter(this, list);
+        adapter.setOnItemCheck(() -> {
+            if (cb.isChecked()) {
+                cb.setChecked(false);
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void initListener() {
+        back.setOnClickListener(this);
+        confirm.setOnClickListener(this);
+        cb.setOnCheckedChangeListener((checkBox, isChecked) -> {
+            if (isChecked) {
+//                adapter.unCheckAll();
+            }
+        });
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.back:
+                finish();
+                break;
+
+            case R.id.confirm:
+
+                break;
+        }
+    }
+
+    private void getAllCoupnList() {
+        String userId = SPUtil.getString(this, "userId");
+        if (TextUtils.isEmpty(userId)) {
+            Toast.makeText(this, "请登录", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        Disposable disposable = ApiWrapper.getInstance().getAllCouponList(userId).subscribe(ret -> {
+            Log.e(TAG, "getAllCoupnList: " + ret);
+        });
+        compositeDisposable.add(disposable);
     }
 }

@@ -176,6 +176,7 @@
                     android:paddingStart="15dp"
                     android:paddingTop="5dp"
                     android:text="文字"
+                    android:visibility="gone"
                     android:textColor="@color/color_reservation_mode_text"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -206,7 +207,7 @@
                     android:gravity="end"
                     android:textColor="#585858"
                     android:textSize="16sp"
-                    tools:text="选择优惠券>" />
+                    android:text="选择优惠券>" />
             </LinearLayout>
 
             <LinearLayout

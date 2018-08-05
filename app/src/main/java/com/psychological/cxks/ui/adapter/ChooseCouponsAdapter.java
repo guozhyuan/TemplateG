@@ -9,13 +9,17 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.CouponPackgeBean;
+
+import java.util.List;
 
 public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdapter.VH> {
-
+    private List<CouponPackgeBean> list;
     private Context ctx;
 
-    public ChooseCouponsAdapter(Context ctx) {
+    public ChooseCouponsAdapter(Context ctx, List<CouponPackgeBean> list) {
         this.ctx = ctx;
+        this.list = list;
     }
 
     @Override
@@ -26,12 +30,23 @@ public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdap
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //重置数据,刷新显示
-            }
-        });
+//        CouponPackgeBean bean = list.get(position);
+//        holder.cb.setChecked(bean.isChecked());
+//
+//        holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (!isChecked) {
+//                    unCheckAll();
+//                    bean.setChecked(true);
+//                    onItemCheck.call();
+//                } else {
+//                    bean.setChecked(false);
+//                }
+//                notifyDataSetChanged();
+//            }
+//        });
+
 
     }
 
@@ -48,5 +63,21 @@ public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdap
             super(itemView);
             cb = itemView.findViewById(R.id.cb);
         }
+    }
+
+    public void unCheckAll() {
+        for (CouponPackgeBean bean : list) {
+            bean.setChecked(false);
+        }
+    }
+
+    private OnItemCheck onItemCheck;
+
+    public interface OnItemCheck {
+        void call();
+    }
+
+    public void setOnItemCheck(OnItemCheck onItemCheck) {
+        this.onItemCheck = onItemCheck;
     }
 }

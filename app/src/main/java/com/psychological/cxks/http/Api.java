@@ -2,6 +2,7 @@ package com.psychological.cxks.http;
 
 
 import com.psychological.cxks.bean.BannerBean;
+import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.ExpertDetailBean;
@@ -12,6 +13,7 @@ import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.AddVisitorInfoParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
+import com.psychological.cxks.bean.param.CouponPackgeParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
@@ -207,25 +209,21 @@ public interface Api {
     @POST("collecttList")
     Observable<HttpResp<Object>> collectList(@Field("uId") String uId);
 
-    //3.7.1 获取365心理顾问产品(/mentality/getMentalityCst)
 
-    //3.7.2 心理顾问-添加订单(/mentality/save)
+    // 3.8.2 购买者获取购买咨询师套餐后所得的优惠码列表(/cp/selectPcList)
+    @POST("cp/selectPcList")
+    Observable<HttpResp<Object>> couponPackgeList(@Body CouponPackgeParam param);
 
-    //3.7.3 心理顾问-获取电询、面询优惠码(/mentality/addCcoupon) (注：用户购买完365心理顾问产品后调用此接口，将优惠码返回给用户)
-
-    //3.7.4 心理顾问-填写365心理顾问服务个人基本资料(/mentality/addmp)
-
-    //3.7.5 心理顾问-获取365咨询档案列表(/mentality/getDescriptionList)
-
-    //3.8.1 用户获取已使用的365心理顾问优惠码列表(/mc/McList)
-
-    //3.8.2 购买者获取购买咨询师套餐后所得的优惠码列表(/cp/selectPcList)
-
-    //3.8.3 用户获取已使用的电询、面询优惠卷列表(/mc/CcList)
-
-    //3.8.4 购买者获取购买优惠套餐后所得的优惠码列表(/cp/selectPcList)
+    // 3.8.3 用户获取电询、面询优惠卷列表(/mc/CcList)
+    @FormUrlEncoded
+    @POST("mc/CcList")
+    Observable<HttpResp<Object>> couponCodeList(@Field("creator") String creator);
 
 
+    // 3.8.4 预约时的优惠码选择(/mc/getCouponList)
+    @FormUrlEncoded
+    @POST("mc/getCouponList")
+    Observable<HttpResp<Object>> getAllCouponList(@Field("userId") String userId);
 }
 
 

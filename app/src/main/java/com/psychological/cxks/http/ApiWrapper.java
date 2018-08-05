@@ -11,6 +11,7 @@ import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.AddVisitorInfoParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
+import com.psychological.cxks.bean.param.CouponPackgeParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
@@ -255,5 +256,25 @@ public class ApiWrapper {
         Observable<HttpResp<Object>> observable = HttpX.Instance().Api().collectList(uId).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
+
+
+    // 3.8.2 购买者获取购买咨询师套餐后所得的优惠码列表(/cp/selectPcList)
+    public Observable<Object> couponPackgeList(CouponPackgeParam param) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().couponPackgeList(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.8.3 用户获取电询、面询优惠卷列表(/mc/CcList)
+    public Observable<Object> couponCodeList(String creator) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().couponCodeList(creator).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    //预约时的优惠码选择
+    public Observable<Object> getAllCouponList(String userId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getAllCouponList(userId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
 
 }

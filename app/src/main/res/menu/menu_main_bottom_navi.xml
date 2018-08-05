@@ -3,15 +3,15 @@
 
     <item
         android:id="@+id/navi_main"
-        android:icon="@mipmap/favorite"
+        android:icon="@mipmap/main"
         android:title="@string/main" />
     <item
         android:id="@+id/navi_msg"
-        android:icon="@mipmap/message"
+        android:icon="@mipmap/msg"
         android:title="@string/message" />
     <item
         android:id="@+id/navi_me"
-        android:icon="@mipmap/me"
+        android:icon="@mipmap/personal"
         android:title="@string/me" />
 
 </menu>

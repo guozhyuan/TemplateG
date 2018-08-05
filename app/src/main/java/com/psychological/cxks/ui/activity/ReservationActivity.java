@@ -24,6 +24,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.JsonBean;
 import com.psychological.cxks.bean.param.ReservationParam;
 import com.psychological.cxks.http.ApiWrapper;
@@ -46,7 +47,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
     private static final int REQ_CODE_DISCOUNTS = 1;
     private static final int REQ_CODE_PRICE = 2;
     private static final int REQ_CODE_CITY = 3;
-    private ExpertBean.ResultBean transData; //传递的咨询师信息
+    private ExpertDetailBean transData; //传递的咨询师信息
     private ArrayList<String> chosenTags;
     private ReservationParam param = new ReservationParam();
     private String chosenTag;
@@ -98,7 +99,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        transData = (ExpertBean.ResultBean) getIntent().getSerializableExtra("expert");
+        transData = (ExpertDetailBean) getIntent().getSerializableExtra("expert");
         chosenTags = new ArrayList<>();
         ArrayList<String> tagList = new ArrayList<>();
         for (CategoryEnum e : CategoryEnum.values()) {
@@ -106,6 +107,10 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
         }
         tagLayout.setTags(tagList);
         Glide.with(this).load(transData.getImg()).apply(RequestOptions.circleCropTransform()).into(head);
+        nick.setText(transData.getName());
+        jobTitle.setText(transData.getRank());
+        mode_phone.setSelected(true);
+        price.setText(transData.getPhone());
     }
 
     @Override
@@ -212,13 +217,9 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
 
             case R.id.submit:
                 if (!checkBox.isChecked()) return;
-
-
-                //TODO 先添加总订单,再锁定时间
                 param.token = "";
                 param.orderId = "";
-                param.csId = transData.getUserId();
-
+                param.csId = transData.getUesrId();
                 //(1-电询；2-面询；3-文字)
                 param.method = mode_phone.isSelected() ? 1 : mode_meeting.isSelected() ? 2 : mode_message.isSelected() ? 3 : -1;
                 if (param.method == -1) {
@@ -232,15 +233,16 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                     return;
                 }
                 param.field = CategoryEnum.getIndex(chosenTag);
-                param.money = 1d;
-                param.name = "";
+                param.money = Double.parseDouble(price.getText().toString());
+                param.name = real_name.getText().toString();
                 // 1：男，2：女
                 param.sex = btnMan.isChecked() ? 1 : btnWoman.isChecked() ? 2 : -1;
                 param.mobile = phone.getText().toString();
                 param.need = feedback.getText().toString();
                 param.time = -1;
                 param.day = "";
-                //  ApiWrapper.getInstance().reservation()
+                //TODO 先添加总订单,再锁定时间,等待支付完成 ??
+
 
                 break;
 
@@ -254,11 +256,13 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                 mode_message.setSelected(false);
                 mode_phone.setSelected(true);
                 mode_meeting.setSelected(false);
+                price.setText(transData.getPhone());
                 break;
             case R.id.mode_meeting:
                 mode_message.setSelected(false);
                 mode_phone.setSelected(false);
                 mode_meeting.setSelected(true);
+                price.setText(transData.getMeet());
                 break;
         }
     }
@@ -267,6 +271,10 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
+            case REQ_CODE_DISCOUNTS:
+
+                break;
+
         }
 
     }
