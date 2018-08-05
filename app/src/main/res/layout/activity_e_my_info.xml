@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="编辑信息"
+            android:text="主页设置"
             android:textColor="#2c2c2c"
             android:textSize="18sp" />
     </FrameLayout>
@@ -120,10 +120,10 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:background="@null"
-                        android:gravity="center"
+                        android:gravity="center_vertical|end"
+                        android:hint="姓名"
                         android:textColor="#bcbcbc"
-                        android:textSize="15sp"
-                        android:text="姓名"/>
+                        android:textSize="15sp" />
 
                 </RelativeLayout>
 
@@ -147,15 +147,16 @@
                         android:textColor="#2d2d2d" />
 
                     <EditText
-                        android:id="@+id/g_title"
+                        android:id="@+id/rank"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:textColor="#bcbcbc"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
                         android:background="@null"
-                        android:text="二级咨询师" />
+                        android:gravity="center_vertical|end"
+                        android:hint="国家二级咨询师"
+                        android:textColor="#bcbcbc"
+                        android:textSize="15sp" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -190,12 +191,14 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/radio_male"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:text="男" />
 
                         <RadioButton
+                            android:id="@+id/radio_female"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="女" />
@@ -226,10 +229,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_toLeftOf="@id/year"
-                        android:gravity="center"
-                        android:textColor="#bcbcbc"
                         android:background="@null"
-                        android:text="12" />
+                        android:gravity="center_vertical|end"
+                        android:hint="12"
+                        android:textColor="#bcbcbc" />
 
                     <TextView
                         android:id="@+id/year"
@@ -237,12 +240,15 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:gravity="center_vertical"
-                        android:textSize="15sp"
-                        android:text="年" />
+                        android:text="年"
+                        android:textSize="15sp" />
+
+
                 </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_address"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/dp10"
@@ -262,21 +268,20 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
                     android:layout_weight="2"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <TextView
                         android:id="@+id/province"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
+                        android:gravity="center_vertical|end"
+                        android:hint="广东省"
                         android:textColor="#bcbcbc"
-                        android:background="@null"
-                        android:textSize="15sp"
-                        android:text="广东省" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -284,19 +289,18 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="省"
-                        android:textSize="15sp"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/city"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:textSize="15sp"
-                        android:background="@null"
+                        android:gravity="center_vertical|end"
+                        android:hint="广州市"
                         android:textColor="#bcbcbc"
-                        android:text="广州市" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -387,12 +391,12 @@
 
             <!--照片展示-->
             <LinearLayout
-                android:id="@+id/rl_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:id="@+id/rl_photo"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
@@ -579,7 +583,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="擅长医疗"
+                        android:text="擅长疗法"
                         android:textColor="#2d2d2d" />
 
                     <ImageView
@@ -682,6 +686,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
