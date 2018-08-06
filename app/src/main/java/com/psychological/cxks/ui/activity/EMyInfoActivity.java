@@ -45,7 +45,7 @@ public class EMyInfoActivity extends BaseActivity {
     public void findView() {
         ImageView ivBack = findViewById(R.id.back);
         ImageView ivPhoto = findViewById(R.id.iv_photo);
-        TextView tvId = findViewById(R.id.tv_id);
+
         TextView infoGrogress = findViewById(R.id.info_prog);
         EditText username = findViewById(R.id.username);
         EditText rank = findViewById(R.id.rank);
@@ -57,8 +57,6 @@ public class EMyInfoActivity extends BaseActivity {
         RelativeLayout rl_rcly = findViewById(R.id.rl_rcly);//擅长领域
         RelativeLayout rlPhoto = findViewById(R.id.rl_photo);//照片展示
 
-        TextView homePriview = findViewById(R.id.home_preview);
-        TextView commitCheck = findViewById(R.id.commit_check);
 
 
         llAddr.setOnClickListener((v) -> {
@@ -72,11 +70,7 @@ public class EMyInfoActivity extends BaseActivity {
             startActivity(new Intent(EMyInfoActivity.this, UploadPhotoActivity.class));
         });
 
-        homePriview.setOnClickListener((v) -> {
 
-        });
-        commitCheck.setOnClickListener((v) -> {
-        });
     }
 
     @Override

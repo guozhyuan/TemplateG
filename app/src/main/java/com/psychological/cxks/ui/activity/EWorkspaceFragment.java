@@ -44,6 +44,8 @@ public class EWorkspaceFragment extends BaseFragment {
     }
 
     class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.VH> {
+        private int[] icons = {R.mipmap.e_03, R.mipmap.e_05, R.mipmap.e_07, R.mipmap.e_09, R.mipmap.e_35,
+                R.mipmap.e_36, R.mipmap.e_37, R.mipmap.e_38, R.mipmap.e_58, R.mipmap.e_59};
 
         @Override
         public ActionAdapter.VH onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,7 +55,7 @@ public class EWorkspaceFragment extends BaseFragment {
 
         @Override
         public void onBindViewHolder(ActionAdapter.VH holder, int position) {
-            holder.img.setImageResource(R.mipmap.ic_launcher_round);
+            holder.img.setImageResource(icons[position]);
             holder.name.setText(actionNames[position]);
             holder.root.setOnClickListener((view) -> {
                 // "主页设置", "我的订单", "客户", "时间设置", "咨询室共享", "套餐设置", "优惠码", "收入", "咨询报告", "评价"

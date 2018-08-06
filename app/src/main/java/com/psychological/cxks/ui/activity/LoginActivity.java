@@ -59,8 +59,8 @@ public class LoginActivity extends BaseActivity {
                 SPUtil.saveString(LoginActivity.this, "mobil", ret.getMobil());
                 SPUtil.saveString(LoginActivity.this, "name", ret.getName());
                 SPUtil.saveString(LoginActivity.this, "userId", ret.getUserId());
-//                startActivity(new Intent(LoginActivity.this, EMainActivity.class));
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, EMainActivity.class));
+//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             });
 
         });

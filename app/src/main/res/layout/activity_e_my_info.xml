@@ -19,7 +19,7 @@
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/left_arrow" />
 
 
         <TextView
@@ -43,67 +43,65 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="209dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_width="94dp"
+                    android:layout_height="94dp"
+                    android:layout_marginTop="25dp">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <ImageView
                         android:id="@+id/iv_photo"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="94dp"
+                        android:layout_height="94dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/ic_launcher_round" />
 
                     <ImageView
                         android:id="@+id/iv_photo_change"
-                        android:layout_width="7dp"
-                        android:layout_height="7dp"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginBottom="10dp"
                         android:layout_marginRight="10dp"
-                        app:srcCompat="@mipmap/ic_launcher_round" />
+                        app:srcCompat="@mipmap/camera" />
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ID:123456789"
-                    android:textColor="#797979"
-                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/info_prog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:text="资料完整度：99%"
-                    android:textSize="12sp" />
+                    android:textColor="#ff8439"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp10"
+                    android:layout_marginTop="12dp"
                     android:text="一天只能进行一次提交审核，请仔细检查再提交"
-                    android:textColor="#FD3D43"
-                    android:textSize="12sp" />
+                    android:textColor="#f8392b"
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@android:color/white"
                 android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
 
@@ -112,13 +110,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="姓名"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/username"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:background="@null"
                         android:gravity="center_vertical|end"
                         android:hint="姓名"
@@ -127,15 +127,10 @@
 
                 </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="50dp"
-                    android:background="@color/main_bg" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
 
@@ -144,14 +139,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="头衔"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/rank"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentBottom="true"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         android:background="@null"
                         android:gravity="center_vertical|end"
                         android:hint="国家二级咨询师"
@@ -170,7 +166,7 @@
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
 
@@ -179,7 +175,8 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="性别"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <RadioGroup
                         android:id="@+id/rg"
@@ -205,15 +202,10 @@
                     </RadioGroup>
                 </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="50dp"
-                    android:background="@color/main_bg" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
 
@@ -222,12 +214,14 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="从业时间"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/Employment_time"
-                        android:layout_width="wrap_content"
+                        android:layout_width="80dp"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="0dp"
                         android:layout_toLeftOf="@id/year"
                         android:background="@null"
                         android:gravity="center_vertical|end"
@@ -250,7 +244,7 @@
             <LinearLayout
                 android:id="@+id/ll_address"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="@dimen/dp10"
                 android:background="@android:color/white"
                 android:orientation="horizontal"
@@ -263,7 +257,8 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="所在城市"
-                    android:textColor="#2d2d2d" />
+                    android:textColor="#2d2d2d"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -317,7 +312,7 @@
             <RelativeLayout
                 android:id="@+id/rl_cyzz"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white"
                 android:paddingLeft="10dp"
@@ -328,21 +323,22 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="从业资质"
-                    android:textColor="#2d2d2d" />
+                    android:textColor="#2d2d2d"
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/left_arrow" />
             </RelativeLayout>
 
             <!--擅长领域-->
             <RelativeLayout
                 android:id="@+id/rl_rcly"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white"
                 android:paddingLeft="10dp"
@@ -353,21 +349,22 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="擅长领域"
-                    android:textColor="#2d2d2d" />
+                    android:textColor="#2d2d2d"
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/left_arrow" />
             </RelativeLayout>
 
             <!--介绍音视频-->
             <RelativeLayout
                 android:id="@+id/rl_ysp"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white"
                 android:paddingLeft="10dp"
@@ -378,14 +375,15 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="介绍视频/音频"
-                    android:textColor="#2d2d2d" />
+                    android:textColor="#2d2d2d"
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/left_arrow" />
             </RelativeLayout>
 
 
@@ -398,7 +396,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_photo"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
@@ -409,14 +407,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="照片展示"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/left_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -428,7 +427,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_introduce_me"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -438,14 +437,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="自我介绍"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/left_arrow" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -458,7 +458,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_diploma"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -468,14 +468,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="资质证书"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/left_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -487,7 +488,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_education_background"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -497,14 +498,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="教育背景"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/left_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -516,7 +518,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_training_experience"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -526,14 +528,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="培训经历"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/left_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -545,7 +548,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_work_exprience"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -555,14 +558,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="从业经历"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/left_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -574,7 +578,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_scyl"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -584,14 +588,15 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="擅长疗法"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/left_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -610,7 +615,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_zwjs"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -620,12 +625,14 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="自我介绍"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <android.support.v7.widget.SwitchCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
                 </RelativeLayout>
 
                 <ImageView
@@ -637,7 +644,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_yyzx"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -647,12 +654,14 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="语音咨询"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <android.support.v7.widget.SwitchCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
                 </RelativeLayout>
 
                 <ImageView
@@ -664,7 +673,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_mx"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
@@ -674,43 +683,56 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="面询"
-                        android:textColor="#2d2d2d" />
+                        android:textColor="#2d2d2d"
+                        android:textSize="18sp" />
 
                     <android.support.v7.widget.SwitchCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
                 </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/home_preview"
-                    android:layout_width="120dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/shape_preview_btn"
+                    android:id="@+id/save"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
                     android:gravity="center"
-                    android:text="主页浏览"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:text="保存草稿"
+                    android:textColor="#ff8439"
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/commit_check"
-                    android:layout_width="120dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/shape_evaluate_btn"
+                    android:id="@+id/preview"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="主页预览"
+                    android:textColor="#ff8439"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/submit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="#47bb44"
                     android:gravity="center"
                     android:text="提交审核"
                     android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </LinearLayout>
