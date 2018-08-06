@@ -28,7 +28,7 @@ public class AddVisitorInfoParam {
 
     public String name;
     public String gender;
-    public String age;
+    public Integer age;
     public String origin;
     public String family;
     public String nation;
@@ -36,6 +36,7 @@ public class AddVisitorInfoParam {
     public String occupation;
     public String education;
     public String mobile;
+    public String addr;
     public String postalAddress;
     public String urgent;
     public String urgentPhone;

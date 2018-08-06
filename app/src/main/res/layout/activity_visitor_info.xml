@@ -125,7 +125,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写真实姓名"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -198,7 +198,8 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写真实年龄"
-                    android:textColor="#d4d4d4"
+                    android:inputType="number"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -230,7 +231,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写民族"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -262,7 +263,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写城市如深圳"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -293,9 +294,8 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="end"
-                    android:hint="请选择"
+                    android:text="已婚"
                     android:textColor="#585858"
-                    android:textColorHint="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -327,7 +327,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写职业"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -347,7 +347,7 @@
                     android:textColor="#2d2d2d"
                     android:textSize="18sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/education"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -357,9 +357,8 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="end"
-                    android:hint="请选择"
+                    android:hint="学历"
                     android:textColor="#585858"
-                    android:textColorHint="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -390,7 +389,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写籍贯"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -450,7 +449,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写通讯地址"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -481,7 +480,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写联系电话"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -513,7 +512,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写紧急联系人"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -545,7 +544,7 @@
                     android:background="@null"
                     android:gravity="end"
                     android:hint="请填写紧急联系人电话"
-                    android:textColor="#d4d4d4"
+                    android:textColor="#585858"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -969,8 +968,9 @@
 
                     <RadioButton
                         android:id="@+id/yes"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:checked="true"
                         android:text="是"
                         android:textColor="#585858"
@@ -978,8 +978,9 @@
 
                     <RadioButton
                         android:id="@+id/no"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="否"
                         android:textColor="#585858"
                         android:textSize="16sp" />
