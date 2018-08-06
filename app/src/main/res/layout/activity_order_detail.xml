@@ -84,6 +84,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -113,10 +114,8 @@
                     android:id="@+id/nick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintStart_toEndOf="@+id/head"
-                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="24dp"
                     tools:text="张三" />
 
                 <TextView
@@ -130,7 +129,7 @@
                     tools:text="深圳" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -140,7 +139,7 @@
                     tools:text="国家二级" />
 
                 <TextView
-                    android:id="@+id/detail"
+                    android:id="@+id/chat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -202,7 +201,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/book_line" />
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/method"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -269,7 +268,7 @@
                     android:textColor="#585858"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19"
+                    app:layout_constraintTop_toBottomOf="@+id/method"
                     tools:text="情感婚姻" />
 
                 <TextView

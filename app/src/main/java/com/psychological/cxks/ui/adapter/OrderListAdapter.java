@@ -57,7 +57,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.VH> 
 
         public VH(View itemView) {
             super(itemView);
-            detail = itemView.findViewById(R.id.detail);
+            detail = itemView.findViewById(R.id.chat);
             orderNum = itemView.findViewById(R.id.orderNum);
             time = itemView.findViewById(R.id.price);
             orderStatus = itemView.findViewById(R.id.orderStatus);

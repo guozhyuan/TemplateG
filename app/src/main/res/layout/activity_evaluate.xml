@@ -69,7 +69,7 @@
             tools:text="深圳" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -79,7 +79,7 @@
             tools:text="国家二级" />
 
         <TextView
-            android:id="@+id/detail"
+            android:id="@+id/chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -126,12 +126,12 @@
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            hedgehog:starCount="5"
-            hedgehog:starEmpty="@mipmap/star_empty"
-            hedgehog:starFill="@mipmap/star_full"
-            hedgehog:starImageHeight="30dp"
-            hedgehog:starImagePadding="15dp"
-            hedgehog:starImageWidth="30dp" />
+            app:starCount="5"
+            app:starEmpty="@mipmap/star_disable"
+            app:starFill="@mipmap/star_enable"
+            app:starImageHeight="40dp"
+            app:starImagePadding="15dp"
+            app:starImageWidth="40dp" />
 
         <TextView
             android:id="@+id/evaluation"
@@ -177,10 +177,10 @@
             android:layout_height="222dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:inputType="textMultiLine"
             android:background="@null"
             android:gravity="top|start"
             android:hint="请评价本次服务"
+            android:inputType="textMultiLine"
             android:textColor="#585858"
             android:textColorHint="#bcbcbc"
             android:textSize="14sp"

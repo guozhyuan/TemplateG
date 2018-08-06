@@ -83,7 +83,7 @@ public class EZiXunShiOrderFragment extends BaseFragment {
                 method = itemView.findViewById(R.id.packge_name);
                 time = itemView.findViewById(R.id.price);
                 orderNum = itemView.findViewById(R.id.orderNum);
-                detail = itemView.findViewById(R.id.detail);
+                detail = itemView.findViewById(R.id.chat);
             }
         }
     }

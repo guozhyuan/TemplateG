@@ -108,7 +108,7 @@
                 android:textColor="#797979" />
 
             <TextView
-                android:id="@+id/detail"
+                android:id="@+id/chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

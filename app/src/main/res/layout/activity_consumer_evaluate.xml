@@ -74,11 +74,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:starCount="5"
-            app:starEmpty="@mipmap/star_empty"
-            app:starFill="@mipmap/star_full"
-            app:starImageHeight="30dp"
+            app:starEmpty="@mipmap/star_disable"
+            app:starFill="@mipmap/star_enable"
+            app:starImageHeight="40dp"
             app:starImagePadding="15dp"
-            app:starImageWidth="30dp" />
+            app:starImageWidth="40dp" />
     </android.support.constraint.ConstraintLayout>
 
     <co.lujun.androidtagview.TagContainerLayout

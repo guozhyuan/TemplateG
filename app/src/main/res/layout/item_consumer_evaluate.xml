@@ -43,8 +43,8 @@
             app:layout_constraintTop_toBottomOf="@+id/consumer_nick"
             app:layout_constraintVertical_bias="0.0"
             app:starCount="5"
-            app:starEmpty="@mipmap/star_empty"
-            app:starFill="@mipmap/star_full"
+            app:starEmpty="@mipmap/star_disable"
+            app:starFill="@mipmap/star_enable"
             app:starImageHeight="30dp"
             app:starImagePadding="15dp"
             app:starImageWidth="30dp" />
