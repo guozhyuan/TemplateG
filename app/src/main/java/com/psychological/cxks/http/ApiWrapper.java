@@ -60,12 +60,13 @@ public class ApiWrapper {
                     @Override
                     public void subscribe(ObservableEmitter<T> emitter) throws Exception {
                         if (r.data == null) {
-                            try {
-                                throw new HttpDataNullException("httpResp data is null.");
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return;
+//                            try {
+//                                throw new HttpDataNullException("httpResp data is null.");
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                            return;
+                            emitter.onError(new HttpDataNullException("httpResp data is null."));
                         }
                         emitter.onNext(r.data);
                     }
