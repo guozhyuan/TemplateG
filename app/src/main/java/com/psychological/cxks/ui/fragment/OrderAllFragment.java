@@ -61,8 +61,8 @@ public class OrderAllFragment extends BaseFragment {
         param.pageNo = 1;
         param.pageSize = 20;
         param.token = App.Instance().info.getToken();
-        Disposable disposable = ApiWrapper.getInstance().allOrder(param).subscribe(ret -> {
-            Log.e(TAG, ret);
+        Disposable disposable = ApiWrapper.getInstance().allOrder2(App.Instance().info.getToken()).subscribe(ret -> {
+
         });
         compositeDisposable.add(disposable);
     }

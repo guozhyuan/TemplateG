@@ -34,6 +34,8 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -41,6 +43,7 @@ import retrofit2.http.POST;
  * Date   : 2018/6/20
  */
 public interface Api {
+
     @FormUrlEncoded
     @POST("/")
     Observable<HttpResp<TestBean>> test();
@@ -191,6 +194,10 @@ public interface Api {
     //3.5.1 用户获取预约订单列表(/verify/sAppt)
     @POST("verify/sAppt")
     Observable<HttpResp<String>> allOrder(@Body OrderDetailParam param);
+    @FormUrlEncoded
+    @POST("verify/sAppt")
+    Observable<HttpResp<Object>> allOrder2(@Field("token") String token);
+
     //3.5.3 用户获取购买的咨询师套餐订单列表(/cp/selectPoList)
 
     //3.5.4 用户获取购买的365心理顾问订单(/verify/morder)
