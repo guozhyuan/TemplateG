@@ -1,6 +1,7 @@
 package com.psychological.cxks.http;
 
 import com.psychological.cxks.bean.BannerBean;
+import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.ExpertDetailBean;
@@ -141,8 +142,9 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    public Observable<String> addAllOrder(AddAllOrderParam param) {
-        Observable<HttpResp<String>> observable = HttpX.Instance().Api().addAllOrder(param).compose(HttpScheduler.applyIO());
+    //添加总订单
+    public Observable<Object> addAllOrder(AddAllOrderParam param) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().addAllOrder(param).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -283,4 +285,15 @@ public class ApiWrapper {
     }
 
 
+    // 3.12.1 获取套餐产品(/cp/getTcAll)
+    public Observable<List<CouponPackgeBean>> getCouponPackge() {
+        Observable<HttpResp<List<CouponPackgeBean>>> observable = HttpX.Instance().Api().getCouponPackge().compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.12.2 获取咨询师发布的套餐(/cp/selectCpList)
+    public Observable<List<CouponPackgeBean>> getExpertCouponPackge(String consultId, int packageState) {
+        Observable<HttpResp<List<CouponPackgeBean>>> observable = HttpX.Instance().Api().getExpertCouponPackge(consultId, packageState).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
 }

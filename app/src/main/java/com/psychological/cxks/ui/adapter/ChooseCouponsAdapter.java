@@ -6,18 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import com.psychological.cxks.R;
-import com.psychological.cxks.bean.CouponPackgeBean;
+import com.psychological.cxks.bean.MyCouponPackgeBean;
 
 import java.util.List;
 
 public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdapter.VH> {
-    private List<CouponPackgeBean> list;
+    private List<MyCouponPackgeBean> list;
     private Context ctx;
 
-    public ChooseCouponsAdapter(Context ctx, List<CouponPackgeBean> list) {
+    public ChooseCouponsAdapter(Context ctx, List<MyCouponPackgeBean> list) {
         this.ctx = ctx;
         this.list = list;
     }
@@ -30,7 +29,7 @@ public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdap
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-//        CouponPackgeBean bean = list.get(position);
+//        MyCouponPackgeBean bean = list.get(position);
 //        holder.cb.setChecked(bean.isChecked());
 //
 //        holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -66,7 +65,7 @@ public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdap
     }
 
     public void unCheckAll() {
-        for (CouponPackgeBean bean : list) {
+        for (MyCouponPackgeBean bean : list) {
             bean.setChecked(false);
         }
     }

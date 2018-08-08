@@ -12,7 +12,7 @@ import com.psychological.cxks.http.HttpX;
  */
 public class App extends MultiDexApplication {
     private static App instance;
-    public UserInfoBean info;
+    public static UserInfoBean info;
 
     @Override
     public void onCreate() {
@@ -22,7 +22,4 @@ public class App extends MultiDexApplication {
         DBManager.getInstance().init(this);
     }
 
-    public static App Instance() {
-        return instance;
-    }
 }

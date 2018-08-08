@@ -34,8 +34,6 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -102,7 +100,7 @@ public interface Api {
 
     // 3.2.3 添加总订单(/wxPay/order) (注：预约或购买产品之前都先调用此接口,以便获取订单号)
     @POST("wxPay/order")
-    Observable<HttpResp<String>> addAllOrder(@Body AddAllOrderParam param);
+    Observable<HttpResp<Object>> addAllOrder(@Body AddAllOrderParam param);
 
     //3.2.4.1 锁定时间段(/expert/lock)
     @POST("expert/lock")
@@ -194,6 +192,7 @@ public interface Api {
     //3.5.1 用户获取预约订单列表(/verify/sAppt)
     @POST("verify/sAppt")
     Observable<HttpResp<String>> allOrder(@Body OrderDetailParam param);
+
     @FormUrlEncoded
     @POST("verify/sAppt")
     Observable<HttpResp<Object>> allOrder2(@Field("token") String token);
@@ -231,6 +230,18 @@ public interface Api {
     @FormUrlEncoded
     @POST("mc/getCouponList")
     Observable<HttpResp<Object>> getAllCouponList(@Field("userId") String userId);
+
+
+    // 3.12 我的套餐
+    // 3.12.1 获取套餐产品(/cp/getTcAll)
+    @POST("cp/getTcAll")
+    Observable<HttpResp<List<CouponPackgeBean>>> getCouponPackge();
+
+    // 3.12.2 获取咨询师发布的套餐(/cp/selectCpList)
+    // packageState:套餐发布状态(默认为0：未发布；1：已发布；2：已下架)
+    @FormUrlEncoded
+    @POST("cp/selectCpList")
+    Observable<HttpResp<List<CouponPackgeBean>>> getExpertCouponPackge(@Field("consultId") String consultId, @Field("packageState") int packageState);
 }
 
 

@@ -1,5 +1,6 @@
 package com.psychological.cxks.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.param.OrderDetailParam;
 import com.psychological.cxks.http.ApiWrapper;
+import com.psychological.cxks.ui.activity.FavoriteActivity;
+import com.psychological.cxks.ui.activity.LoginActivity;
 import com.psychological.cxks.ui.adapter.OrderListAdapter;
 import com.psychological.cxks.util.DeviceUtils;
 
@@ -57,11 +60,15 @@ public class OrderAllFragment extends BaseFragment {
         });
         adapter = new OrderListAdapter(getActivity());
         recycler.setAdapter(adapter);
+        if (App.info == null) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            return;
+        }
         OrderDetailParam param = new OrderDetailParam();
         param.pageNo = 1;
         param.pageSize = 20;
-        param.token = App.Instance().info.getToken();
-        Disposable disposable = ApiWrapper.getInstance().allOrder2(App.Instance().info.getToken()).subscribe(ret -> {
+        param.token = App.info.getToken();
+        Disposable disposable = ApiWrapper.getInstance().allOrder2(App.info.getToken()).subscribe(ret -> {
 
         });
         compositeDisposable.add(disposable);

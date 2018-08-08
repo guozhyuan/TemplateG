@@ -1,5 +1,6 @@
 package com.psychological.cxks.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,7 +36,11 @@ public class FavoriteActivity extends BaseActivity {
         });
         FavoriteAdapter adapter = new FavoriteAdapter(this);
         recyclerView.setAdapter(adapter);
-        Disposable disposable = ApiWrapper.getInstance().collectList(App.Instance().info.getUserId()).subscribe(ret -> {
+        if (App.info == null) {
+            startActivity(new Intent(FavoriteActivity.this, LoginActivity.class));
+            return;
+        }
+        Disposable disposable = ApiWrapper.getInstance().collectList(App.info.getUserId()).subscribe(ret -> {
 
         });
         compositeDisposable.add(disposable);

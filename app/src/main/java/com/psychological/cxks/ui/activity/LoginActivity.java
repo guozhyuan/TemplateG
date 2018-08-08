@@ -37,7 +37,7 @@ public class LoginActivity extends BaseActivity {
 
         reg.setOnClickListener((v) -> {
             ApiWrapper.getInstance().rgsAndLog("15550029982", "2150").subscribe(ret -> {
-                App.Instance().info = ret;
+                App.info = ret;
                 SPUtil.saveString(LoginActivity.this, "token", ret.getToken());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             });
@@ -53,7 +53,7 @@ public class LoginActivity extends BaseActivity {
 
         login.setOnClickListener((v) -> {
             ApiWrapper.getInstance().login("15550029982", "123456").subscribe(ret -> {
-                App.Instance().info = ret;
+                App.info = ret;
                 SPUtil.saveString(LoginActivity.this, "token", ret.getToken());
                 SPUtil.saveInt(LoginActivity.this, "type", ret.getType());
                 SPUtil.saveString(LoginActivity.this, "mobil", ret.getMobil());
