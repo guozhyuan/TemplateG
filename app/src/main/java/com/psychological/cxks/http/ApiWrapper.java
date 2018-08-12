@@ -12,7 +12,6 @@ import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.AddVisitorInfoParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
-import com.psychological.cxks.bean.param.CouponPackgeParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
@@ -21,7 +20,7 @@ import com.psychological.cxks.bean.param.FirstCodePayParam;
 import com.psychological.cxks.bean.param.FreeCodePayParam;
 import com.psychological.cxks.bean.param.GeneDisCodeParam;
 import com.psychological.cxks.bean.param.LockParam;
-import com.psychological.cxks.bean.param.OrderDetailParam;
+import com.psychological.cxks.bean.param.OrderListParam;
 import com.psychological.cxks.bean.param.PhoneCodePayParam;
 import com.psychological.cxks.bean.param.QueryOrderStateParam;
 import com.psychological.cxks.bean.param.ReservationParam;
@@ -30,6 +29,7 @@ import com.psychological.cxks.bean.param.UnlockParam;
 import org.greenrobot.greendao.annotation.NotNull;
 
 import java.util.List;
+import java.util.Map;
 
 
 import io.reactivex.Observable;
@@ -37,7 +37,6 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
-import retrofit2.http.Field;
 
 
 /**
@@ -62,12 +61,14 @@ public class ApiWrapper {
                     public void subscribe(ObservableEmitter<T> emitter) throws Exception {
                         if (r.data == null) {
 //                            try {
+//                               emitter.onError(new HttpDataNullException("httpResp data is null."));
 //                                throw new HttpDataNullException("httpResp data is null.");
 //                            } catch (Exception e) {
 //                                e.printStackTrace();
 //                            }
 //                            return;
                             emitter.onError(new HttpDataNullException("httpResp data is null."));
+                            return;
                         }
                         emitter.onNext(r.data);
                     }
@@ -148,11 +149,18 @@ public class ApiWrapper {
         return transform(observable);
     }
 
+    public Observable<Object> addAllOrder2(Map<String, Object> param) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().addAllOrder2(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    //锁定时间
     public Observable<Boolean> lockTime(LockParam param) {
         Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().lockTime(param).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
+    //解锁时间
     public Observable<Boolean> unlockTime(UnlockParam param) {
         Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().unlockTime(param).compose(HttpScheduler.applyIO());
         return transform(observable);
@@ -243,13 +251,13 @@ public class ApiWrapper {
     }
 
     //所有订单
-    public Observable<String> allOrder(OrderDetailParam param) {
-        Observable<HttpResp<String>> observable = HttpX.Instance().Api().allOrder(param).compose(HttpScheduler.applyIO());
+    public Observable<Object> allOrder(OrderListParam param) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().allOrder(param).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
-    public Observable<Object> allOrder2(String token) {
-        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().allOrder2(token).compose(HttpScheduler.applyIO());
+    public Observable<Object> allOrder2(Map<String, Object> param) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().allOrder2(param).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -267,8 +275,8 @@ public class ApiWrapper {
 
 
     // 3.8.2 购买者获取购买咨询师套餐后所得的优惠码列表(/cp/selectPcList)
-    public Observable<Object> couponPackgeList(CouponPackgeParam param) {
-        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().couponPackgeList(param).compose(HttpScheduler.applyIO());
+    public Observable<Object> couponPackgeList(String obtainId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().couponPackgeList(obtainId).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -296,4 +304,12 @@ public class ApiWrapper {
         Observable<HttpResp<List<CouponPackgeBean>>> observable = HttpX.Instance().Api().getExpertCouponPackge(consultId, packageState).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
+
+    // 3.14.3 查询预约时间段状态(/expert/time)(咨询师详情页)
+
+    public Observable<Object> getExpertTimes(String userId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getExpertTimes(userId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
 }

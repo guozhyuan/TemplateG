@@ -14,6 +14,9 @@ import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.http.ApiWrapper;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.reactivex.ObservableSource;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -36,7 +39,7 @@ public class CouponsDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         tranBean = (CouponPackgeBean) getIntent().getSerializableExtra("taocan");
         consultId = getIntent().getStringExtra("consultId");
-        name.setText(tranBean.getId() + "");
+        name.setText(tranBean.getExplain());
         price.setText(tranBean.getPrice() + "");
         num.setText(tranBean.getNum() + "");
     }
@@ -77,7 +80,7 @@ public class CouponsDetailActivity extends BaseActivity {
             param.body = tranBean.getTaocan();
             param.price = tranBean.getPrice();
             param.isPay = 0;
-            ApiWrapper.getInstance().addAllOrder(param).flatMap((Function<Object, ObservableSource<Boolean>>) orderId -> {
+            ApiWrapper.getInstance().addAllOrder2(bean2map(param)).flatMap((Function<Object, ObservableSource<Boolean>>) orderId -> {
                 BuyPackgeParam param1 = new BuyPackgeParam();
                 param1.consultId = consultId;
                 param1.orderId = orderId.toString();
@@ -93,6 +96,17 @@ public class CouponsDetailActivity extends BaseActivity {
                 Toast.makeText(this, "未知错误", Toast.LENGTH_SHORT).show();
             });
         });
+    }
+
+    private Map<String, Object> bean2map(AddAllOrderParam param) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("mobile", param.mobile);
+        map.put("nick", param.mobile);
+        map.put("body", param.body);
+        map.put("price", param.price);
+        map.put("isPay", param.isPay);
+        return map;
+
     }
 
 

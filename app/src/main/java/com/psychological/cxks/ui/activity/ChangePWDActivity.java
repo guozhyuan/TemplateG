@@ -37,6 +37,8 @@ public class ChangePWDActivity extends BaseActivity implements View.OnClickListe
         }
         phone.setText(App.info.getMobil());
         Disposable disposable = ApiWrapper.getInstance().send(App.info.getMobil()).subscribe(c -> {
+        }, err -> {
+
         });
         compositeDisposable.add(disposable);
 
@@ -90,6 +92,8 @@ public class ChangePWDActivity extends BaseActivity implements View.OnClickListe
                 ApiWrapper.getInstance().reset(App.info.getMobil(), verifyCode.getText().toString(), newPwd.getText().toString()).subscribe(ret -> {
                     Toast.makeText(this, "密码重置成功", Toast.LENGTH_SHORT).show();
                     finish();
+                }, err -> {
+
                 });
                 break;
             case R.id.tv_resend:
@@ -99,6 +103,8 @@ public class ChangePWDActivity extends BaseActivity implements View.OnClickListe
                 }
                 ApiWrapper.getInstance().send(App.info.getMobil()).subscribe(c -> {
                     Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
+                }, err -> {
+
                 });
 
 

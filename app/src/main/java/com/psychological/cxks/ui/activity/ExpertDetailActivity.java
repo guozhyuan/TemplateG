@@ -24,6 +24,7 @@ import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.OnSalePackgeAdapter;
+import com.psychological.cxks.util.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -165,6 +166,8 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             ArrayList<String> tagList = new ArrayList<>(Arrays.asList(ret.getLabels().split(",")));
             tagLayout.setTags(tagList);
             recordUrl = ret.getPath();
+        }, err -> {
+
         });
         compositeDisposable.add(subscribe);
     }
@@ -177,6 +180,8 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             consumerNick.setText(ret.get(0).getConsultName());
             consumerEvaluate.setText(ret.get(0).getContent());
             ratingbar.setStar(ret.get(0).getLevel());
+        }, err -> {
+            Utils.handleErr(ExpertDetailActivity.this, err.getMessage());
         });
         compositeDisposable.add(subscribe);
     }

@@ -36,32 +36,45 @@ public class LoginActivity extends BaseActivity {
         });
 
         reg.setOnClickListener((v) -> {
-            ApiWrapper.getInstance().rgsAndLog("15550029982", "2150").subscribe(ret -> {
-                App.info = ret;
-                SPUtil.saveString(LoginActivity.this, "token", ret.getToken());
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            });
+            ApiWrapper.getInstance().rgsAndLog("15550029982", "2150").subscribe(
+                    ret -> {
+                        App.info = ret;
+                        SPUtil.saveString(LoginActivity.this, "token", ret.getToken());
+                        SPUtil.saveInt(LoginActivity.this, "type", ret.getType());
+                        SPUtil.saveString(LoginActivity.this, "mobil", ret.getMobil());
+                        SPUtil.saveString(LoginActivity.this, "name", ret.getName());
+                        SPUtil.saveString(LoginActivity.this, "userId", ret.getUserId());
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    },
+                    err -> {
+
+                    });
         });
 
         code.setOnClickListener((v) -> {
-            ApiWrapper.getInstance().send("15550029982").subscribe(c -> {
-                Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
-            }, err -> {
-                Toast.makeText(this, "验证码发送失败", Toast.LENGTH_SHORT).show();
-            });
+            ApiWrapper.getInstance().send("15550029982").subscribe(
+                    c -> {
+                        Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
+                    }, err -> {
+                        Toast.makeText(this, "验证码发送失败", Toast.LENGTH_SHORT).show();
+                    });
         });
 
         login.setOnClickListener((v) -> {
-            ApiWrapper.getInstance().login("15550029982", "123456").subscribe(ret -> {
-                App.info = ret;
-                SPUtil.saveString(LoginActivity.this, "token", ret.getToken());
-                SPUtil.saveInt(LoginActivity.this, "type", ret.getType());
-                SPUtil.saveString(LoginActivity.this, "mobil", ret.getMobil());
-                SPUtil.saveString(LoginActivity.this, "name", ret.getName());
-                SPUtil.saveString(LoginActivity.this, "userId", ret.getUserId());
-//                startActivity(new Intent(LoginActivity.this, EMainActivity.class));
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            });
+            ApiWrapper.getInstance().login("15550029982", "123456").subscribe(
+                    ret -> {
+                        App.info = ret;
+                        SPUtil.saveString(LoginActivity.this, "token", ret.getToken());
+                        SPUtil.saveInt(LoginActivity.this, "type", ret.getType());
+                        SPUtil.saveString(LoginActivity.this, "mobil", ret.getMobil());
+                        SPUtil.saveString(LoginActivity.this, "name", ret.getName());
+                        SPUtil.saveString(LoginActivity.this, "userId", ret.getUserId());
+                        // startActivity(new Intent(LoginActivity.this, EMainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    },
+                    err -> {
+
+                    });
 
         });
     }

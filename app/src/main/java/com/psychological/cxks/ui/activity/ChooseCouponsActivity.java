@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 
 import com.psychological.cxks.bean.MyCouponPackgeBean;
@@ -105,13 +106,15 @@ public class ChooseCouponsActivity extends BaseActivity implements View.OnClickL
     }
 
     private void getAllCoupnList() {
-        String userId = SPUtil.getString(this, "userId");
-        if (TextUtils.isEmpty(userId)) {
+        if (App.info == null) {
             Toast.makeText(this, "请登录", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
         }
+        String userId = SPUtil.getString(this, "userId");
         Disposable disposable = ApiWrapper.getInstance().getAllCouponList(userId).subscribe(ret -> {
             Log.e(TAG, "getAllCoupnList: " + ret);
+        }, err -> {
+
         });
         compositeDisposable.add(disposable);
     }

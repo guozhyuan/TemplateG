@@ -1,6 +1,6 @@
 package com.psychological.cxks.bean;
 
-public class OrderDetailBean {
+public class OrderListBean {
 //    id	√	int	主键
 //    orderId	√	string	订单号
 //    serialId	√	string	预约流水号

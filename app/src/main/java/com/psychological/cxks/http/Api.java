@@ -13,7 +13,6 @@ import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.AddVisitorInfoParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
-import com.psychological.cxks.bean.param.CouponPackgeParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
@@ -22,17 +21,19 @@ import com.psychological.cxks.bean.param.FirstCodePayParam;
 import com.psychological.cxks.bean.param.FreeCodePayParam;
 import com.psychological.cxks.bean.param.GeneDisCodeParam;
 import com.psychological.cxks.bean.param.LockParam;
-import com.psychological.cxks.bean.param.OrderDetailParam;
+import com.psychological.cxks.bean.param.OrderListParam;
 import com.psychological.cxks.bean.param.QueryOrderStateParam;
 import com.psychological.cxks.bean.param.PhoneCodePayParam;
 import com.psychological.cxks.bean.param.ReservationParam;
 import com.psychological.cxks.bean.param.UnlockParam;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
@@ -101,6 +102,10 @@ public interface Api {
     // 3.2.3 添加总订单(/wxPay/order) (注：预约或购买产品之前都先调用此接口,以便获取订单号)
     @POST("wxPay/order")
     Observable<HttpResp<Object>> addAllOrder(@Body AddAllOrderParam param);
+
+    @FormUrlEncoded
+    @POST("wxPay/order")
+    Observable<HttpResp<Object>> addAllOrder2(@FieldMap Map<String, Object> param);
 
     //3.2.4.1 锁定时间段(/expert/lock)
     @POST("expert/lock")
@@ -191,11 +196,12 @@ public interface Api {
 
     //3.5.1 用户获取预约订单列表(/verify/sAppt)
     @POST("verify/sAppt")
-    Observable<HttpResp<String>> allOrder(@Body OrderDetailParam param);
+    Observable<HttpResp<Object>> allOrder(@Body OrderListParam param);
 
     @FormUrlEncoded
     @POST("verify/sAppt")
-    Observable<HttpResp<Object>> allOrder2(@Field("token") String token);
+    Observable<HttpResp<Object>> allOrder2(@FieldMap Map<String, Object> param);
+
 
     //3.5.3 用户获取购买的咨询师套餐订单列表(/cp/selectPoList)
 
@@ -217,8 +223,9 @@ public interface Api {
 
 
     // 3.8.2 购买者获取购买咨询师套餐后所得的优惠码列表(/cp/selectPcList)
+    @FormUrlEncoded
     @POST("cp/selectPcList")
-    Observable<HttpResp<Object>> couponPackgeList(@Body CouponPackgeParam param);
+    Observable<HttpResp<Object>> couponPackgeList(@Field("obtainId") String obtainId);
 
     // 3.8.3 用户获取电询、面询优惠卷列表(/mc/CcList)
     @FormUrlEncoded
@@ -242,6 +249,13 @@ public interface Api {
     @FormUrlEncoded
     @POST("cp/selectCpList")
     Observable<HttpResp<List<CouponPackgeBean>>> getExpertCouponPackge(@Field("consultId") String consultId, @Field("packageState") int packageState);
+
+
+    // 3.14.3 查询预约时间段状态(/expert/time)(咨询师详情页)
+    @FormUrlEncoded
+    @POST("expert/time")
+    Observable<HttpResp<Object>> getExpertTimes(@Field("userId") String userId);
+
 }
 
 
