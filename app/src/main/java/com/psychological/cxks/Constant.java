@@ -7,6 +7,8 @@ package com.psychological.cxks;
 public class Constant {
 
 
-//    public static final String BASE_URL = "http://192.168.50.210:8080/";
+    //    public static final String BASE_URL = "http://192.168.50.210:8080/";
     public static final String BASE_URL = "http://39.108.214.157:8090/cxks_app/";
+    public static final String WXAPP_ID = "wx52a3d9c190ff01d6";
+
 }

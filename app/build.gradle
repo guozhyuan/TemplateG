@@ -73,4 +73,5 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'  //最新版本
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.bilibili:boxing:1.0.2'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
 }

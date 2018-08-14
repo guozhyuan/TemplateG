@@ -52,6 +52,7 @@
         <activity android:name=".ui.activity.EEditPackgeActivity" />
         <activity android:name=".ui.activity.LabelsActivity"/>
         <activity android:name=".ui.activity.UploadPhotoActivity"/>
+        <activity android:name=".wxapi.WXPayEntryActivity"/>
     </application>
 
 </manifest>
