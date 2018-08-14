@@ -104,7 +104,10 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.logout:
                 App.info = null;
                 SPUtil.clean(getActivity());
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                getActivity().finish();
                 break;
 
         }

@@ -55,7 +55,6 @@ public class EZiXunOrderFragment extends BaseFragment {
         list.add(completeFragment);
         OrderVpAdapter adapter = new OrderVpAdapter(getChildFragmentManager(), list, titles);
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(3);
         tabs.addTab(tabs.newTab().setText("全部"));
         tabs.addTab(tabs.newTab().setText("待付款"));
         tabs.addTab(tabs.newTab().setText("待确认"));

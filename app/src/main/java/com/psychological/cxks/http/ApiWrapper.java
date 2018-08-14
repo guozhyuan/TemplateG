@@ -12,6 +12,7 @@ import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.AddVisitorInfoParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
+import com.psychological.cxks.bean.param.CustomerParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
@@ -312,10 +313,39 @@ public class ApiWrapper {
     }
 
     // 3.14.3 查询预约时间段状态(/expert/time)(咨询师详情页)
-
     public Observable<Object> getExpertTimes(String userId) {
         Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getExpertTimes(userId).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
+    // #######################################################  咨询师 ##################################################################################
+    // 3.10.8 客户列表(/getCustomerList)
+    public Observable<Object> getCustomerList(CustomerParam param) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getCustomerList(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.10.9 咨询记录(/getConsultNum)
+    public Observable<Object> getConsultNum(String csId, String userId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getConsultNum(csId, userId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.10.10 根据用户id查询用户填写的来访者信息(/client/selectClientAll)
+    public Observable<Object> getCustomerInfo(String userId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getCustomerInfo(userId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.11.1 获取咨询室列表(/room/list)
+    public Observable<Object> roomList(int type, String addr) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().roomList(type, addr).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.11.2 咨询室详情(/room/detail)
+    public Observable<Object> roomDetail(String serialNo) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().roomDetail(serialNo).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
 }

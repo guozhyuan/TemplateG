@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,10 +27,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class EMyInfoActivity extends BaseActivity {
+public class EMyInfoActivity extends BaseActivity implements View.OnClickListener {
 
-    private TextView province;
-    private TextView city;
+
+    private ImageView back;
+    private ImageView head;
+    private EditText name;
+    private EditText rank;
+    private EditText time;
+    private TextView addr;
+
+    private SwitchCompat chat;
+    private SwitchCompat voice;
+    private SwitchCompat meet;
+
+    private TextView save;
+    private TextView preview;
+    private TextView submit;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,40 +58,55 @@ public class EMyInfoActivity extends BaseActivity {
 
     @Override
     public void findView() {
-        ImageView ivBack = findViewById(R.id.back);
-        ImageView ivPhoto = findViewById(R.id.iv_photo);
-
-        TextView infoGrogress = findViewById(R.id.info_prog);
-        EditText username = findViewById(R.id.username);
-        EditText rank = findViewById(R.id.rank);
-
-        LinearLayout llAddr = findViewById(R.id.ll_address);//地址
-        province = findViewById(R.id.province);
-        city = findViewById(R.id.city);
-
-        RelativeLayout rl_rcly = findViewById(R.id.rl_rcly);//擅长领域
-        RelativeLayout rlPhoto = findViewById(R.id.rl_photo);//照片展示
+        back = findViewById(R.id.back);
+        head = findViewById(R.id.head);
+        name = findViewById(R.id.name);
+        rank = findViewById(R.id.rank);
+        time = findViewById(R.id.time);
+        addr = findViewById(R.id.addr);
 
 
+        //
+        chat = findViewById(R.id.chat);
+        voice = findViewById(R.id.voice);
+        meet = findViewById(R.id.meet);
 
-        llAddr.setOnClickListener((v) -> {
-            showPicker();
-        });
-
-        rl_rcly.setOnClickListener((v) -> {
-            startActivity(new Intent(EMyInfoActivity.this, LabelsActivity.class));
-        });
-        rlPhoto.setOnClickListener((v)->{
-            startActivity(new Intent(EMyInfoActivity.this, UploadPhotoActivity.class));
-        });
-
-
+        //
+        save = findViewById(R.id.save);
+        preview = findViewById(R.id.preview);
+        submit = findViewById(R.id.submit);
     }
 
     @Override
     public void initListener() {
+        back.setOnClickListener(this);
+        addr.setOnClickListener(this);
+        save.setOnClickListener(this);
+        preview.setOnClickListener(this);
+        submit.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.back:
+                finish();
+                break;
+            case R.id.addr:
+                showPicker();
+                break;
+
+            case R.id.save:
+
+                break;
+            case R.id.preview:
+
+                break;
+            case R.id.submit:
+
+                break;
+        }
+    }
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -132,8 +162,7 @@ public class EMyInfoActivity extends BaseActivity {
                                     options3Items.get(options1).get(options2).get(options3);
                             String provinceStr = options1Items.get(options1).getPickerViewText();
                             String cityStr = options2Items.get(options1).get(options2);
-                            province.setText(provinceStr);
-                            city.setText(cityStr);
+                            addr.setText(String.format("%s  %s", provinceStr, cityStr));
                         }
                     })
                     .setTitleText("城市选择")
@@ -153,4 +182,6 @@ public class EMyInfoActivity extends BaseActivity {
 
 
     }
+
+
 }

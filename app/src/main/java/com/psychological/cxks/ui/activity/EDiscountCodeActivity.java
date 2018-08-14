@@ -72,7 +72,7 @@ public class EDiscountCodeActivity extends BaseActivity {
 
         @Override
         public int getCount() {
-            return 10;
+            return titles.length;
         }
 
         @Override

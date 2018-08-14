@@ -7,7 +7,11 @@ import android.support.constraint.ConstraintLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
+import com.psychological.cxks.http.ApiWrapper;
+
+import io.reactivex.disposables.Disposable;
 
 public class ECustomerDetailActivity extends BaseActivity {
 
@@ -16,14 +20,27 @@ public class ECustomerDetailActivity extends BaseActivity {
     private ImageView gender;
     private TextView nick;
     private TextView addr;
-    private TextView msg;
+    private TextView chat;
+
     private ConstraintLayout histroy;
+    private TextView count;             //咨询次数
     private ConstraintLayout info;
     private ConstraintLayout report;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //TODO 暂时写死
+        Disposable dis = ApiWrapper.getInstance().getCustomerInfo("qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N").subscribe(
+                ret -> {
+
+                },
+                err -> {
+
+                }
+        );
+
     }
 
     @Override
@@ -37,8 +54,10 @@ public class ECustomerDetailActivity extends BaseActivity {
         head = findViewById(R.id.head);
         gender = findViewById(R.id.gender);
         nick = findViewById(R.id.nick);
-        msg = findViewById(R.id.msg);
+        chat = findViewById(R.id.chat);
+
         histroy = findViewById(R.id.history);
+        count = findViewById(R.id.count);
         info = findViewById(R.id.visitor_info);
         report = findViewById(R.id.report);
     }
@@ -48,14 +67,25 @@ public class ECustomerDetailActivity extends BaseActivity {
         back.setOnClickListener((v) -> {
             finish();
         });
-        msg.setOnClickListener((v) -> {
+        chat.setOnClickListener((v) -> {
         });
         histroy.setOnClickListener((v) -> {
+            if (App.info == null) {
+                startActivity(new Intent(this, LoginActivity.class));
+                return;
+            }
+            //TODO 暂时写死
+            Disposable dis = ApiWrapper.getInstance().getConsultNum(App.info.getUserId(), "qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N").subscribe(
+                    ret -> {
 
+                    },
+                    err -> {
+
+                    }
+            );
         });
         info.setOnClickListener((v) -> {
-            Intent intent = new Intent(this, VisitorInfoActivity.class);
-            startActivity(intent);
+
         });
         report.setOnClickListener((v) -> {
         });

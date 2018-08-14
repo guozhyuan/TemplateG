@@ -32,9 +32,10 @@ public class SplashActivity extends BaseActivity {
                 App.info = userInfo;
                 startActivity(new Intent(this, type == 1 ? MainActivity.class : EMainActivity.class));
             } else {
-                startActivity(new Intent(this, RegistActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
             }
         }
+        finish();
     }
 
     @Override

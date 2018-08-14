@@ -34,6 +34,7 @@ public class EZiXunShiOrderFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
@@ -44,6 +45,7 @@ public class EZiXunShiOrderFragment extends BaseFragment {
         });
         Adapter adapter = new Adapter();
         recyclerView.setAdapter(adapter);
+
     }
 
     class Adapter extends RecyclerView.Adapter<Adapter.VH> {

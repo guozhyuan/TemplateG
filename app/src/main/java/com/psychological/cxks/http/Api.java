@@ -13,6 +13,7 @@ import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.AddVisitorInfoParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
+import com.psychological.cxks.bean.param.CustomerParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
@@ -262,6 +263,33 @@ public interface Api {
     @POST("expert/time")
     Observable<HttpResp<Object>> getExpertTimes(@Field("userId") String userId);
 
+
+    // ##############################  咨询师  ####################################
+
+
+    // 3.10.8 客户列表(/getCustomerList)
+    @POST("getCustomerList")
+    Observable<HttpResp<Object>> getCustomerList(@Body CustomerParam param);
+
+    // 3.10.9 咨询记录(/getConsultNum)
+    @FormUrlEncoded
+    @POST("getConsultNum")
+    Observable<HttpResp<Object>> getConsultNum(@Field("csId") String csId, @Field("userId") String userId);
+
+    // 3.10.10 根据用户id查询用户填写的来访者信息(/client/selectClientAll)
+    @FormUrlEncoded
+    @POST("client/selectClientAll")
+    Observable<HttpResp<Object>> getCustomerInfo(@Field("userId") String userId);
+
+    // 3.11.1 获取咨询室列表(/room/list)
+    @FormUrlEncoded
+    @POST("room/list")
+    Observable<HttpResp<Object>> roomList(@Field("type") int type, @Field("addr") String addr);
+
+    // 3.11.2 咨询室详情(/room/detail)
+    @FormUrlEncoded
+    @POST("room/detail")
+    Observable<HttpResp<Object>> roomDetail(@Field("serialNo") String serialNo);
 }
 
 

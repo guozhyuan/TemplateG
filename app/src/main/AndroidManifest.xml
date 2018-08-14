@@ -53,10 +53,11 @@
         <activity android:name=".ui.activity.ECustomerDetailActivity" />
         <activity android:name=".ui.activity.EMyInfoActivity" />
         <activity android:name=".ui.activity.EEditPackgeActivity" />
+        <activity android:name=".ui.activity.EZiXunShiDetailActivity" />
 
         <activity android:name=".ui.activity.LabelsActivity" />
         <activity android:name=".ui.activity.UploadPhotoActivity" />
-        <activity android:name=".wxapi.WXPayEntryActivity"/>
+        <activity android:name=".wxapi.WXPayEntryActivity" />
     </application>
 
 </manifest>

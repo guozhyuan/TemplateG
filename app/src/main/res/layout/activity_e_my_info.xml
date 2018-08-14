@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg"
@@ -55,7 +56,7 @@
                     android:layout_marginTop="25dp">
 
                     <ImageView
-                        android:id="@+id/iv_photo"
+                        android:id="@+id/head"
                         android:layout_width="94dp"
                         android:layout_height="94dp"
                         android:layout_centerHorizontal="true"
@@ -114,7 +115,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/username"
+                        android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -218,14 +219,14 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/Employment_time"
+                        android:id="@+id/time"
                         android:layout_width="80dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="0dp"
                         android:layout_toLeftOf="@id/year"
                         android:background="@null"
                         android:gravity="center_vertical|end"
-                        android:hint="12"
+                        android:hint="XX"
                         android:textColor="#bcbcbc" />
 
                     <TextView
@@ -260,51 +261,16 @@
                     android:textColor="#2d2d2d"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/province"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|end"
-                        android:hint="广东省"
-                        android:textColor="#bcbcbc"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="省"
-                        android:textColor="@android:color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/city"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|end"
-                        android:hint="广州市"
-                        android:textColor="#bcbcbc"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="市"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="#2d2d2d"
+                    android:textSize="18sp"
+                    tools:text="广东省广州市" />
             </LinearLayout>
 
 
@@ -613,7 +579,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:id="@+id/rl_zwjs"
+                    android:id="@+id/rl_chat"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@android:color/white"
@@ -624,11 +590,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="自我介绍"
+                        android:text="文字咨询"
                         android:textColor="#2d2d2d"
                         android:textSize="18sp" />
 
                     <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/chat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -642,7 +609,7 @@
                     android:background="@color/main_bg" />
 
                 <RelativeLayout
-                    android:id="@+id/rl_yyzx"
+                    android:id="@+id/rl_voice"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@android:color/white"
@@ -658,6 +625,7 @@
                         android:textSize="18sp" />
 
                     <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/voice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -671,7 +639,7 @@
                     android:background="@color/main_bg" />
 
                 <RelativeLayout
-                    android:id="@+id/rl_mx"
+                    android:id="@+id/rl_meet"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@android:color/white"
@@ -687,6 +655,7 @@
                         android:textSize="18sp" />
 
                     <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/meet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
