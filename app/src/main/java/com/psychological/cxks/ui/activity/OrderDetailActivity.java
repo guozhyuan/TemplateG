@@ -1,6 +1,8 @@
 package com.psychological.cxks.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -8,17 +10,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.psychological.cxks.R;
+import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.view.stepview.HorizontalStepView;
 import com.psychological.cxks.ui.view.stepview.StepBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "OrderDetail";
-    private TextView tvEvaluate;
+    private TextView tv_evaluate;
     private HorizontalStepView stepView;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        String serialId = getIntent().getStringExtra("serialId");
+//        Disposable dis = ApiWrapper.getInstance().orderDetail(serialId).subscribe(ret -> {
+//
+//        });
+//        compositeDisposable.add(dis);
+    }
 
     @Override
     public int setLayoutId() {
@@ -27,7 +42,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void findView() {
-        tvEvaluate = findViewById(R.id.tv_evaluate);
         stepView = findViewById(R.id.stepview);
         setupStepView();
 
@@ -61,7 +75,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         TextView tv_track_order_ask_time = findViewById(R.id.tv_track_order_ask_time);   //咨询时间
 
         //
-        TextView tv_evaluate = findViewById(R.id.tv_evaluate);
+        tv_evaluate = findViewById(R.id.tv_evaluate);
 
     }
 
@@ -94,7 +108,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initListener() {
-        tvEvaluate.setOnClickListener(this);
+        tv_evaluate.setOnClickListener(this);
     }
 
     @Override

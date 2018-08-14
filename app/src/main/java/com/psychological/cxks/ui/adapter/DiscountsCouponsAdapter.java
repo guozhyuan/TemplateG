@@ -45,7 +45,7 @@ public class DiscountsCouponsAdapter extends RecyclerView.Adapter<DiscountsCoupo
 
     @Override
     public int getItemCount() {
-        return retList.size();
+        return 50;
     }
 
     class VH extends RecyclerView.ViewHolder {

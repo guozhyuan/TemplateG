@@ -198,6 +198,12 @@ public interface Api {
     @POST("verify/sAppt")
     Observable<HttpResp<Object>> allOrder(@Body OrderListParam param);
 
+    // 3.5.1.1 订单详情(/verify/getApptOrder)
+    @FormUrlEncoded
+    @POST("verify/getApptOrder")
+    Observable<HttpResp<Object>> orderDetail(@Field("serialId") String serialId);
+
+
     @FormUrlEncoded
     @POST("verify/sAppt")
     Observable<HttpResp<Object>> allOrder2(@FieldMap Map<String, Object> param);

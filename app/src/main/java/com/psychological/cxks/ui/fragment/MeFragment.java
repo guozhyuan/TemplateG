@@ -7,14 +7,18 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 import com.psychological.cxks.ui.activity.ChangePWDActivity;
 import com.psychological.cxks.ui.activity.CouponsListActivity;
 import com.psychological.cxks.ui.activity.FavoriteActivity;
+import com.psychological.cxks.ui.activity.LoginActivity;
 import com.psychological.cxks.ui.activity.OrderListActivity;
 import com.psychological.cxks.ui.activity.VisitorInfoActivity;
+import com.psychological.cxks.util.SPUtil;
 
 /**
  * Author : jugg
@@ -26,6 +30,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout coupons;
     private LinearLayout resetpwd;
     private LinearLayout visitor;
+    private Button logout;
 
     @Override
     public void onAttach(Context context) {
@@ -52,11 +57,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         coupons = view.findViewById(R.id.coupons);
         resetpwd = view.findViewById(R.id.resetpwd);
         visitor = view.findViewById(R.id.visitor);
+        logout = view.findViewById(R.id.logout);
         order.setOnClickListener(this);
         favorite.setOnClickListener(this);
         coupons.setOnClickListener(this);
         resetpwd.setOnClickListener(this);
         visitor.setOnClickListener(this);
+        logout.setOnClickListener(this);
 
     }
 
@@ -92,6 +99,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.visitor:
                 startActivity(new Intent(getActivity(), VisitorInfoActivity.class));
+                break;
+
+            case R.id.logout:
+                App.info = null;
+                SPUtil.clean(getActivity());
+                startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
 
         }

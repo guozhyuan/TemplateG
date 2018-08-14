@@ -110,6 +110,6 @@ public class SPUtil {
      */
     public static void clean(Context context) {
         SharedPreferences sp = context.getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE);
-        sp.edit().clear().commit();
+        sp.edit().clear().apply();
     }
 }

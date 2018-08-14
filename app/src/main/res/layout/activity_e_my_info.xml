@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/left_arrow" />
@@ -331,7 +331,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/left_arrow" />
+                    android:src="@mipmap/right_arrow" />
             </RelativeLayout>
 
             <!--擅长领域-->
@@ -357,7 +357,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/left_arrow" />
+                    android:src="@mipmap/right_arrow" />
             </RelativeLayout>
 
             <!--介绍音视频-->
@@ -383,7 +383,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/left_arrow" />
+                    android:src="@mipmap/right_arrow" />
             </RelativeLayout>
 
 
@@ -415,7 +415,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/left_arrow" />
+                        android:src="@mipmap/right_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -445,7 +445,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/left_arrow" />
+                        android:src="@mipmap/right_arrow" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -476,7 +476,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/left_arrow" />
+                        android:src="@mipmap/right_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -506,7 +506,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/left_arrow" />
+                        android:src="@mipmap/right_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -536,7 +536,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/left_arrow" />
+                        android:src="@mipmap/right_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -566,7 +566,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/left_arrow" />
+                        android:src="@mipmap/right_arrow" />
                 </RelativeLayout>
 
                 <ImageView
@@ -596,7 +596,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/left_arrow" />
+                        android:src="@mipmap/right_arrow" />
                 </RelativeLayout>
 
                 <ImageView

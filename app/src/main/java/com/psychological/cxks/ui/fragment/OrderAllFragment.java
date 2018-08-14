@@ -89,12 +89,12 @@ public class OrderAllFragment extends BaseFragment {
         param.pageSize = 20;
         param.pageNo = 1;
         param.state = -1;
-
+        //TODO 所有订单传递什么字段?
         Disposable disposable = ApiWrapper.getInstance().allOrder2(bean2map()).subscribe(ret -> {
             if (swipe.isRefreshing()) {
                 swipe.setRefreshing(false);
             }
-
+            //TODO 更新List
         });
         compositeDisposable.add(disposable);
 

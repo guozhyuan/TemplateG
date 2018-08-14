@@ -98,7 +98,8 @@ public class RegistExpertFragment extends BaseFragment {
                 SPUtil.saveString(getActivity(), "mobil", ret.getMobil());
                 SPUtil.saveString(getActivity(), "name", ret.getName());
                 SPUtil.saveString(getActivity(), "userId", ret.getUserId());
-                startActivity(new Intent(getActivity(), MainActivity.class));
+
+                startActivity(new Intent(getActivity(), EMainActivity.class));
             }, err -> {
 
             });

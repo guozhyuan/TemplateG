@@ -261,6 +261,12 @@ public class ApiWrapper {
         return transform(observable);
     }
 
+    //   // 3.5.1.1 订单详情(/verify/getApptOrder)
+    public Observable<Object> orderDetail(String serialId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().orderDetail(serialId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
     //添加收藏
     public Observable<Boolean> addCollect(String uId, String consultId) {
         Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().addCollect(uId, consultId).compose(HttpScheduler.applyIO());

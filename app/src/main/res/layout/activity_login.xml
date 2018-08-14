@@ -6,29 +6,21 @@
 
     <include layout="@layout/statusbar_cover" />
 
-    <Button
-        android:id="@+id/user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="USER" />
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 
-    <Button
-        android:id="@+id/expert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EXPERT" />
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 
     <Button
         android:id="@+id/reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REG" />
-
-    <Button
-        android:id="@+id/code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CODE" />
 
     <Button
         android:id="@+id/login"

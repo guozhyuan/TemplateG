@@ -31,7 +31,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.VH> 
         holder.detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ctx.startActivity(new Intent(ctx, OrderDetailActivity.class));
+                Intent intent = new Intent(ctx, OrderDetailActivity.class);
+                intent.putExtra("serialId","");
+                ctx.startActivity(intent);
             }
         });
         holder.method.setText(String.format("咨询方式:%s", ""));
