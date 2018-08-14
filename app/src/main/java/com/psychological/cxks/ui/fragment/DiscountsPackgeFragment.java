@@ -1,5 +1,6 @@
 package com.psychological.cxks.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,14 +11,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.DiscountsPackgeBean;
+import com.psychological.cxks.http.ApiWrapper;
+import com.psychological.cxks.ui.activity.LoginActivity;
 import com.psychological.cxks.ui.adapter.DiscountsPackgeAdapter;
 import com.psychological.cxks.util.DeviceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
+/**
+ * 我的优惠券套餐列表
+ */
 public class DiscountsPackgeFragment extends BaseFragment {
     private SwipeRefreshLayout swipe;
     private RecyclerView recycler;
@@ -53,5 +63,18 @@ public class DiscountsPackgeFragment extends BaseFragment {
         }
         DiscountsPackgeAdapter adapter = new DiscountsPackgeAdapter(getActivity(), list);
         recycler.setAdapter(adapter);
+        getCouponPackgeList();
+    }
+
+
+    private void getCouponPackgeList() {
+        if (App.info == null) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            return;
+        }
+        Disposable dis = ApiWrapper.getInstance().couponPackgeList(App.info.getUserId()).subscribe(ret -> {
+
+        });
+        compositeDisposable.add(dis);
     }
 }

@@ -1,5 +1,6 @@
 package com.psychological.cxks.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -30,10 +31,17 @@ public class ChangePWDActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        phone.setText(App.Instance().info.getMobil());
-        Disposable disposable = ApiWrapper.getInstance().send(App.Instance().info.getMobil()).subscribe(c -> {
+        if (App.info == null) {
+            startActivity(new Intent(ChangePWDActivity.this, LoginActivity.class));
+            return;
+        }
+        phone.setText(App.info.getMobil());
+        Disposable disposable = ApiWrapper.getInstance().send(App.info.getMobil()).subscribe(c -> {
+        }, err -> {
+
         });
         compositeDisposable.add(disposable);
+
     }
 
     @Override
@@ -81,15 +89,25 @@ public class ChangePWDActivity extends BaseActivity implements View.OnClickListe
                     Toast.makeText(this, "密码不一致", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ApiWrapper.getInstance().reset(App.Instance().info.getMobil(), verifyCode.getText().toString(), newPwd.getText().toString()).subscribe(ret -> {
+                ApiWrapper.getInstance().reset(App.info.getMobil(), verifyCode.getText().toString(), newPwd.getText().toString()).subscribe(ret -> {
                     Toast.makeText(this, "密码重置成功", Toast.LENGTH_SHORT).show();
                     finish();
+                }, err -> {
+
                 });
                 break;
             case R.id.tv_resend:
-                ApiWrapper.getInstance().send(App.Instance().info.getMobil()).subscribe(c -> {
+                if (App.info == null) {
+                    startActivity(new Intent(ChangePWDActivity.this, LoginActivity.class));
+                    return;
+                }
+                ApiWrapper.getInstance().send(App.info.getMobil()).subscribe(c -> {
                     Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
+                }, err -> {
+
                 });
+
+
                 break;
             case R.id.back:
                 finish();

@@ -18,15 +18,18 @@ import com.bumptech.glide.request.RequestOptions;
 import com.hedgehog.ratingbar.RatingBar;
 import com.psychological.cxks.R;
 
+import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.OnSalePackgeAdapter;
+import com.psychological.cxks.util.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -69,6 +72,8 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
     private ExpertBean.ResultBean transData; //传递的咨询师信息
     private MediaPlayer mediaPlayer;
     private ExpertDetailBean detailBean;
+    private OnSalePackgeAdapter onSalePackgeAdapter;
+    private List<CouponPackgeBean> couponPackgeBeanList = new ArrayList<>();
 
 
     @Override
@@ -80,12 +85,21 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
         nick.setText(Objects.requireNonNull(transData).getName());
         Glide.with(this).load(Objects.requireNonNull(transData).getImg()).apply(RequestOptions.circleCropTransform()).into(head);
 
-        OnSalePackgeAdapter onSalePackgeAdapter = new OnSalePackgeAdapter(this);
+        onSalePackgeAdapter = new OnSalePackgeAdapter(this, couponPackgeBeanList);
+        onSalePackgeAdapter.setOnPackgeClickListener(position -> {
+            Intent intent = new Intent(ExpertDetailActivity.this, CouponsDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("taocan", couponPackgeBeanList.get(position));
+            intent.putExtras(bundle);
+            intent.putExtra("consultId", transData.getUserId());
+            startActivity(intent);
+        });
         recyclerPackge.setLayoutManager(new LinearLayoutManager(this));
         recyclerPackge.setAdapter(onSalePackgeAdapter);
 
         getDetail(transData.getUserId());
         getEvaluate(transData.getUserId());
+        getCouponPackgeList(transData.getUserId());
 
     }
 
@@ -152,6 +166,8 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             ArrayList<String> tagList = new ArrayList<>(Arrays.asList(ret.getLabels().split(",")));
             tagLayout.setTags(tagList);
             recordUrl = ret.getPath();
+        }, err -> {
+
         });
         compositeDisposable.add(subscribe);
     }
@@ -164,8 +180,18 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             consumerNick.setText(ret.get(0).getConsultName());
             consumerEvaluate.setText(ret.get(0).getContent());
             ratingbar.setStar(ret.get(0).getLevel());
+        }, err -> {
+            Utils.handleErr(ExpertDetailActivity.this, err.getMessage());
         });
         compositeDisposable.add(subscribe);
+    }
+
+    private void getCouponPackgeList(String userId) {
+        Disposable disposable = ApiWrapper.getInstance().getExpertCouponPackge(userId, 1).subscribe(ret -> {
+            couponPackgeBeanList.addAll(ret);
+            onSalePackgeAdapter.notifyDataSetChanged();
+        });
+        compositeDisposable.add(disposable);
     }
 
 

@@ -10,14 +10,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 
-import com.psychological.cxks.bean.CouponPackgeBean;
+import com.psychological.cxks.bean.MyCouponPackgeBean;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.ChooseCouponsAdapter;
 import com.psychological.cxks.util.DeviceUtils;
@@ -39,7 +39,7 @@ public class ChooseCouponsActivity extends BaseActivity implements View.OnClickL
 
     private RecyclerView recyclerView;
     private ChooseCouponsAdapter adapter;
-    private List<CouponPackgeBean> list = new ArrayList<>();
+    private List<MyCouponPackgeBean> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,13 +106,15 @@ public class ChooseCouponsActivity extends BaseActivity implements View.OnClickL
     }
 
     private void getAllCoupnList() {
-        String userId = SPUtil.getString(this, "userId");
-        if (TextUtils.isEmpty(userId)) {
+        if (App.info == null) {
             Toast.makeText(this, "请登录", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
         }
+        String userId = SPUtil.getString(this, "userId");
         Disposable disposable = ApiWrapper.getInstance().getAllCouponList(userId).subscribe(ret -> {
             Log.e(TAG, "getAllCoupnList: " + ret);
+        }, err -> {
+
         });
         compositeDisposable.add(disposable);
     }

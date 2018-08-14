@@ -1,7 +1,7 @@
 package com.psychological.cxks.bean.param;
 
 public class AddAllOrderParam {
-    //    mobile	√	string	11	手机号码
+//    mobile	√	string	11	手机号码
 //    nick		string	10	昵称
 //    body	√	string	50	订单商品名称
 //    need		string	200	客户需求
@@ -9,10 +9,11 @@ public class AddAllOrderParam {
 //    isPay	√	int		是否支付(0-未支付；1-已支付)
 //    consultDuration		int		咨询时长
 
+    public String mobile;
     public String nick;
     public String body;
     public String need;
     public double price;
-    public int isPay;
-    public int consultDuration;
+    public Integer isPay;
+    public Integer consultDuration;
 }

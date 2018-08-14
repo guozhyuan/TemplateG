@@ -1,6 +1,9 @@
 package com.psychological.cxks.bean;
 
-public class CouponCodeBean {
+/**
+ *  用户端:优惠码列表
+ */
+public class MyCouponCodeBean {
     //    id	√	int	主键
 //    orderId	√	string	订单号
 //    type	√	int	优惠类型:1代表电询；2代表面询

@@ -2,6 +2,7 @@ package com.psychological.cxks.bean;
 
 public class DiscountsPackgeBean {
     private boolean isExpand = false;
+    private int subTypeCnt = 5;
 
     public boolean isExpand() {
         return isExpand;
@@ -11,13 +12,12 @@ public class DiscountsPackgeBean {
         isExpand = expand;
     }
 
-    public int getSunTypeCnt() {
-        return sunTypeCnt;
+    public int getSubTypeCnt() {
+        return subTypeCnt;
     }
 
-    public void setSunTypeCnt(int sunTypeCnt) {
-        this.sunTypeCnt = sunTypeCnt;
+    public void setSubTypeCnt(int subTypeCnt) {
+        this.subTypeCnt = subTypeCnt;
     }
 
-    private int sunTypeCnt = 5;
 }

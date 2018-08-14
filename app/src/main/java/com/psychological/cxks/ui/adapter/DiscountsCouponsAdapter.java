@@ -9,13 +9,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.MyCouponCodeBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DiscountsCouponsAdapter extends RecyclerView.Adapter<DiscountsCouponsAdapter.VH> {
 
     private Context ctx;
+    private List<MyCouponCodeBean> retList;
 
-    public DiscountsCouponsAdapter(Context ctx) {
+    public DiscountsCouponsAdapter(Context ctx, List<MyCouponCodeBean> retList) {
         this.ctx = ctx;
+        this.retList = retList;
     }
 
     @Override
@@ -26,7 +32,6 @@ public class DiscountsCouponsAdapter extends RecyclerView.Adapter<DiscountsCoupo
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        holder.copy.setText("COPY");
         holder.copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,11 +39,13 @@ public class DiscountsCouponsAdapter extends RecyclerView.Adapter<DiscountsCoupo
             }
         });
 
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 50;
+        return retList.size();
     }
 
     class VH extends RecyclerView.ViewHolder {

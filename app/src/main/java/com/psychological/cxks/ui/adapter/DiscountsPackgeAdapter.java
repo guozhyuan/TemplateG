@@ -43,7 +43,7 @@ public class DiscountsPackgeAdapter extends RecyclerView.Adapter<DiscountsPackge
                     bean.setExpand(false);
                 } else {
                     bean.setExpand(true);
-                    for (int i = 0; i < bean.getSunTypeCnt(); i++) {
+                    for (int i = 0; i < bean.getSubTypeCnt(); i++) {
                         View discountsItem = LayoutInflater.from(ctx).inflate(R.layout.view_discount_packge_expand, holder.discountContainer, false);
                         holder.discountContainer.addView(discountsItem);
                         TextView code = discountsItem.findViewById(R.id.discount_code);

@@ -105,6 +105,8 @@ public class ConsumerEvaluateActivity extends BaseActivity {
             }
             list.addAll(ret);
             adapter.notifyDataSetChanged();
+        }, err -> {
+
         });
         compositeDisposable.add(subscribe);
     }
@@ -114,6 +116,8 @@ public class ConsumerEvaluateActivity extends BaseActivity {
             //TODO
             ratingBar.setStar(3);
             ratingBar.setmClickable(false);
+        }, err -> {
+
         });
         compositeDisposable.add(d);
     }

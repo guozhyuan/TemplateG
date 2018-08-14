@@ -1,5 +1,6 @@
 package com.psychological.cxks.ui.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -60,7 +61,7 @@ public class VisitorInfoActivity extends BaseActivity implements View.OnClickLis
         param.isVip = "是";
         param.marriage = "已婚";
         param.source = "官网";
-        param.userId = App.Instance().info.getUserId();
+        param.userId = App.info.getUserId();
     }
 
     @Override
@@ -152,7 +153,10 @@ public class VisitorInfoActivity extends BaseActivity implements View.OnClickLis
                 showChannel();
                 break;
             case R.id.submit:
-                //TODO App.Instance().info 可能会改动
+                if (App.info == null) {
+                    startActivity(new Intent(VisitorInfoActivity.this, LoginActivity.class));
+                    return;
+                }
                 if (checkBox.isChecked() && !TextUtils.isEmpty(realName.getText())) {
                     param.name = realName.getText().toString();
                     param.age = TextUtils.isEmpty(age.getText()) ? null : Integer.parseInt(age.getText().toString());

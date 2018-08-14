@@ -251,7 +251,7 @@ public class TagView extends View {
         canvas.drawRoundRect(mRectF, mBorderRadius, mBorderRadius, mPaint);
 
         // draw ripple for TagView
-        drawRipple(canvas);
+        // drawRipple(canvas);
 
         // draw text
         mPaint.setStyle(Paint.Style.FILL);
