@@ -88,8 +88,6 @@ public class OrderAllFragment extends BaseFragment {
         param.token = App.info.getToken();
         param.pageSize = 20;
         param.pageNo = 1;
-        param.state = -1;
-        //TODO 所有订单传递什么字段?
         Disposable disposable = ApiWrapper.getInstance().allOrder2(bean2map()).subscribe(ret -> {
             if (swipe.isRefreshing()) {
                 swipe.setRefreshing(false);
@@ -105,7 +103,6 @@ public class OrderAllFragment extends BaseFragment {
         p.put("token", param.token);
         p.put("pageSize", param.pageSize);
         p.put("pageNo", param.pageNo);
-        p.put("state", param.state);
         return p;
     }
 

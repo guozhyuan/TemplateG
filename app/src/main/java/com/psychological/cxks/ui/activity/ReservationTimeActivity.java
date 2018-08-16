@@ -18,7 +18,7 @@ import com.psychological.cxks.util.DeviceUtils;
 
 import io.reactivex.disposables.Disposable;
 
-public class ReservationTimeActivity extends BaseActivity {
+public class ReservationTimeActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView back;
     private RecyclerView recyclerView;
@@ -64,6 +64,15 @@ public class ReservationTimeActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        back.setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 }

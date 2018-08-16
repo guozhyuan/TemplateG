@@ -34,7 +34,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VH> {
 
     @Override
     public int getItemCount() {
-        return 20;
+        return 0;
     }
 
     class VH extends RecyclerView.ViewHolder {
