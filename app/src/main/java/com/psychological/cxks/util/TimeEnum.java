@@ -1,7 +1,9 @@
 package com.psychological.cxks.util;
 
+import android.text.TextUtils;
+
 public enum TimeEnum {
-//            1	9:00-10:00
+//            1	09:00-10:00
 //            2	10:00-11:00
 //            3	11:00-12:00
 //            4	12:00-13:00
@@ -38,7 +40,7 @@ public enum TimeEnum {
 
     public static int getIndex(String name) {
         for (TimeEnum c : TimeEnum.values()) {
-            if (c.getName() == name) {
+            if (TextUtils.equals(c.getName(), name)) {
                 return c.index;
             }
         }

@@ -11,7 +11,7 @@ public class MyCouponCodeBean {
 //    couponState	√	int	优惠码状态：默认为0，未使用；1为已使用
     private int id;
     private String orderId;
-    private int type;
+    private Integer type;
     private String coupon;
     private int couponState;
     private boolean checked;
@@ -32,11 +32,11 @@ public class MyCouponCodeBean {
         this.orderId = orderId;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

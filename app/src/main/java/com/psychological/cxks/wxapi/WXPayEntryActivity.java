@@ -43,6 +43,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     public void onResp(BaseResp resp) {
         Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
+        // TODO 查询订单信息 -> 发送广播
+//        Intent intent = new Intent();
+//        intent.addFlags()
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             Toast.makeText(this, "支付完成", Toast.LENGTH_SHORT).show();
         }

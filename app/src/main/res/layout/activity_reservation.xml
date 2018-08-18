@@ -99,9 +99,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="15dp"
-                    android:text="预约时间"
                     android:textColor="#2d2d2d"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:text="预约时间" />
 
                 <TextView
                     android:id="@+id/reservation_time"
@@ -111,10 +111,11 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginStart="15dp"
                     android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="预约时间>"
+                    android:drawableRight="@mipmap/right_arrow"
+                    android:gravity="end|center_vertical"
                     android:textColor="#ff9358"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="选择时间" />
             </LinearLayout>
 
             <RelativeLayout
@@ -176,9 +177,9 @@
                     android:paddingStart="15dp"
                     android:paddingTop="5dp"
                     android:text="文字"
-                    android:visibility="gone"
                     android:textColor="@color/color_reservation_mode_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <LinearLayout
@@ -204,10 +205,11 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginStart="15dp"
                     android:layout_weight="1"
-                    android:gravity="end"
+                    android:drawableRight="@mipmap/right_arrow"
+                    android:gravity="end|center_vertical"
                     android:textColor="#585858"
                     android:textSize="16sp"
-                    android:text="选择优惠券>" />
+                    tools:text="选择优惠券" />
             </LinearLayout>
 
             <LinearLayout
@@ -337,10 +339,11 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginStart="15dp"
                     android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="选择地址>"
+                    android:drawableRight="@mipmap/right_arrow"
+                    android:gravity="end|center_vertical"
                     android:textColor="#585858"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="选择地址" />
             </LinearLayout>
 
             <View
@@ -408,6 +411,7 @@
                     android:layout_marginTop="20dp"
                     android:text="可多选"
                     android:textColor="#bcbcbc"
+                    android:visibility="invisible"
                     app:layout_constraintStart_toEndOf="@+id/textView23"
                     app:layout_constraintTop_toTopOf="parent" />
 

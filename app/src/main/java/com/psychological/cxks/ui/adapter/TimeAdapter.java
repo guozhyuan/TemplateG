@@ -9,17 +9,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.psychological.cxks.R;
+import com.psychological.cxks.util.TimeConstants;
 import com.psychological.cxks.util.TimeEnum;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import co.lujun.androidtagview.TagContainerLayout;
 import co.lujun.androidtagview.TagView;
 
 public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.VH> {
+    private OnTagClick onTagClick;
     private Context ctx;
     private List<String> chosenTags = new ArrayList<>();
+    private Date now = new Date();
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
 
     public TimeAdapter(Context ctx) {
         this.ctx = ctx;
@@ -33,6 +40,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
+        holder.date.setText(format.format(now.getTime() + position * TimeConstants.DAY));
         List<String> tagList = new ArrayList<>();
         for (TimeEnum e : TimeEnum.values()) {
             tagList.add(e.getName());
@@ -41,13 +49,14 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.VH> {
         holder.tags.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
             public void onTagClick(int position, String text) {
-                if (chosenTags.contains(text)) {
-                    chosenTags.remove(text);
-                    holder.tags.getTags().get(position).setChosen(false);
-                } else {
-                    chosenTags.add(text);
-                    holder.tags.getTags().get(position).setChosen(true);
-                }
+//                if (chosenTags.contains(text)) {
+//                    chosenTags.remove(text);
+//                    holder.tags.getTags().get(position).setChosen(false);
+//                } else {
+//                    chosenTags.add(text);
+//                    holder.tags.getTags().get(position).setChosen(true);
+//                }
+                onTagClick.onTagClick(format.format(now.getTime() + position * TimeConstants.DAY), text);
             }
 
             @Override
@@ -65,7 +74,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.VH> {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 7;
     }
 
     class VH extends RecyclerView.ViewHolder {
@@ -79,4 +88,14 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.VH> {
             date = itemView.findViewById(R.id.date);
         }
     }
+
+    public void setOnTagClick(OnTagClick onTagClick) {
+        this.onTagClick = onTagClick;
+    }
+
+    public interface OnTagClick {
+        void onTagClick(String day, String time);
+    }
+
+
 }

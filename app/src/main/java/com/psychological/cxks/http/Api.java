@@ -1,11 +1,13 @@
 package com.psychological.cxks.http;
 
 
+import com.google.gson.JsonArray;
 import com.psychological.cxks.bean.BannerBean;
 import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.ExpertDetailBean;
+import com.psychological.cxks.bean.UseableCouponBean;
 import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.bean.QueryOrderStateBean;
 import com.psychological.cxks.bean.TestBean;
@@ -15,7 +17,6 @@ import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
 import com.psychological.cxks.bean.param.CustomerParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
-import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.bean.param.ExpertListParam;
 import com.psychological.cxks.bean.param.FirstCodePayParam;
@@ -102,11 +103,11 @@ public interface Api {
 
     // 3.2.3 添加总订单(/wxPay/order) (注：预约或购买产品之前都先调用此接口,以便获取订单号)
     @POST("wxPay/order")
-    Observable<HttpResp<Object>> addAllOrder(@Body AddAllOrderParam param);
+    Observable<HttpResp<String>> addAllOrder(@Body AddAllOrderParam param);
 
     @FormUrlEncoded
     @POST("wxPay/order")
-    Observable<HttpResp<Object>> addAllOrder2(@FieldMap Map<String, Object> param);
+    Observable<HttpResp<String>> addAllOrder2(@FieldMap Map<String, Object> param);
 
     //3.2.4.1 锁定时间段(/expert/lock)
     @POST("expert/lock")
@@ -130,8 +131,13 @@ public interface Api {
     Observable<HttpResp<Boolean>> cancelAppt(@Body ChangeOrderStateParam param);
 
     // 3.2.5.1 APP支付(折扣优惠码支付)(/wxPay/appPay)
+
     @POST("wxPay/appPay")
     Observable<HttpResp<String>> discountCodePay(@Body DisCodePayParam param);
+
+    @POST("wxPay/appPay")
+    @FormUrlEncoded
+    Observable<HttpResp<String>> discountCodePay2(@FieldMap Map<String, Object> map);
 
     // 3.2.5.2 查询优惠券信息(/expert/disInfo) (注：用于展示优惠码的折扣)
     @FormUrlEncoded
@@ -144,8 +150,9 @@ public interface Api {
     Observable<HttpResp<Boolean>> freeCodePay(@Body FreeCodePayParam param);
 
     //    3.2.5.4 心理顾问套餐优惠码支付(/mc/mcPay)
+    @FormUrlEncoded
     @POST("mc/mcPay")
-    Observable<HttpResp<Boolean>> couponPackgePay(@Body DisPackgeParam param);
+    Observable<HttpResp<Boolean>> couponPackgePay(@Field("coupon") String coupon, @Field("operator") String operator, @Field("title") int title);
 
 
     // 3.2.5.5 电询、面询优惠码支付(/mc/couponPay)
@@ -243,7 +250,7 @@ public interface Api {
     // 3.8.4 预约时的优惠码选择(/mc/getCouponList)
     @FormUrlEncoded
     @POST("mc/getCouponList")
-    Observable<HttpResp<Object>> getAllCouponList(@Field("userId") String userId);
+    Observable<HttpResp<UseableCouponBean>> getAllCouponList(@Field("userId") String userId);
 
 
     // 3.12 我的套餐

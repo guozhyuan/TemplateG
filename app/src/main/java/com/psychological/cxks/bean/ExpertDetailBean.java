@@ -30,10 +30,11 @@ public class ExpertDetailBean implements Serializable{
 //    workExprience	√	string	从业经历
 //    aptitude	√	string	资质介绍
 
-    private String uesrId;
+    private String userId;
     private String name;
     private String img;
     private String addr;
+    private int sex;
     private String detail;
     private String labels;
     private int isGuild;
@@ -44,8 +45,8 @@ public class ExpertDetailBean implements Serializable{
     private int cancelTime;
     private int modifynum;
     private int modifytime;
-    private String phone;
-    private String meet;
+    private double phone;
+    private double meet;
     private String path;
     private String rank;
     private int workTime;
@@ -56,12 +57,12 @@ public class ExpertDetailBean implements Serializable{
     private String workExprience;
     private String aptitude;
 
-    public String getUesrId() {
-        return uesrId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUesrId(String uesrId) {
-        this.uesrId = uesrId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -86,6 +87,14 @@ public class ExpertDetailBean implements Serializable{
 
     public void setAddr(String addr) {
         this.addr = addr;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 
     public String getDetail() {
@@ -168,19 +177,19 @@ public class ExpertDetailBean implements Serializable{
         this.modifytime = modifytime;
     }
 
-    public String getPhone() {
+    public double getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(double phone) {
         this.phone = phone;
     }
 
-    public String getMeet() {
+    public double getMeet() {
         return meet;
     }
 
-    public void setMeet(String meet) {
+    public void setMeet(double meet) {
         this.meet = meet;
     }
 

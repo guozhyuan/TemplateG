@@ -1,5 +1,7 @@
 package com.psychological.cxks.util;
 
+import android.text.TextUtils;
+
 public enum CategoryEnum {
 //1	恋爱婚姻
 //2	家庭关系
@@ -30,7 +32,7 @@ public enum CategoryEnum {
 
     public static int getIndex(String name) {
         for (CategoryEnum c : CategoryEnum.values()) {
-            if (c.getName() == name) {
+            if (TextUtils.equals(c.getName(), name)) {
                 return c.index;
             }
         }

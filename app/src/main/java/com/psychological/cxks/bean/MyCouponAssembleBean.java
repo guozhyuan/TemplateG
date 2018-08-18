@@ -1,24 +1,13 @@
 package com.psychological.cxks.bean;
 
-/**
- * 用户端:优惠套餐列表
- */
-public class MyCouponPackgeBean {
-//    id	√	int	主键
-//    consultId	√	string	咨询师id
-//    coupon	√	string	优惠码
-//    couponState	√	int	优惠卷状态(默认为0：未使用；1：已使用)
-//    time	√	string	获取优惠码时间
-//    obtainId	√	string	获取人id
-//    obtainName	√	string	获取人姓名
-//    useId	√	string	使用人id
-//    useTime	√	string	使用时间
-//    packageId	√	int	套餐id
-//    name	√	string	咨询师姓名
-//    content	√	string	套餐名
-
-    private int id;
+public class MyCouponAssembleBean {
+    // code 独有
+    private String orderId;
+    private Integer type;
+    // packge 独有
     private String consultId;
+    // 共有
+    private int id;
     private String coupon;
     private int couponState;
     private String time;
@@ -30,13 +19,22 @@ public class MyCouponPackgeBean {
     private String name;
     private String content;
     private boolean checked;
+    private int couponType;
 
-    public int getId() {
-        return id;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getConsultId() {
@@ -45,6 +43,14 @@ public class MyCouponPackgeBean {
 
     public void setConsultId(String consultId) {
         this.consultId = consultId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCoupon() {
@@ -133,5 +139,13 @@ public class MyCouponPackgeBean {
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public int getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(int couponType) {
+        this.couponType = couponType;
     }
 }

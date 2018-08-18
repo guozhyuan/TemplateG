@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -15,11 +16,12 @@ import com.psychological.cxks.R;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.TimeAdapter;
 import com.psychological.cxks.util.DeviceUtils;
+import com.psychological.cxks.util.TimeEnum;
 
 import io.reactivex.disposables.Disposable;
 
 public class ReservationTimeActivity extends BaseActivity implements View.OnClickListener {
-
+    private static final String TAG = "ReservationTimeActivity";
     private ImageView back;
     private RecyclerView recyclerView;
     private TimeAdapter adapter;
@@ -31,7 +33,9 @@ public class ReservationTimeActivity extends BaseActivity implements View.OnClic
             startActivity(new Intent(ReservationTimeActivity.this, LoginActivity.class));
             return;
         }
-        Disposable dis = ApiWrapper.getInstance().getExpertTimes(App.info.getUserId()).subscribe(
+        String id = getIntent().getStringExtra("id");
+        Log.e(TAG, "id : " + id);
+        Disposable dis = ApiWrapper.getInstance().getExpertTimes(id).subscribe(
                 ret -> {
 
                 },
@@ -59,6 +63,13 @@ public class ReservationTimeActivity extends BaseActivity implements View.OnClic
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TimeAdapter(this);
+        adapter.setOnTagClick((day, time) -> {
+            Intent intent = new Intent();
+            intent.putExtra("day", day);
+            intent.putExtra("time", time);
+            setResult(RESULT_OK, intent);
+            finish();
+        });
         recyclerView.setAdapter(adapter);
     }
 

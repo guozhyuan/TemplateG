@@ -5,6 +5,7 @@ import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.ExpertDetailBean;
+import com.psychological.cxks.bean.UseableCouponBean;
 import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.bean.QueryOrderStateBean;
 import com.psychological.cxks.bean.TestBean;
@@ -14,7 +15,6 @@ import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.bean.param.ChangeOrderStateParam;
 import com.psychological.cxks.bean.param.CustomerParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
-import com.psychological.cxks.bean.param.DisPackgeParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.bean.param.ExpertListParam;
 import com.psychological.cxks.bean.param.FirstCodePayParam;
@@ -145,13 +145,13 @@ public class ApiWrapper {
     }
 
     //添加总订单
-    public Observable<Object> addAllOrder(AddAllOrderParam param) {
-        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().addAllOrder(param).compose(HttpScheduler.applyIO());
+    public Observable<String> addAllOrder(AddAllOrderParam param) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().addAllOrder(param).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
-    public Observable<Object> addAllOrder2(Map<String, Object> param) {
-        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().addAllOrder2(param).compose(HttpScheduler.applyIO());
+    public Observable<String> addAllOrder2(Map<String, Object> param) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().addAllOrder2(param).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -190,6 +190,11 @@ public class ApiWrapper {
         return transform(observable);
     }
 
+    public Observable<String> discountCodePay2(Map<String, Object> map) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().discountCodePay2(map).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
 
     public Observable<String> couponInfo(String discountCode) {
         Observable<HttpResp<String>> observable = HttpX.Instance().Api().couponInfo(discountCode).compose(HttpScheduler.applyIO());
@@ -201,8 +206,8 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    public Observable<Boolean> couponPackgePay(DisPackgeParam param) {
-        Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().couponPackgePay(param).compose(HttpScheduler.applyIO());
+    public Observable<Boolean> couponPackgePay(String coupon, String operator, int price) {
+        Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().couponPackgePay(coupon, operator, price).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -294,8 +299,8 @@ public class ApiWrapper {
     }
 
     //预约时的优惠码选择
-    public Observable<Object> getAllCouponList(String userId) {
-        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getAllCouponList(userId).compose(HttpScheduler.applyIO());
+    public Observable<UseableCouponBean> getAllCouponList(String userId) {
+        Observable<HttpResp<UseableCouponBean>> observable = HttpX.Instance().Api().getAllCouponList(userId).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 

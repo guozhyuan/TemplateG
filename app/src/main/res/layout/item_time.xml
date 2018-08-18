@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:text="6月10号" />
+        tools:text="2018年6月10号" />
 
     <co.lujun.androidtagview.TagContainerLayout
         android:id="@+id/tagLayout"

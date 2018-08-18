@@ -13,6 +13,7 @@ import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.http.ApiWrapper;
+import com.psychological.cxks.wxapi.WXSDKHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,10 +81,10 @@ public class CouponsDetailActivity extends BaseActivity {
             param.body = tranBean.getTaocan();
             param.price = tranBean.getPrice();
             param.isPay = 0;
-            ApiWrapper.getInstance().addAllOrder2(bean2map(param)).flatMap((Function<Object, ObservableSource<Boolean>>) orderId -> {
+            ApiWrapper.getInstance().addAllOrder2(bean2map(param)).flatMap((Function<String, ObservableSource<Boolean>>) orderId -> {
                 BuyPackgeParam param1 = new BuyPackgeParam();
                 param1.consultId = consultId;
-                param1.orderId = orderId.toString();
+                param1.orderId = orderId;
                 param1.userId = App.info.getUserId();
                 param1.username = App.info.getName();
                 param1.packageId = tranBean.getId();
@@ -92,6 +93,7 @@ public class CouponsDetailActivity extends BaseActivity {
                 return ApiWrapper.getInstance().buyPackge(param1);
             }).subscribe(boo -> {
                 // 3.发起付款
+//                WXSDKHelper.getInstance().wxPay();
             }, err -> {
                 Toast.makeText(this, "未知错误", Toast.LENGTH_SHORT).show();
             });

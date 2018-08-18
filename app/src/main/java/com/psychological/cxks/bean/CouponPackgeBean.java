@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 用户端:  咨询师详情中的套餐列表
- * 咨询师段:我的套餐中套餐
+ * 咨询师:  我的套餐中套餐
  */
 public class CouponPackgeBean implements Serializable{
     //    id	√	int	套餐主键id

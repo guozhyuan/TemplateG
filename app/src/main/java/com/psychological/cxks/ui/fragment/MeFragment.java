@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.psychological.cxks.App;
 import com.psychological.cxks.R;
@@ -17,6 +18,7 @@ import com.psychological.cxks.ui.activity.CouponsListActivity;
 import com.psychological.cxks.ui.activity.FavoriteActivity;
 import com.psychological.cxks.ui.activity.LoginActivity;
 import com.psychological.cxks.ui.activity.OrderListActivity;
+import com.psychological.cxks.ui.activity.ProfileActivity;
 import com.psychological.cxks.ui.activity.VisitorInfoActivity;
 import com.psychological.cxks.util.SPUtil;
 
@@ -31,6 +33,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout resetpwd;
     private LinearLayout visitor;
     private Button logout;
+    private TextView profile;
 
     @Override
     public void onAttach(Context context) {
@@ -52,6 +55,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        profile = view.findViewById(R.id.profile);
         order = view.findViewById(R.id.ll_order);
         favorite = view.findViewById(R.id.ll_favorite);
         coupons = view.findViewById(R.id.coupons);
@@ -64,6 +68,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         resetpwd.setOnClickListener(this);
         visitor.setOnClickListener(this);
         logout.setOnClickListener(this);
+        profile.setOnClickListener(this);
 
     }
 
@@ -85,6 +90,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.profile:
+                startActivity(new Intent(getActivity(), ProfileActivity.class));
+                break;
             case R.id.ll_order:
                 startActivity(new Intent(getActivity(), OrderListActivity.class));
                 break;
