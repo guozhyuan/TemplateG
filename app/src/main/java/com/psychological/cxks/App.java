@@ -1,12 +1,7 @@
 package com.psychological.cxks;
 
-import android.support.annotation.NonNull;
 import android.support.multidex.MultiDexApplication;
-import android.widget.ImageView;
 
-import com.bilibili.boxing.BoxingMediaLoader;
-import com.bilibili.boxing.loader.IBoxingCallback;
-import com.bilibili.boxing.loader.IBoxingMediaLoader;
 import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.dao.DBManager;
 import com.psychological.cxks.http.HttpX;
@@ -27,7 +22,7 @@ public class App extends MultiDexApplication {
         HttpX.Instance().init();
         DBManager.getInstance().init(this);
         WXSDKHelper.getInstance().init(this);
-        
+
     }
 
 }

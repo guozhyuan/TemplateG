@@ -262,7 +262,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                                     } else if (mode_phone.isSelected()) {
                                         disCodePayParam.amount = transData.getMeet();
                                     }
-                                    disCodePayParam.title = "商品名称";
+                                    disCodePayParam.title = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());
                                     disCodePayParam.orderId = ret;
                                     disCodePayParam.count = 1;
                                     disCodePayParam.ip = "127.0.0.1";
@@ -273,6 +273,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                                     payMap.put("count", disCodePayParam.count);
                                     payMap.put("ip", disCodePayParam.ip);
                                     ApiWrapper.getInstance().discountCodePay2(payMap).subscribe(
+//                                    ApiWrapper.getInstance().discountCodePay(disCodePayParam).subscribe(
                                             prepayIdSign -> {
                                                 // 发起支付
 //                                                WXSDKHelper.getInstance().wxPay();
@@ -304,7 +305,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                                     } else if (mode_phone.isSelected()) {
                                         disCodePayParam2.amount = transData.getMeet();
                                     }
-                                    disCodePayParam2.title = "商品名称";
+                                    disCodePayParam2.title = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());
                                     disCodePayParam2.orderId = ret;
                                     disCodePayParam2.count = 1;
                                     disCodePayParam2.ip = "127.0.0.1";
@@ -321,6 +322,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                                     payMap2.put("userId", disCodePayParam2.userId);
 
                                     ApiWrapper.getInstance().discountCodePay2(payMap2).subscribe(
+//                                    ApiWrapper.getInstance().discountCodePay(disCodePayParam2).subscribe(
                                             prepayIdSign -> {
                                                 // 发起支付
 //                                                WXSDKHelper.getInstance().wxPay();
@@ -396,13 +398,32 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                     switch (resultPayType) {
                         case Constant.PAY_TYPE_DIRECT:
                             resultCoupon = "";
+                            if (mode_phone.isSelected()) {
+                                price.setText(String.valueOf(transData.getPhone()));
+                            } else if (mode_meeting.isSelected()) {
+                                price.setText(String.valueOf(transData.getMeet()));
+                            }
                             break;
                         case Constant.PAY_TYPE_INPUT_FREE:
+                            resultCoupon = data.getStringExtra("coupon");
+                            price.setText("免费");
+                            break;
                         case Constant.PAY_TYPE_INPUT_DISCOUNT:
+                            resultCoupon = data.getStringExtra("coupon");
                             resultDiscount = data.getIntExtra("discount", 0);
+                            if (mode_phone.isSelected()) {
+                                price.setText(String.valueOf(transData.getPhone() * 8 / 10));
+                            } else if (mode_meeting.isSelected()) {
+                                price.setText(String.valueOf(transData.getMeet() * 8 / 10));
+                            }
+                            break;
                         case Constant.PAY_TYPE_CODE:
+                            resultCoupon = data.getStringExtra("coupon");
+                            price.setText("免费");
+                            break;
                         case Constant.PAY_TYPE_PACKGE:
                             resultCoupon = data.getStringExtra("coupon");
+                            price.setText("免费");
                             break;
                     }
                     break;

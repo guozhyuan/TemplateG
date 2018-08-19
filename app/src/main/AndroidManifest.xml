@@ -15,14 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.psychological.cxks.file.provider">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/boxing_file_provider" />
-        </provider>
-
         <activity
             android:name=".ui.activity.SplashActivity"
             android:label="@string/app_name"
@@ -63,6 +55,7 @@
         <activity android:name=".ui.activity.EMyInfoActivity" />
         <activity android:name=".ui.activity.EEditPackgeActivity" />
         <activity android:name=".ui.activity.EZiXunShiDetailActivity" />
+        <activity android:name=".ui.activity.EExtractMoneyActivity" />
 
         <activity android:name=".ui.activity.LabelsActivity" />
         <activity android:name=".ui.activity.UploadPhotoActivity" />

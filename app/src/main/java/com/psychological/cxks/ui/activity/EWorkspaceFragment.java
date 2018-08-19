@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 import com.psychological.cxks.ui.fragment.BaseFragment;
 
@@ -58,6 +59,10 @@ public class EWorkspaceFragment extends BaseFragment {
             holder.img.setImageResource(icons[position]);
             holder.name.setText(actionNames[position]);
             holder.root.setOnClickListener((view) -> {
+                if (App.info == null) {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    return;
+                }
                 // "主页设置", "我的订单", "客户", "时间设置", "咨询室共享", "套餐设置", "优惠码", "收入", "咨询报告", "评价"
                 switch (position) {
                     case 0: //主页设置

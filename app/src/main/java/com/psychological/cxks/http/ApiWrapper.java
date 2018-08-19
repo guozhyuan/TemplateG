@@ -17,10 +17,12 @@ import com.psychological.cxks.bean.param.CustomerParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.bean.param.ExpertListParam;
+import com.psychological.cxks.bean.param.ExtractParam;
 import com.psychological.cxks.bean.param.FirstCodePayParam;
 import com.psychological.cxks.bean.param.FreeCodePayParam;
 import com.psychological.cxks.bean.param.GeneDisCodeParam;
 import com.psychological.cxks.bean.param.LockParam;
+import com.psychological.cxks.bean.param.ModifyCouponParam;
 import com.psychological.cxks.bean.param.OrderListParam;
 import com.psychological.cxks.bean.param.PhoneCodePayParam;
 import com.psychological.cxks.bean.param.QueryOrderStateParam;
@@ -305,18 +307,6 @@ public class ApiWrapper {
     }
 
 
-    // 3.12.1 获取套餐产品(/cp/getTcAll)
-    public Observable<List<CouponPackgeBean>> getCouponPackge() {
-        Observable<HttpResp<List<CouponPackgeBean>>> observable = HttpX.Instance().Api().getCouponPackge().compose(HttpScheduler.applyIO());
-        return transform(observable);
-    }
-
-    // 3.12.2 获取咨询师发布的套餐(/cp/selectCpList)
-    public Observable<List<CouponPackgeBean>> getExpertCouponPackge(String consultId, int packageState) {
-        Observable<HttpResp<List<CouponPackgeBean>>> observable = HttpX.Instance().Api().getExpertCouponPackge(consultId, packageState).compose(HttpScheduler.applyIO());
-        return transform(observable);
-    }
-
     // 3.14.3 查询预约时间段状态(/expert/time)(咨询师详情页)
     public Observable<Object> getExpertTimes(String userId) {
         Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getExpertTimes(userId).compose(HttpScheduler.applyIO());
@@ -342,15 +332,59 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    // 3.11.1 获取咨询室列表(/room/list)
+    /**
+     * 3.11.1 获取咨询室列表(/room/list)
+     */
     public Observable<Object> roomList(int type, String addr) {
         Observable<HttpResp<Object>> observable = HttpX.Instance().Api().roomList(type, addr).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
-    // 3.11.2 咨询室详情(/room/detail)
+    /**
+     * 3.11.2 咨询室详情(/room/detail)
+     */
     public Observable<Object> roomDetail(String serialNo) {
         Observable<HttpResp<Object>> observable = HttpX.Instance().Api().roomDetail(serialNo).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.12.1 获取套餐产品(/cp/getTcAll)
+    public Observable<List<CouponPackgeBean>> getCouponPackge() {
+        Observable<HttpResp<List<CouponPackgeBean>>> observable = HttpX.Instance().Api().getCouponPackge().compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.12.2 获取咨询师发布的套餐(/cp/selectCpList)
+    public Observable<List<CouponPackgeBean>> getExpertCouponPackge(String consultId, int packageState) {
+        Observable<HttpResp<List<CouponPackgeBean>>> observable = HttpX.Instance().Api().getExpertCouponPackge(consultId, packageState).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    /**
+     * 3.12.4 修改套餐内容、更改套餐排序、发布/下架套餐(/cp/setCpState)
+     */
+    public Observable<Boolean> setCouponPackge(ModifyCouponParam param) {
+        Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().setCouponPackge(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    /**
+     * 3.13.1 收支明细列表(/balance/query)  consultId
+     */
+    public Observable<Object> balanceListQuery(String consultId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().balanceListQuery(consultId).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.13.2 申请提现(/cash/insert)
+    public Observable<Object> cashExtract(ExtractParam param) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().cashExtract(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    // 3.13.4 获取提现信息(/bank/query)
+    public Observable<Object> balanceQuery(String userId) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().balanceQuery(userId).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 }

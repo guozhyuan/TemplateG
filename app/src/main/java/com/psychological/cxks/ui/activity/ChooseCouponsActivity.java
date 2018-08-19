@@ -109,6 +109,8 @@ public class ChooseCouponsActivity extends BaseActivity implements View.OnClickL
                 adapter.notifyDataSetChanged();
             }
         });
+
+
     }
 
     @Override
@@ -208,7 +210,6 @@ public class ChooseCouponsActivity extends BaseActivity implements View.OnClickL
             MyCouponAssembleBean bean = new MyCouponAssembleBean();
             bean.setCouponType(Constant.COUPON_TYPE_CODE);
             bean.setCoupon(codeBean.getCoupon());
-            bean.setCouponType(codeBean.getCouponState());
             bean.setId(codeBean.getId());
             bean.setType(codeBean.getType());
             bean.setOrderId(codeBean.getOrderId());

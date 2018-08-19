@@ -59,7 +59,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            hedgehog:srcCompat="@mipmap/drop_down_selected_icon" />
+            hedgehog:srcCompat="@mipmap/right_arrow" />
 
     </android.support.constraint.ConstraintLayout>
 

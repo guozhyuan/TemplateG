@@ -104,7 +104,7 @@
             android:background="@null"
             android:gravity="end"
             android:hint="请输入套餐价格"
-            android:inputType="text"
+            android:inputType="number"
             android:textColor="#585858"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -140,7 +140,7 @@
             android:background="@null"
             android:gravity="end"
             android:hint="请输入使用次数"
-            android:inputType="text"
+            android:inputType="number"
             android:textColor="#585858"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +149,7 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:background="@color/white">
@@ -157,31 +157,47 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="可用咨询方式"
             android:textColor="#2d2d2d"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/mode_meeting"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:gravity="end"
-            android:hint="选择可用咨询方式"
-            android:textColor="#585858"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/selector_reservation_mode_bg"
+            android:paddingBottom="5dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="5dp"
+            android:text="面询"
+            android:textColor="@color/color_reservation_mode_text"
+            android:textSize="16sp" />
 
-    </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/mode_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:layout_toStartOf="@id/mode_meeting"
+            android:background="@drawable/selector_reservation_mode_bg"
+            android:paddingBottom="5dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="5dp"
+            android:text="电话"
+            android:textColor="@color/color_reservation_mode_text"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

@@ -1,7 +1,10 @@
 package com.psychological.cxks.ui.adapter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdapter.VH> {
+    private static final String TAG = "ChooseCouponsAdapter";
     private List<MyCouponAssembleBean> list;
     private Context ctx;
 
@@ -50,18 +54,17 @@ public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdap
         Date now = new Date();
         Date endTime = new Date(now.getTime() + (86400000 * 365));
         holder.time.setText(String.format("%s到期", TimeUtils.date2String(endTime, new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault()))));
-        holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked) {
-                    unCheckAll();
-                    bean.setChecked(true);
-                    onItemCheck.call();
-                } else {
-                    bean.setChecked(false);
-                }
-                notifyDataSetChanged();
+
+        holder.cb.setOnClickListener(v -> {
+            Log.e(TAG, "holder.cb : " + holder.cb.isChecked());
+            if (holder.cb.isChecked()) {
+                unCheckAll();
+                bean.setChecked(true);
+                onItemCheck.call();
+            } else {
+                bean.setChecked(false);
             }
+            notifyDataSetChanged();
         });
 
     }
@@ -70,11 +73,6 @@ public class ChooseCouponsAdapter extends RecyclerView.Adapter<ChooseCouponsAdap
     public int getItemCount() {
         return list.size();
     }
-
-//    @Override
-//    public int getItemViewType(int position) {
-//        return list.get(position).getCouponType() == 1 ? 1 : 2;
-//    }
 
     class VH extends RecyclerView.ViewHolder {
 

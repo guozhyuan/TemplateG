@@ -19,10 +19,12 @@ import com.psychological.cxks.bean.param.CustomerParam;
 import com.psychological.cxks.bean.param.DisCodePayParam;
 import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.bean.param.ExpertListParam;
+import com.psychological.cxks.bean.param.ExtractParam;
 import com.psychological.cxks.bean.param.FirstCodePayParam;
 import com.psychological.cxks.bean.param.FreeCodePayParam;
 import com.psychological.cxks.bean.param.GeneDisCodeParam;
 import com.psychological.cxks.bean.param.LockParam;
+import com.psychological.cxks.bean.param.ModifyCouponParam;
 import com.psychological.cxks.bean.param.OrderListParam;
 import com.psychological.cxks.bean.param.QueryOrderStateParam;
 import com.psychological.cxks.bean.param.PhoneCodePayParam;
@@ -254,15 +256,6 @@ public interface Api {
 
 
     // 3.12 我的套餐
-    // 3.12.1 获取套餐产品(/cp/getTcAll)
-    @POST("cp/getTcAll")
-    Observable<HttpResp<List<CouponPackgeBean>>> getCouponPackge();
-
-    // 3.12.2 获取咨询师发布的套餐(/cp/selectCpList)
-    // packageState:套餐发布状态(默认为0：未发布；1：已发布；2：已下架)
-    @FormUrlEncoded
-    @POST("cp/selectCpList")
-    Observable<HttpResp<List<CouponPackgeBean>>> getExpertCouponPackge(@Field("consultId") String consultId, @Field("packageState") int packageState);
 
 
     // 3.14.3 查询预约时间段状态(/expert/time)(咨询师详情页)
@@ -297,6 +290,44 @@ public interface Api {
     @FormUrlEncoded
     @POST("room/detail")
     Observable<HttpResp<Object>> roomDetail(@Field("serialNo") String serialNo);
+
+    // 3.12.1 获取套餐产品(/cp/getTcAll)
+    @POST("cp/getTcAll")
+    Observable<HttpResp<List<CouponPackgeBean>>> getCouponPackge();
+
+
+    // 3.12.2 获取咨询师发布的套餐(/cp/selectCpList)
+    // packageState:套餐发布状态(默认为0：未发布；1：已发布；2：已下架)
+    @FormUrlEncoded
+    @POST("cp/selectCpList")
+    Observable<HttpResp<List<CouponPackgeBean>>> getExpertCouponPackge(@Field("consultId") String consultId, @Field("packageState") int packageState);
+
+    // 3.12.3 设置咨询师套餐(/cp/addConsultPackage)
+
+    // 3.12.4 修改套餐内容、更改套餐排序、发布/下架套餐(/cp/setCpState)
+    @POST("cp/setCpState")
+    Observable<HttpResp<Boolean>> setCouponPackge(@Body ModifyCouponParam param);
+
+    // 3.13.1 收支明细列表(/balance/query)  consultId
+    @FormUrlEncoded
+    @POST("balance/query")
+    Observable<HttpResp<Object>> balanceListQuery(@Field("consultId") String consultId);
+
+    // 3.13.2 申请提现(/cash/insert)
+    @POST("balance/query")
+    Observable<HttpResp<Object>> cashExtract(@Body ExtractParam param);
+
+    // 3.13.3 获取提现记录(/cash/query)
+
+
+    // 3.13.4 获取提现信息(/bank/query)
+    @FormUrlEncoded
+    @POST("bank/query")
+    Observable<HttpResp<Object>> balanceQuery(@Field("userId") String userId);
+
+    // 3.13.5 添加提现信息(/bank/insert) userId
+
+    // 3.13.6 修改提现信息(/bank/update)
 }
 
 
