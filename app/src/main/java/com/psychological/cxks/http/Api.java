@@ -3,9 +3,12 @@ package com.psychological.cxks.http;
 
 import com.google.gson.JsonArray;
 import com.psychological.cxks.bean.BannerBean;
+import com.psychological.cxks.bean.CouponCodeListBean;
+import com.psychological.cxks.bean.CouponPackageListBean;
 import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertBean2;
 import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.UseableCouponBean;
 import com.psychological.cxks.bean.UserInfoBean;
@@ -29,17 +32,23 @@ import com.psychological.cxks.bean.param.OrderListParam;
 import com.psychological.cxks.bean.param.QueryOrderStateParam;
 import com.psychological.cxks.bean.param.PhoneCodePayParam;
 import com.psychological.cxks.bean.param.ReservationParam;
+import com.psychological.cxks.bean.param.RoomOrderParam;
 import com.psychological.cxks.bean.param.UnlockParam;
 
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 /**
  * Author : jugg
@@ -87,7 +96,7 @@ public interface Api {
 
     // 3.2.2 根据条件获取默认排序专家列表数据(/expert/list)
     @POST("expert/list")
-    Observable<HttpResp<ExpertBean>> expertList(@Body ExpertListParam param);
+    Observable<HttpResp<List<ExpertBean2>>> expertList(@Body ExpertListParam param);
 
     // 3.2.2.1 咨询师详情(/expert/detail)
     @FormUrlEncoded
@@ -107,10 +116,6 @@ public interface Api {
     @POST("wxPay/order")
     Observable<HttpResp<String>> addAllOrder(@Body AddAllOrderParam param);
 
-    @FormUrlEncoded
-    @POST("wxPay/order")
-    Observable<HttpResp<String>> addAllOrder2(@FieldMap Map<String, Object> param);
-
     //3.2.4.1 锁定时间段(/expert/lock)
     @POST("expert/lock")
     Observable<HttpResp<Boolean>> lockTime(@Body LockParam param);
@@ -119,11 +124,12 @@ public interface Api {
     @POST("expert/unlock")
     Observable<HttpResp<Boolean>> unlockTime(@Body UnlockParam param);
 
-    // 3.2.4.3 预约(/verify/expert/oder)
-    @POST("verify/expert/oder")
+    // 3.2.4.3 预约(/expert/addApptOrder)
+    @POST("expert/addApptOrder")
     Observable<HttpResp<String>> reservation(@Body ReservationParam param);
 
     // 3.2.4.4 咨询师订单金额分成(/expert/recharge)
+    @Deprecated
     @FormUrlEncoded
     @POST("expert/recharge")
     Observable<HttpResp<Boolean>> cashDivid(@Field("serialId") String serialId);
@@ -136,7 +142,6 @@ public interface Api {
 
     @POST("wxPay/appPay")
     Observable<HttpResp<String>> discountCodePay(@Body DisCodePayParam param);
-
     @POST("wxPay/appPay")
     @FormUrlEncoded
     Observable<HttpResp<String>> discountCodePay2(@FieldMap Map<String, Object> map);
@@ -195,7 +200,7 @@ public interface Api {
     //3.3.1 搜索(/search)
     @FormUrlEncoded
     @POST("search")
-    Observable<HttpResp<List<ExpertBean.ResultBean>>> search(@Field("keyWord") String keyWord);
+    Observable<HttpResp<List<ExpertBean2>>> search(@Field("keyWord") String keyWord);
 
     //3.4.1 系统消息列表(/inform/query)
 
@@ -241,12 +246,12 @@ public interface Api {
     // 3.8.2 购买者获取购买咨询师套餐后所得的优惠码列表(/cp/selectPcList)
     @FormUrlEncoded
     @POST("cp/selectPcList")
-    Observable<HttpResp<Object>> couponPackgeList(@Field("obtainId") String obtainId);
+    Observable<HttpResp<CouponPackageListBean>> couponPackgeList(@Field("obtainId") String obtainId);
 
     // 3.8.3 用户获取电询、面询优惠卷列表(/mc/CcList)
     @FormUrlEncoded
     @POST("mc/CcList")
-    Observable<HttpResp<Object>> couponCodeList(@Field("creator") String creator);
+    Observable<HttpResp<CouponCodeListBean>> couponCodeList(@Field("creator") String creator);
 
 
     // 3.8.4 预约时的优惠码选择(/mc/getCouponList)
@@ -266,6 +271,17 @@ public interface Api {
 
     // ##############################  咨询师  ####################################
 
+    //3.10.3 图片上传(/uploadFile)
+    @POST("uploadFile")
+    Observable<HttpResp<String>> uploadFile(@Body RequestBody body);
+
+    @Multipart
+    @POST("uploadFile")
+    Observable<HttpResp<String>> uploadFile2(@PartMap Map<String, RequestBody> params, @Part MultipartBody.Part p);
+
+    @Multipart
+    @POST("uploadFile")
+    Observable<HttpResp<String>> uploadFile3(@Part("moduleid")  RequestBody moduleid,@Part("oldImg")  RequestBody oldImg, @Part MultipartBody.Part p);
 
     // 3.10.8 客户列表(/getCustomerList)
     @POST("getCustomerList")
@@ -290,6 +306,10 @@ public interface Api {
     @FormUrlEncoded
     @POST("room/detail")
     Observable<HttpResp<Object>> roomDetail(@Field("serialNo") String serialNo);
+
+    // 3.11.3 我的咨询室预约(/verify/queryRoomList)
+    @POST("verify/queryRoomList")
+    Observable<HttpResp<Object>> getRoomOrderList(@Body RoomOrderParam param);
 
     // 3.12.1 获取套餐产品(/cp/getTcAll)
     @POST("cp/getTcAll")

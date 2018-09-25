@@ -25,7 +25,6 @@ import com.google.gson.Gson;
 import com.psychological.cxks.App;
 import com.psychological.cxks.Constant;
 import com.psychological.cxks.R;
-import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.JsonBean;
 import com.psychological.cxks.bean.param.AddAllOrderParam;
@@ -39,7 +38,6 @@ import com.psychological.cxks.util.CSLevelEnum;
 import com.psychological.cxks.util.CSTypeEnum;
 import com.psychological.cxks.util.CategoryEnum;
 import com.psychological.cxks.util.TimeEnum;
-import com.psychological.cxks.wxapi.WXSDKHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,6 +71,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
     private String resultCoupon;  // 选择的优惠码
     private int resultPayType;   // 选择优惠码后对应的支付类型
     private int resultDiscount;  // 输入优惠码的折扣
+    private String orderId;       // 订单号
 
 
     private ImageView back;
@@ -147,7 +146,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
         jobTitle = findViewById(R.id.jobTitle);
         reservation_time = findViewById(R.id.reservation_time);
         discounts = findViewById(R.id.discounts);
-        price = findViewById(R.id.price);
+        price = findViewById(R.id.time);
         mode_meeting = findViewById(R.id.mode_meeting);
         mode_phone = findViewById(R.id.mode_phone);
         mode_message = findViewById(R.id.mode_message);
@@ -208,6 +207,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
 
     }
 
+
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -216,7 +216,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
             case R.id.back:
                 finish();
                 break;
-            case R.id.price:
+            case R.id.time:
 
                 break;
             case R.id.discounts:
@@ -238,131 +238,138 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                     startActivity(new Intent(this, LoginActivity.class));
                     return;
                 }
-                //TODO 先添加总订单,再锁定时间, 发起支付,支付完成调用预约
                 AddAllOrderParam addAllOrderParam = new AddAllOrderParam();
                 addAllOrderParam.mobile = App.info.getMobil();
-                addAllOrderParam.nick = App.info.getName();
+                addAllOrderParam.nick = App.info.getUsername();
                 addAllOrderParam.body = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());
                 if (mode_phone.isSelected()) {
                     addAllOrderParam.price = transData.getPhone();
                 } else if (mode_phone.isSelected()) {
                     addAllOrderParam.price = transData.getMeet();
                 }
-                addAllOrderParam.isPay = 0;
-                ApiWrapper.getInstance().addAllOrder2(bean2map(addAllOrderParam)).subscribe(
-                        ret -> {
-                            //TODO 锁定时间
-                            switch (resultPayType) {
-                                case Constant.PAY_TYPE_DEFAULT:
-                                case Constant.PAY_TYPE_DIRECT:
-                                    // 3.2.5.1 APP支付(折扣优惠码支付)(/wxPay/appPay)
-                                    DisCodePayParam disCodePayParam = new DisCodePayParam();
-                                    if (mode_phone.isSelected()) {
-                                        disCodePayParam.amount = transData.getPhone();
-                                    } else if (mode_phone.isSelected()) {
-                                        disCodePayParam.amount = transData.getMeet();
-                                    }
-                                    disCodePayParam.title = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());
-                                    disCodePayParam.orderId = ret;
-                                    disCodePayParam.count = 1;
-                                    disCodePayParam.ip = "127.0.0.1";
-                                    Map<String, Object> payMap = new HashMap<>();
-                                    payMap.put("amount", disCodePayParam.amount);
-                                    payMap.put("title", disCodePayParam.title);
-                                    payMap.put("orderId", disCodePayParam.orderId);
-                                    payMap.put("count", disCodePayParam.count);
-                                    payMap.put("ip", disCodePayParam.ip);
-                                    ApiWrapper.getInstance().discountCodePay2(payMap).subscribe(
-//                                    ApiWrapper.getInstance().discountCodePay(disCodePayParam).subscribe(
-                                            prepayIdSign -> {
-                                                // 发起支付
-//                                                WXSDKHelper.getInstance().wxPay();
-                                            },
-                                            err -> {
-
-                                            }
-                                    );
-                                    break;
-                                case Constant.PAY_TYPE_INPUT_FREE:
-                                    // 3.2.5.3 免费优惠码支付(/mc/discountPay)
-                                    FreeCodePayParam freeCodePayParam = new FreeCodePayParam();
-                                    freeCodePayParam.discountCode = resultCoupon;
-                                    freeCodePayParam.userId = transData.getUserId();  // 咨询师id
-                                    ApiWrapper.getInstance().freeCodePay(freeCodePayParam).subscribe(
-                                            freePayRet -> {
-                                                reservate();
-                                            },
-                                            err -> {
-
-                                            }
-                                    );
-                                    break;
-                                case Constant.PAY_TYPE_INPUT_DISCOUNT:
-                                    // 3.2.5.1 APP支付(折扣优惠码支付)(/wxPay/appPay)
-                                    DisCodePayParam disCodePayParam2 = new DisCodePayParam();
-                                    if (mode_phone.isSelected()) {
-                                        disCodePayParam2.amount = transData.getPhone();
-                                    } else if (mode_phone.isSelected()) {
-                                        disCodePayParam2.amount = transData.getMeet();
-                                    }
-                                    disCodePayParam2.title = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());
-                                    disCodePayParam2.orderId = ret;
-                                    disCodePayParam2.count = 1;
-                                    disCodePayParam2.ip = "127.0.0.1";
-                                    disCodePayParam2.discount = String.valueOf(resultDiscount);
-                                    disCodePayParam2.userId = String.valueOf(resultDiscount);
-
-                                    Map<String, Object> payMap2 = new HashMap<>();
-                                    payMap2.put("amount", disCodePayParam2.amount);
-                                    payMap2.put("title", disCodePayParam2.title);
-                                    payMap2.put("orderId", disCodePayParam2.orderId);
-                                    payMap2.put("count", disCodePayParam2.count);
-                                    payMap2.put("ip", disCodePayParam2.ip);
-                                    payMap2.put("discount", disCodePayParam2.discount);
-                                    payMap2.put("userId", disCodePayParam2.userId);
-
-                                    ApiWrapper.getInstance().discountCodePay2(payMap2).subscribe(
-//                                    ApiWrapper.getInstance().discountCodePay(disCodePayParam2).subscribe(
-                                            prepayIdSign -> {
-                                                // 发起支付
-//                                                WXSDKHelper.getInstance().wxPay();
-                                            },
-                                            err -> {
-
-                                            }
-                                    );
-                                    break;
-                                case Constant.PAY_TYPE_CODE:
-                                    // 3.2.5.4 心理顾问套餐优惠码支付(/mc/mcPay)
-                                    ApiWrapper.getInstance().couponPackgePay(resultCoupon, App.info.getUserId(), (int) (mode_phone.isSelected() ? transData.getPhone() : transData.getMeet())).subscribe(
-                                            mcPay -> {
-                                                reservate();
-                                            }, err -> {
-                                            }
-                                    );
-                                    break;
-                                case Constant.PAY_TYPE_PACKGE:
-                                    // 3.2.5.5 电询、面询优惠码支付(/mc/couponPay)
-                                    PhoneCodePayParam phoneCodePayParam = new PhoneCodePayParam();
-                                    phoneCodePayParam.coupon = resultCoupon;
-                                    phoneCodePayParam.operator = App.info.getUserId();
-                                    phoneCodePayParam.only = transData.getOnly();
-                                    phoneCodePayParam.type = transData.getCsType();
-                                    ApiWrapper.getInstance().phoneCodePay(phoneCodePayParam).subscribe(
-                                            couponPay -> {
-                                                reservate();
-                                            },
-                                            err -> {
-
-                                            }
-                                    );
-                                    break;
+                addAllOrderParam.isPay = 0; // TODO isPay????
+                ApiWrapper.getInstance().addAllOrder(addAllOrderParam)
+                        .flatMap(new Function<String, ObservableSource<Boolean>>() {
+                            @Override
+                            public ObservableSource<Boolean> apply(String ret) throws Exception {
+                                orderId = ret;
+                                LockParam lockParam = new LockParam();
+                                lockParam.userId = transData.getUserId();
+                                lockParam.day = resultDay;
+                                lockParam.time = TimeEnum.getIndex(resultTime);
+                                return ApiWrapper.getInstance().lockTime(lockParam);
                             }
-                        }
-                        , err -> {
+                        })
+                        .subscribe(ret -> {
+                                    switch (resultPayType) {
+                                        case Constant.PAY_TYPE_DEFAULT:
+                                        case Constant.PAY_TYPE_DIRECT:
+                                            // 3.2.5.1 APP支付(折扣优惠码支付)(/wxPay/appPay)
+                                            DisCodePayParam disCodePayParam = new DisCodePayParam();
+                                            if (mode_phone.isSelected()) {
+                                                disCodePayParam.amount = transData.getPhone();
+                                            } else if (mode_phone.isSelected()) {
+                                                disCodePayParam.amount = transData.getMeet();
+                                            }
+                                            disCodePayParam.title = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());
+                                            disCodePayParam.orderId = orderId;
+                                            disCodePayParam.count = 1;
+                                            disCodePayParam.ip = "127.0.0.1";
+                                            Map<String, Object> payMap = new HashMap<>();
+                                            payMap.put("amount", disCodePayParam.amount);
+                                            payMap.put("title", disCodePayParam.title);
+                                            payMap.put("orderId", disCodePayParam.orderId);
+                                            payMap.put("count", disCodePayParam.count);
+                                            payMap.put("ip", disCodePayParam.ip);
+                                            ApiWrapper.getInstance().discountCodePay2(bean2map(disCodePayParam)).subscribe(
+                                                    prepayIdSign -> {
+                                                        // 发起支付
+//                                                      WXSDKHelper.getInstance().wxPay();
+                                                    },
+                                                    err -> {
 
-                        }
-                );
+                                                    }
+                                            );
+                                            break;
+                                        case Constant.PAY_TYPE_INPUT_FREE:
+                                            // 3.2.5.3 免费优惠码支付(/mc/discountPay)
+                                            FreeCodePayParam freeCodePayParam = new FreeCodePayParam();
+                                            freeCodePayParam.discountCode = resultCoupon;
+                                            freeCodePayParam.userId = transData.getUserId();  // 咨询师id
+                                            ApiWrapper.getInstance().freeCodePay(freeCodePayParam).subscribe(
+                                                    freePayRet -> {
+                                                        reservate();
+                                                    },
+                                                    err -> {
+
+                                                    }
+                                            );
+                                            break;
+                                        case Constant.PAY_TYPE_INPUT_DISCOUNT:
+                                            // 3.2.5.1 APP支付(折扣优惠码支付)(/wxPay/appPay)
+                                            DisCodePayParam disCodePayParam2 = new DisCodePayParam();
+                                            if (mode_phone.isSelected()) {
+                                                disCodePayParam2.amount = transData.getPhone();
+                                            } else if (mode_phone.isSelected()) {
+                                                disCodePayParam2.amount = transData.getMeet();
+                                            }
+                                            disCodePayParam2.title = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());
+                                            disCodePayParam2.orderId = orderId;
+                                            disCodePayParam2.count = 1;
+                                            disCodePayParam2.ip = "127.0.0.1";
+                                            disCodePayParam2.discount = String.valueOf(resultDiscount);
+                                            disCodePayParam2.userId = String.valueOf(resultDiscount);
+
+                                            Map<String, Object> payMap2 = new HashMap<>();
+                                            payMap2.put("amount", disCodePayParam2.amount);
+                                            payMap2.put("title", disCodePayParam2.title);
+                                            payMap2.put("orderId", disCodePayParam2.orderId);
+                                            payMap2.put("count", disCodePayParam2.count);
+                                            payMap2.put("ip", disCodePayParam2.ip);
+                                            payMap2.put("discount", disCodePayParam2.discount);
+                                            payMap2.put("userId", disCodePayParam2.userId);
+
+                                            ApiWrapper.getInstance().discountCodePay(disCodePayParam2).subscribe(
+                                                    prepayIdSign -> {
+                                                        // 发起支付
+//                                                WXSDKHelper.getInstance().wxPay();
+                                                    },
+                                                    err -> {
+
+                                                    }
+                                            );
+                                            break;
+                                        case Constant.PAY_TYPE_CODE:
+                                            // 3.2.5.4 心理顾问套餐优惠码支付(/mc/mcPay)
+                                            ApiWrapper.getInstance().couponPackgePay(resultCoupon, App.info.getUserId(), (int) (mode_phone.isSelected() ? transData.getPhone() : transData.getMeet())).subscribe(
+                                                    mcPay -> {
+                                                        reservate();
+                                                    }, err -> {
+                                                    }
+                                            );
+                                            break;
+                                        case Constant.PAY_TYPE_PACKGE:
+                                            // 3.2.5.5 电询、面询优惠码支付(/mc/couponPay)
+                                            PhoneCodePayParam phoneCodePayParam = new PhoneCodePayParam();
+                                            phoneCodePayParam.coupon = resultCoupon;
+                                            phoneCodePayParam.operator = App.info.getUserId();
+                                            phoneCodePayParam.only = transData.getOnly();
+                                            phoneCodePayParam.type = transData.getCsType();
+                                            ApiWrapper.getInstance().phoneCodePay(phoneCodePayParam).subscribe(
+                                                    couponPay -> {
+                                                        reservate();
+                                                    },
+                                                    err -> {
+
+                                                    }
+                                            );
+                                            break;
+                                    }
+                                }
+                                , err -> {
+
+                                }
+                        );
 
 
                 break;
@@ -512,22 +519,21 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
 
     }
 
-    private Map<String, Object> bean2map(AddAllOrderParam param) {
+    private Map<String, Object> bean2map(DisCodePayParam param) {
         Map<String, Object> map = new HashMap<>();
-        map.put("mobile", param.mobile);
-        map.put("nick", param.mobile);
-        map.put("body", param.body);
-        map.put("price", param.price);
-        map.put("isPay", param.isPay);
+        map.put("amount", param.amount);
+        map.put("title", param.title);
+        map.put("orderId", param.orderId);
+        map.put("count", param.count);
+        map.put("ip", param.ip);
         return map;
-
     }
 
     /**
      * 预约 & 咨询师订单金额分成 & 锁定时间
      */
     private void reservate() {
-        param.token = App.info.getToken();
+        param.userId = App.info.getUserId();
         param.orderId = App.info.getUserId();
         param.csId = transData.getUserId();
         //(1-电询；2-面询；3-文字)
@@ -555,22 +561,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
         }
         // 预约 & 咨询师订单金额分成 & 锁定时间
         Disposable disposable = ApiWrapper.getInstance().reservation(param)
-                .flatMap(new Function<String, ObservableSource<Boolean>>() {                 // 咨询师订单金额分成
-                    @Override
-                    public ObservableSource<Boolean> apply(String serialId) throws Exception {
-                        return ApiWrapper.getInstance().cashDivid(serialId);
-                    }
-                })
-                .flatMap(new Function<Boolean, ObservableSource<Boolean>>() {
-                    @Override
-                    public ObservableSource<Boolean> apply(Boolean aBoolean) throws Exception {
-                        LockParam lockParam = new LockParam();
-                        lockParam.userId = transData.getUserId();
-                        lockParam.day = resultDay;
-                        lockParam.time = TimeEnum.getIndex(resultTime);
-                        return ApiWrapper.getInstance().lockTime(lockParam);                  // 锁定时间
-                    }
-                }).subscribe(
+                .subscribe(
                         ret -> {
 
                         },

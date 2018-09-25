@@ -13,14 +13,11 @@ import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
 import com.psychological.cxks.http.ApiWrapper;
-import com.psychological.cxks.wxapi.WXSDKHelper;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.ObservableSource;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 public class CouponsDetailActivity extends BaseActivity {
@@ -40,7 +37,8 @@ public class CouponsDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         tranBean = (CouponPackgeBean) getIntent().getSerializableExtra("taocan");
         consultId = getIntent().getStringExtra("consultId");
-        name.setText(tranBean.getExplain());
+        name.setText(tranBean.getTaocan());
+        method.setText(tranBean.getExplain());
         price.setText(tranBean.getPrice() + "");
         num.setText(tranBean.getNum() + "");
     }
@@ -54,7 +52,7 @@ public class CouponsDetailActivity extends BaseActivity {
     public void findView() {
         back = findViewById(R.id.back);
         name = findViewById(R.id.packge_name);
-        price = findViewById(R.id.price);
+        price = findViewById(R.id.time);
         num = findViewById(R.id.num);
         method = findViewById(R.id.method);
         valid = findViewById(R.id.valid);
@@ -77,16 +75,16 @@ public class CouponsDetailActivity extends BaseActivity {
             // 1.添加总订单
             AddAllOrderParam param = new AddAllOrderParam();
             param.mobile = App.info.getMobil();
-            param.nick = App.info.getName();
+            param.nick = App.info.getUsername();
             param.body = tranBean.getTaocan();
             param.price = tranBean.getPrice();
             param.isPay = 0;
-            ApiWrapper.getInstance().addAllOrder2(bean2map(param)).flatMap((Function<String, ObservableSource<Boolean>>) orderId -> {
+            ApiWrapper.getInstance().addAllOrder(param).flatMap((Function<String, ObservableSource<Boolean>>) orderId -> {
                 BuyPackgeParam param1 = new BuyPackgeParam();
                 param1.consultId = consultId;
                 param1.orderId = orderId;
                 param1.userId = App.info.getUserId();
-                param1.username = App.info.getName();
+                param1.username = App.info.getUsername();
                 param1.packageId = tranBean.getId();
                 param1.state = 0;
                 // 2.购买套餐

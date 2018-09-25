@@ -40,7 +40,7 @@ public class WXSDKHelper {
     }
 
     public void init(Context context) {
-        api = WXAPIFactory.createWXAPI(context, APP_ID, true);
+        api = WXAPIFactory.createWXAPI(context, APP_ID);
         api.registerApp(APP_ID);
     }
 

@@ -85,7 +85,7 @@ public class RegistExpertFragment extends BaseFragment {
                 return;
             }
 
-            if (TextUtils.equals(etPwd.getText(), etPwdReapeat.getText())) {
+            if (!TextUtils.equals(etPwd.getText(), etPwdReapeat.getText())) {
                 Toast.makeText(getActivity(), "密码不一致", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -96,9 +96,14 @@ public class RegistExpertFragment extends BaseFragment {
                 SPUtil.saveString(getActivity(), "token", ret.getToken());
                 SPUtil.saveInt(getActivity(), "type", ret.getType());
                 SPUtil.saveString(getActivity(), "mobil", ret.getMobil());
-                SPUtil.saveString(getActivity(), "name", ret.getName());
+                SPUtil.saveString(getActivity(), "name", ret.getUsername());
                 SPUtil.saveString(getActivity(), "userId", ret.getUserId());
-
+                SPUtil.saveString(getActivity(), "img", ret.getImg());
+                // TODO 极光信息时候需要存储?
+                SPUtil.saveInt(getActivity(), "jg_id", ret.getJiguang().getId());
+                SPUtil.saveString(getActivity(), "jg_nickname", ret.getJiguang().getNickname());
+                SPUtil.saveString(getActivity(), "jg_password", ret.getJiguang().getPassword());
+                SPUtil.saveString(getActivity(), "jg_username", ret.getJiguang().getUsername());
                 startActivity(new Intent(getActivity(), EMainActivity.class));
             }, err -> {
 

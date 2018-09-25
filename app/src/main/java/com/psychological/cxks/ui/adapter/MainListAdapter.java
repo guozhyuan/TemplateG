@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertBean2;
 import com.psychological.cxks.ui.activity.ExpertDetailActivity;
 import com.psychological.cxks.util.DeviceUtils;
 
@@ -27,9 +28,9 @@ import java.util.List;
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.VH> {
     private static final String TAG = "MainListAdapter";
     private Context ctx;
-    private List<ExpertBean.ResultBean> list;
+    private List<ExpertBean2> list;
 
-    public MainListAdapter(Context ctx, List<ExpertBean.ResultBean> list) {
+    public MainListAdapter(Context ctx, List<ExpertBean2> list) {
         this.ctx = ctx;
         this.list = list;
     }
@@ -42,7 +43,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.VH> {
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        ExpertBean.ResultBean bean = list.get(position);
+        ExpertBean2 bean = list.get(position);
         holder.root.setOnClickListener((view) -> {
             Intent intent = new Intent(ctx, ExpertDetailActivity.class);
             Bundle bundle = new Bundle();

@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -13,6 +14,8 @@ import com.psychological.cxks.R;
 
 import com.psychological.cxks.util.BarUtil;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.event.LoginStateChangeEvent;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -39,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 //        }
 
         setContentView(setLayoutId());
+        JMessageClient.registerEventReceiver(this);
         findView();
         initListener();
 //        setStatusbarCover();
@@ -48,6 +52,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     protected void onDestroy() {
         super.onDestroy();
         compositeDisposable.dispose();
+        JMessageClient.unRegisterEventReceiver(this);
+    }
+
+    public void onEventMainThread(LoginStateChangeEvent event) {
+        Log.e("BaseActivity", "LoginStateChangeEvent changed ");
     }
 
     /**

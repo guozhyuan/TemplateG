@@ -148,7 +148,7 @@ public class EWorkspaceFragment extends BaseFragment {
                 super(itemView);
 
                 desc = itemView.findViewById(R.id.desc);
-                time = itemView.findViewById(R.id.price);
+                time = itemView.findViewById(R.id.time);
             }
         }
     }

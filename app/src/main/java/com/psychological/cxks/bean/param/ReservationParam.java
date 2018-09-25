@@ -1,7 +1,7 @@
 package com.psychological.cxks.bean.param;
 
 public class ReservationParam {
-    //    token	√	string	100	用户登录成功后返回的token
+//    userId	√	string	100	用户id
 //    orderId	√	string	50	订单号(总订单返回的订单号)
 //    csId	√	string	32	咨询师ID
 //    method	√	int		咨询方式(1-电询；2-面询；3-文字)
@@ -17,7 +17,8 @@ public class ReservationParam {
 //    day	√	string		日期，例如：XXXX-XX-XX
 //    remark		string		需求(如果是用优惠码支付的请备注：通过免费优惠码预约)
 
-    public String token;
+
+    public String userId;
     public String orderId;
     public String csId;
     public int method;

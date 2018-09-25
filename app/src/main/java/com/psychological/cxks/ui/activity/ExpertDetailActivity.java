@@ -20,6 +20,7 @@ import com.psychological.cxks.R;
 
 import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertBean2;
 import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.http.ApiWrapper;
@@ -34,6 +35,13 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.jiguang.jmrtc.api.JMRtcClient;
+import cn.jiguang.jmrtc.api.JMRtcListener;
+import cn.jiguang.jmrtc.api.JMSignalingMessage;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.Conversation;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
 import co.lujun.androidtagview.TagContainerLayout;
 import io.reactivex.disposables.Disposable;
 
@@ -69,7 +77,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
     private RatingBar ratingbar;
 
 
-    private ExpertBean.ResultBean transData; //传递的咨询师信息
+    private ExpertBean2 transData; //传递的咨询师信息
     private MediaPlayer mediaPlayer;
     private ExpertDetailBean detailBean;
     private OnSalePackgeAdapter onSalePackgeAdapter;
@@ -79,11 +87,11 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        transData = (ExpertBean.ResultBean) getIntent().getSerializableExtra("expert");
+        transData = (ExpertBean2) getIntent().getSerializableExtra("expert");
 
-        peer_name.setText(Objects.requireNonNull(transData).getName());
-        nick.setText(Objects.requireNonNull(transData).getName());
-        Glide.with(this).load(Objects.requireNonNull(transData).getImg()).apply(RequestOptions.circleCropTransform()).into(head);
+//        peer_name.setText(Objects.requireNonNull(transData).getName());
+//        nick.setText(Objects.requireNonNull(transData).getName());
+//        Glide.with(this).load(Objects.requireNonNull(transData).getImg()).apply(RequestOptions.circleCropTransform()).into(head);
 
         onSalePackgeAdapter = new OnSalePackgeAdapter(this, couponPackgeBeanList);
         onSalePackgeAdapter.setOnPackgeClickListener(position -> {
@@ -165,7 +173,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             introduction.setText(ret.getDetail());
             ArrayList<String> tagList = new ArrayList<>(Arrays.asList(ret.getLabels().split(",")));
             tagLayout.setTags(tagList);
-            recordUrl = ret.getPath();
+            recordUrl = ret.getPath(); // TODO 字段不匹配?
         }, err -> {
 
         });
@@ -188,6 +196,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
 
     private void getCouponPackgeList(String userId) {
         Disposable disposable = ApiWrapper.getInstance().getExpertCouponPackge(userId, 1).subscribe(ret -> {
+            couponPackgeBeanList.clear();
             couponPackgeBeanList.addAll(ret);
             onSalePackgeAdapter.notifyDataSetChanged();
         });
@@ -249,10 +258,25 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.message:
-
+                intent = new Intent(this, ChatActivity.class);
+                intent.putExtra("peer", transData.getUserId());
+                startActivity(intent);
                 break;
             case R.id.talk:
+//                Conversation conv = JMessageClient.getSingleConversation(transData.getUserId());
+                Conversation conv = JMessageClient.getSingleConversation("Gi24CWFuueQBUHPdP3PJir87nwYG4UIC");
+                if (conv == null) {
+                    conv = Conversation.createSingleConversation(transData.getUserId());
+                }
+                UserInfo targetInfo = (UserInfo) conv.getTargetInfo();
+                List<UserInfo> info = new ArrayList<>();
+                info.add(targetInfo);
+                JMRtcClient.getInstance().call(info, JMSignalingMessage.MediaType.AUDIO, new BasicCallback() {
+                    @Override
+                    public void gotResult(int i, String s) {
 
+                    }
+                });
                 break;
 
             case R.id.order:

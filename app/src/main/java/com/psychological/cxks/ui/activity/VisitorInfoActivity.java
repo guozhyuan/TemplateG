@@ -179,6 +179,8 @@ public class VisitorInfoActivity extends BaseActivity implements View.OnClickLis
                     Disposable disposable = ApiWrapper.getInstance().addVisitorInfo(param).subscribe(ret -> {
                         Log.e(TAG, "addVisitorInfo ret: " + ret);
                         Toast.makeText(this, "提交成功", Toast.LENGTH_SHORT).show();
+                    }, err -> {
+
                     });
                     compositeDisposable.add(disposable);
                 }

@@ -108,3 +108,38 @@ public static java.lang.String TABLENAME;
     *;
  }
 ##---------------------------  banner  --------------------------------<<
+
+
+##>>---------------------------  JPUSH  --------------------------------
+-dontoptimize
+-dontpreverify
+-keepattributes  EnclosingMethod,Signature
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+
+ -keepclassmembers class ** {
+     public void onEvent*(**);
+ }
+
+#========================gson================================
+-dontwarn com.google.**
+-keep class com.google.gson.** {*;}
+
+#========================protobuf================================
+-keep class com.google.protobuf.** {*;}
+
+#========================support=================================
+-dontwarn cn.jmessage.support.**
+-keep class cn.jmessage.support.**{*;}
+##---------------------------  banner  --------------------------------<<
+
+#========================JMRTC================================
+-dontwarn cn.jiguang.jmrtc.**
+-keep class cn.jiguang.jmrtc.api.** {*;}
+
+#========================Agora================================
+-dontwarn io.agora.rtc.**
+-keep class io.agora.rtc.** {*;}

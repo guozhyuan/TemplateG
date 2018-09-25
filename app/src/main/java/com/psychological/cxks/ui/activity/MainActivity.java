@@ -1,5 +1,6 @@
 package com.psychological.cxks.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Gravity;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.TestBean;
 import com.psychological.cxks.dao.DBManager;

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertBean2;
 import com.psychological.cxks.http.Api;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.MainListAdapter;
@@ -34,7 +35,7 @@ public class SearchActivity extends BaseActivity {
     private ImageView back;
     private RecyclerView recycler;
     private EditText et;
-    private List<ExpertBean.ResultBean> searchBeanList = new ArrayList<>();
+    private List<ExpertBean2> searchBeanList = new ArrayList<>();
     private MainListAdapter gridAdapter;
 
     @Override

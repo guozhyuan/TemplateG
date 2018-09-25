@@ -28,4 +28,14 @@ public class Constant {
     public static final int PAY_TYPE_INPUT_DISCOUNT = 3;    //  手动输入的优惠码,类型为免费
     public static final int PAY_TYPE_CODE = 4;                //  优惠码列表中的优惠码
     public static final int PAY_TYPE_PACKGE = 5;              //  优惠套餐列表中的优惠码
+
+
+    // 聊天内容类型
+    public static final int CHAT_TYPE_TEXT_MINE = 1;
+    public static final int CHAT_TYPE_TEXT_PEER = 2;
+
+    // 语音
+    public static final String RTC_TYPE = "rtc_type";
+    public static final int RTC_TYPE_SEND = 1;
+    public static final int RTC_TYPE_RECV = 2;
 }

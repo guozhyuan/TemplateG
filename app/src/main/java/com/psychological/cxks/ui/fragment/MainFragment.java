@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.BannerBean;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertBean2;
 import com.psychological.cxks.bean.param.ExpertListParam;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.activity.SearchActivity;
@@ -51,7 +52,7 @@ public class MainFragment extends BaseFragment {
     private static final String TAG = "MainFragment";
 
     private String citys[] = {"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
-    private String cates[] = {"恋爱婚姻", "家庭关系","亲子教育","情绪压力","人际关系","职业发展","性心理"};
+    private String cates[] = {"恋爱婚姻", "家庭关系", "亲子教育", "情绪压力", "人际关系", "职业发展", "性心理"};
     private String sexs[] = {"男", "女"};
     private int currentSelectedPos = -1;
     private RelativeLayout dropdownMenus;
@@ -68,7 +69,8 @@ public class MainFragment extends BaseFragment {
 
     private ExpertListParam expertListParam = new ExpertListParam();
     private MainListAdapter mainListAdapter;
-    private List<ExpertBean.ResultBean> expertBeanList;
+    //    private List<ExpertBean.ResultBean> expertBeanList;
+    private List<ExpertBean2> expertBeanList;
     private boolean isRefreshData = false;
 
     @Override
@@ -181,7 +183,7 @@ public class MainFragment extends BaseFragment {
                 expertBeanList.clear();
             }
             swipe.setRefreshing(false);
-            expertBeanList.addAll(expertBeans.getResult());
+            expertBeanList.addAll(expertBeans);
             mainListAdapter.notifyDataSetChanged();
         }, err -> {
             swipe.setRefreshing(false);
@@ -287,7 +289,7 @@ public class MainFragment extends BaseFragment {
         dropdownMenus.addView(popWindows);
     }
 
-    private void clearDropdownMenus(){
+    private void clearDropdownMenus() {
         dropdownMenus.removeAllViews();
     }
 

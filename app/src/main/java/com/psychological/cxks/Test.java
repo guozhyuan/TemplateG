@@ -5,14 +5,20 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.psychological.cxks.bean.MyCouponCodeBean;
 import com.psychological.cxks.bean.MyCouponPackgeBean;
+import com.psychological.cxks.util.TimeConstants;
+import com.psychological.cxks.util.TimeUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 
 public class Test {
-    public static void main(String[] args) {
-        testParseInt();
+    public static void main(String[] args) throws ParseException {
+//        testParseInt();
+        testDate();
     }
 
     public static void getNow() {
@@ -67,5 +73,14 @@ public class Test {
 
     public static void testParseInt() {
         System.out.println(Double.parseDouble("1600.0"));
+    }
+
+
+    public static void testDate() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String str = "2018-08-18 15:10:23";
+
+        long createTimeMills = TimeUtils.getMillis(str, format, 365, TimeConstants.DAY);
+        System.out.println(TimeUtils.millis2String(createTimeMills));
     }
 }

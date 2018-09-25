@@ -58,6 +58,7 @@ public class RegistActivity extends BaseActivity {
     }
 
     class RegistAdapter extends FragmentPagerAdapter {
+        private String[] titles = {"用户注册", "咨询师注册"};
 
         public RegistAdapter(FragmentManager fm) {
             super(fm);
@@ -71,6 +72,12 @@ public class RegistActivity extends BaseActivity {
         @Override
         public int getCount() {
             return fragments.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
         }
     }
 }
