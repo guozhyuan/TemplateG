@@ -1,5 +1,6 @@
 package com.psychological.cxks.http;
 
+import com.psychological.cxks.App;
 import com.psychological.cxks.Constant;
 
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class HttpX {
         okhttp3.logging.HttpLoggingInterceptor interceptor = new okhttp3.logging.HttpLoggingInterceptor();
         interceptor.setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
-//                .addInterceptor(headerInterceptor)
+                .addInterceptor(headerInterceptor)
                 .addInterceptor(interceptor)
                 .connectTimeout(HttpConstant.HTTP_TIME_OUT, TimeUnit.MILLISECONDS)
                 .readTimeout(HttpConstant.HTTP_READ_TIME_OUT, TimeUnit.MILLISECONDS)
@@ -79,7 +80,8 @@ public class HttpX {
         public Response intercept(Chain chain) throws IOException {
             Request origin = chain.request();
             Request request = origin.newBuilder()
-                    .addHeader("Accept", "application/json")
+//                    .addHeader("Accept", "application/json")
+                    .addHeader("token", App.info == null ? "" : App.info.getToken())
                     .method(origin.method(), origin.body())
                     .build();
             Response response = chain.proceed(request);

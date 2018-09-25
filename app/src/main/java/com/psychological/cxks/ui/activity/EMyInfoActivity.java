@@ -1,31 +1,60 @@
 package com.psychological.cxks.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 import com.psychological.cxks.bean.JsonBean;
+import com.psychological.cxks.bean.param.EProfileParam;
+import com.psychological.cxks.http.ApiWrapper;
+import com.psychological.cxks.util.GlideEngine;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.GetUserInfoCallback;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+import io.reactivex.disposables.Disposable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class EMyInfoActivity extends BaseActivity implements View.OnClickListener {
 
@@ -34,21 +63,35 @@ public class EMyInfoActivity extends BaseActivity implements View.OnClickListene
     private ImageView head;
     private EditText name;
     private EditText rank;
+    private RadioButton male;
+    private RadioButton female;
     private EditText time;
+    //
     private TextView addr;
-
+    private LinearLayout ll_address;
+    private RelativeLayout rl_cyzz; //从业资质
+    //
     private SwitchCompat chat;
     private SwitchCompat voice;
     private SwitchCompat meet;
-
+    //
     private TextView save;
     private TextView preview;
     private TextView submit;
 
+    private final int REQUEST_READ_CONTACTS = 100;
+    private final int REQUEST_CODE_AVATAR = 101;
+
+    private EProfileParam param = new EProfileParam();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_READ_CONTACTS);
+        }
     }
 
     @Override
@@ -62,9 +105,14 @@ public class EMyInfoActivity extends BaseActivity implements View.OnClickListene
         head = findViewById(R.id.head);
         name = findViewById(R.id.name);
         rank = findViewById(R.id.rank);
+        male = findViewById(R.id.radio_male);
+        female = findViewById(R.id.radio_female);
         time = findViewById(R.id.time);
-        addr = findViewById(R.id.addr);
 
+        //
+        addr = findViewById(R.id.addr);
+        ll_address = findViewById(R.id.ll_address);
+        rl_cyzz = findViewById(R.id.rl_cyzz);
 
         //
         chat = findViewById(R.id.chat);
@@ -80,7 +128,8 @@ public class EMyInfoActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void initListener() {
         back.setOnClickListener(this);
-        addr.setOnClickListener(this);
+        head.setOnClickListener(this);
+        ll_address.setOnClickListener(this);
         save.setOnClickListener(this);
         preview.setOnClickListener(this);
         submit.setOnClickListener(this);
@@ -92,7 +141,17 @@ public class EMyInfoActivity extends BaseActivity implements View.OnClickListene
             case R.id.back:
                 finish();
                 break;
-            case R.id.addr:
+            case R.id.head:
+                Matisse.from(EMyInfoActivity.this)
+                        .choose(MimeType.of(MimeType.PNG))
+                        .countable(true)
+                        .maxSelectable(1)
+                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                        .thumbnailScale(0.85f)
+                        .imageEngine(new GlideEngine())
+                        .forResult(REQUEST_CODE_AVATAR);
+                break;
+            case R.id.ll_address:
                 showPicker();
                 break;
 
@@ -105,6 +164,80 @@ public class EMyInfoActivity extends BaseActivity implements View.OnClickListene
             case R.id.submit:
 
                 break;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) return;
+        switch (requestCode) {
+            case REQUEST_CODE_AVATAR:
+                handleImg(data, true);
+                break;
+
+        }
+    }
+
+    private void handleImg(Intent data, boolean isAvatar) {
+        List<String> strings = Matisse.obtainPathResult(data);
+        Glide.with(this).load(strings.get(0)).apply(RequestOptions.circleCropTransform()).into(head);
+        Luban.with(this)
+                .load(strings.get(0))
+                .ignoreBy(100)
+                .setCompressListener(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        RequestBody moduleid = RequestBody.create(MediaType.parse("text/plain"), "1");
+                        RequestBody oldImg = RequestBody.create(MediaType.parse("text/plain"), "1");
+                        RequestBody img = RequestBody.create(MediaType.parse("image/png"), file);
+                        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), img);
+                        Disposable d = ApiWrapper.getInstance().uploadFile3(moduleid, oldImg, part).subscribe(ret -> {
+                            param.img = ret;
+                            if (isAvatar) {
+                                JMessageClient.getUserInfo(App.info.getJiguang().getUsername(), new GetUserInfoCallback() {
+                                    @Override
+                                    public void gotResult(int i, String s, UserInfo userInfo) {
+                                        userInfo.setUserExtras("avatar", ret);
+                                        JMessageClient.updateMyInfo(UserInfo.Field.extras, userInfo, new BasicCallback() {
+                                            @Override
+                                            public void gotResult(int i, String s) {
+                                                Log.e("updateMyInfo", "Success");
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        }, err -> {
+
+                        });
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                }).launch();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_READ_CONTACTS:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    finish();
+                }
         }
     }
 
@@ -163,6 +296,7 @@ public class EMyInfoActivity extends BaseActivity implements View.OnClickListene
                             String provinceStr = options1Items.get(options1).getPickerViewText();
                             String cityStr = options2Items.get(options1).get(options2);
                             addr.setText(String.format("%s  %s", provinceStr, cityStr));
+                            param.addr = String.format("%s  %s", provinceStr, cityStr);
                         }
                     })
                     .setTitleText("城市选择")
@@ -182,6 +316,4 @@ public class EMyInfoActivity extends BaseActivity implements View.OnClickListene
 
 
     }
-
-
 }

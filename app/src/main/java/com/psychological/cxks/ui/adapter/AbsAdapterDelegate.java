@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 public interface AbsAdapterDelegate {
     RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType);
 
-    <T> void onBindViewHolder(RecyclerView.ViewHolder holder, int position, T t);
+    <T, H extends RecyclerView.ViewHolder> void onBindViewHolder(H holder, int position, T data);
 
+    <T extends RecyclerView.ViewHolder> T getHolder();
 }

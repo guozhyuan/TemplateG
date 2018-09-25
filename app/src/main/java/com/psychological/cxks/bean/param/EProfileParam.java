@@ -16,7 +16,9 @@ public class EProfileParam {
 //    workExprience		string	500	从业经历
 //    aptitude		string	500	资质介绍
 //    detail		string		个人介绍
-    public String token;
+
+
+//    public String token;
     public String realName;
     public int sex;
     public String img;

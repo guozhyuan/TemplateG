@@ -86,8 +86,6 @@ public class OrderNotPayFragment extends BaseFragment {
         // 订单状态，-1:已下单；0：已付款；1：已取消；2：已确定接单；3：咨询结束；4：已评价
         // -1——查询待付款；2——待咨询；4——已完成
         param.token = App.info.getToken();
-        param.pageSize = 20;
-        param.pageNo = 1;
         param.state = -1;
 
         Disposable disposable = ApiWrapper.getInstance().allOrder2(bean2map()).subscribe(ret -> {

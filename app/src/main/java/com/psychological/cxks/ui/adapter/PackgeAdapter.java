@@ -71,7 +71,7 @@ public class PackgeAdapter extends RecyclerView.Adapter<PackgeAdapter.VH> {
         public VH(View itemView) {
             super(itemView);
             packgeName = itemView.findViewById(R.id.packge_name);
-            price = itemView.findViewById(R.id.price);
+            price = itemView.findViewById(R.id.time);
             method = itemView.findViewById(R.id.method);
             amount = itemView.findViewById(R.id.amount);
             valid = itemView.findViewById(R.id.valid);

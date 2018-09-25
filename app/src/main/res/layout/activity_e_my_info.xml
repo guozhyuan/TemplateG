@@ -60,7 +60,7 @@
                         android:layout_width="94dp"
                         android:layout_height="94dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@mipmap/ic_launcher_round" />
+                        android:src="@mipmap/launcher" />
 
                     <ImageView
                         android:id="@+id/iv_photo_change"
@@ -271,6 +271,14 @@
                     android:textColor="#2d2d2d"
                     android:textSize="18sp"
                     tools:text="广东省广州市" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/right_arrow" />
             </LinearLayout>
 
 

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.psychological.cxks.App;
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.CouponPackageListBean;
 import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.DiscountsPackgeBean;
 import com.psychological.cxks.http.ApiWrapper;
@@ -31,6 +32,8 @@ import io.reactivex.disposables.Disposable;
 public class DiscountsPackgeFragment extends BaseFragment {
     private SwipeRefreshLayout swipe;
     private RecyclerView recycler;
+    private List<CouponPackageListBean.ResultBean> list;
+    private DiscountsPackgeAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,15 +60,15 @@ public class DiscountsPackgeFragment extends BaseFragment {
                 outRect.top = DeviceUtils.dip2px(getActivity(), 10);
             }
         });
-        List<DiscountsPackgeBean> list = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            list.add(new DiscountsPackgeBean());
-        }
-        DiscountsPackgeAdapter adapter = new DiscountsPackgeAdapter(getActivity(), list);
+//        List<DiscountsPackgeBean> list = new ArrayList<>();
+//        for (int i = 0; i < 50; i++) {
+//            list.add(new DiscountsPackgeBean());
+//        }
+        list = new ArrayList<>();
+        adapter = new DiscountsPackgeAdapter(getActivity(), list);
         recycler.setAdapter(adapter);
         getCouponPackgeList();
     }
-
 
     private void getCouponPackgeList() {
         if (App.info == null) {
@@ -73,6 +76,10 @@ public class DiscountsPackgeFragment extends BaseFragment {
             return;
         }
         Disposable dis = ApiWrapper.getInstance().couponPackgeList(App.info.getUserId()).subscribe(ret -> {
+            List<CouponPackageListBean.ResultBean> result = ret.getResult();
+            list.addAll(result);
+            adapter.notifyDataSetChanged();
+        }, err -> {
 
         });
         compositeDisposable.add(dis);

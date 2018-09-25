@@ -1,9 +1,12 @@
 package com.psychological.cxks.http;
 
 import com.psychological.cxks.bean.BannerBean;
+import com.psychological.cxks.bean.CouponCodeListBean;
+import com.psychological.cxks.bean.CouponPackageListBean;
 import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean;
+import com.psychological.cxks.bean.ExpertBean2;
 import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.UseableCouponBean;
 import com.psychological.cxks.bean.UserInfoBean;
@@ -27,6 +30,7 @@ import com.psychological.cxks.bean.param.OrderListParam;
 import com.psychological.cxks.bean.param.PhoneCodePayParam;
 import com.psychological.cxks.bean.param.QueryOrderStateParam;
 import com.psychological.cxks.bean.param.ReservationParam;
+import com.psychological.cxks.bean.param.RoomOrderParam;
 import com.psychological.cxks.bean.param.UnlockParam;
 
 import org.greenrobot.greendao.annotation.NotNull;
@@ -40,6 +44,9 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Part;
 
 
 /**
@@ -123,8 +130,8 @@ public class ApiWrapper {
     }
 
     // 咨询师列表
-    public Observable<ExpertBean> expertList(ExpertListParam param) {
-        Observable<HttpResp<ExpertBean>> observable = HttpX.Instance().Api().expertList(param).compose(HttpScheduler.applyIO());
+    public Observable<List<ExpertBean2>> expertList(ExpertListParam param) {
+        Observable<HttpResp<List<ExpertBean2>>> observable = HttpX.Instance().Api().expertList(param).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -152,11 +159,6 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    public Observable<String> addAllOrder2(Map<String, Object> param) {
-        Observable<HttpResp<String>> observable = HttpX.Instance().Api().addAllOrder2(param).compose(HttpScheduler.applyIO());
-        return transform(observable);
-    }
-
     //锁定时间
     public Observable<Boolean> lockTime(LockParam param) {
         Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().lockTime(param).compose(HttpScheduler.applyIO());
@@ -175,7 +177,7 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-
+    @Deprecated
     public Observable<Boolean> cashDivid(String serialId) {
         Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().cashDivid(serialId).compose(HttpScheduler.applyIO());
         return transform(observable);
@@ -196,7 +198,6 @@ public class ApiWrapper {
         Observable<HttpResp<String>> observable = HttpX.Instance().Api().discountCodePay2(map).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
-
 
     public Observable<String> couponInfo(String discountCode) {
         Observable<HttpResp<String>> observable = HttpX.Instance().Api().couponInfo(discountCode).compose(HttpScheduler.applyIO());
@@ -253,8 +254,8 @@ public class ApiWrapper {
         return transform(observable);
     }
 
-    public Observable<List<ExpertBean.ResultBean>> search(String keyWord) {
-        Observable<HttpResp<List<ExpertBean.ResultBean>>> observable = HttpX.Instance().Api().search(keyWord).compose(HttpScheduler.applyIO());
+    public Observable<List<ExpertBean2>> search(String keyWord) {
+        Observable<HttpResp<List<ExpertBean2>>> observable = HttpX.Instance().Api().search(keyWord).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -289,14 +290,14 @@ public class ApiWrapper {
 
 
     // 3.8.2 购买者获取购买咨询师套餐后所得的优惠码列表(/cp/selectPcList)
-    public Observable<Object> couponPackgeList(String obtainId) {
-        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().couponPackgeList(obtainId).compose(HttpScheduler.applyIO());
+    public Observable<CouponPackageListBean> couponPackgeList(String obtainId) {
+        Observable<HttpResp<CouponPackageListBean>> observable = HttpX.Instance().Api().couponPackgeList(obtainId).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
     // 3.8.3 用户获取电询、面询优惠卷列表(/mc/CcList)
-    public Observable<Object> couponCodeList(String creator) {
-        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().couponCodeList(creator).compose(HttpScheduler.applyIO());
+    public Observable<CouponCodeListBean> couponCodeList(String creator) {
+        Observable<HttpResp<CouponCodeListBean>> observable = HttpX.Instance().Api().couponCodeList(creator).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 
@@ -314,6 +315,22 @@ public class ApiWrapper {
     }
 
     // #######################################################  咨询师 ##################################################################################
+
+    public Observable<String> uploadFile(RequestBody body) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().uploadFile(body).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    public Observable<String> uploadFile2(Map<String, RequestBody> params, MultipartBody.Part p) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().uploadFile2(params, p).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    public Observable<String> uploadFile3(@Part RequestBody moduleid, @Part RequestBody oldImg, @Part MultipartBody.Part p) {
+        Observable<HttpResp<String>> observable = HttpX.Instance().Api().uploadFile3(moduleid, oldImg, p).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
     // 3.10.8 客户列表(/getCustomerList)
     public Observable<Object> getCustomerList(CustomerParam param) {
         Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getCustomerList(param).compose(HttpScheduler.applyIO());
@@ -347,6 +364,13 @@ public class ApiWrapper {
         Observable<HttpResp<Object>> observable = HttpX.Instance().Api().roomDetail(serialNo).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
+
+    // 3.11.3 我的咨询室预约(/verify/queryRoomList)
+    public Observable<Object> getRoomOrderList(RoomOrderParam param) {
+        Observable<HttpResp<Object>> observable = HttpX.Instance().Api().getRoomOrderList(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
 
     // 3.12.1 获取套餐产品(/cp/getTcAll)
     public Observable<List<CouponPackgeBean>> getCouponPackge() {

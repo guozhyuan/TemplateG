@@ -38,7 +38,7 @@ public class EMainActivity extends BaseActivity {
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomView.getChildAt(0);
         BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(1);
-        badge = new QBadgeView(this).bindTarget(itemView).setBadgeNumber(4).setBadgeGravity(Gravity.END | Gravity.TOP).setGravityOffset(40, 0, true);
+//        badge = new QBadgeView(this).bindTarget(itemView).setBadgeNumber(4).setBadgeGravity(Gravity.END | Gravity.TOP).setGravityOffset(40, 0, true);
 
         EWorkspaceFragment mainFragment = new EWorkspaceFragment();
         MsgFragment msgFragment = new MsgFragment();

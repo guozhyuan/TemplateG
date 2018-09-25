@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.psychological.cxks.App;
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.CouponCodeListBean;
 import com.psychological.cxks.bean.MyCouponCodeBean;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.activity.LoginActivity;
@@ -31,7 +32,7 @@ public class DiscountsCouponsFragment extends BaseFragment {
     private SwipeRefreshLayout swipe;
     private RecyclerView recycler;
     private DiscountsCouponsAdapter adapter;
-    private List<MyCouponCodeBean> retList;
+    private List<CouponCodeListBean.ResultBean> retList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +71,11 @@ public class DiscountsCouponsFragment extends BaseFragment {
             return;
         }
         Disposable disposable = ApiWrapper.getInstance().couponCodeList(App.info.getUserId()).subscribe(ret -> {
+            List<CouponCodeListBean.ResultBean> result = ret.getResult();
+            retList.clear();
+            retList.addAll(result);
+            adapter.notifyDataSetChanged();
+        }, err -> {
 
         });
         compositeDisposable.add(disposable);

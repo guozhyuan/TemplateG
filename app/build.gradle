@@ -12,6 +12,17 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a','x86'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "com.psychological.cxks",
+                JPUSH_APPKEY : "bacff95b42838ce7d1036b57", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
     signingConfigs {
         release {
@@ -75,4 +86,10 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
     implementation 'com.zhihu.android:matisse:0.5.1'
+    //JPUSH
+    implementation 'cn.jiguang.sdk:jmessage:2.7.0'
+    implementation 'cn.jiguang.sdk:jcore:1.2.3'
+    implementation 'cn.jiguang.sdk:jmrtc:1.0.2'
+    // 压缩
+    implementation 'top.zibin:Luban:1.1.8'
 }
