@@ -144,6 +144,7 @@ public class RtcActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+
     public void onBackPressed() {
 //        super.onBackPressed();
 //        屏蔽掉返回按键
