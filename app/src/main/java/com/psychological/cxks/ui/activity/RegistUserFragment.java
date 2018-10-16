@@ -92,7 +92,7 @@ public class RegistUserFragment extends BaseFragment {
                         SPUtil.saveString(getActivity(), "name", ret.getUsername());
                         SPUtil.saveString(getActivity(), "userId", ret.getUserId());
                         SPUtil.saveString(getActivity(), "img", ret.getImg());
-                        // TODO 极光信息时候需要存储?
+
                         SPUtil.saveInt(getActivity(), "jg_id", ret.getJiguang().getId());
                         SPUtil.saveString(getActivity(), "jg_nickname", ret.getJiguang().getNickname());
                         SPUtil.saveString(getActivity(), "jg_password", ret.getJiguang().getPassword());

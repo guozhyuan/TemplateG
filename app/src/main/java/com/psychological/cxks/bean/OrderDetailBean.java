@@ -1,46 +1,64 @@
 package com.psychological.cxks.bean;
 
 public class OrderDetailBean {
-//    id	√	int	主键
-//    orderId	√	string	订单号
-//    serialId	√	string	预约流水号
-//    userId	√	string	用户id
-//    csId	√	string	咨询师ID
-//    method	√	int	咨询方式，1—电话咨询，2—见面咨询
-//    money	√	double	订单金额
-//    name	√	string	姓名
-//    time	√	int	预约时间段(具体时间看状态码说明)
-//    day	√	string	日期
-//    state	√	string	状态，0：已预约，1：咨询结束，2：已取消
-//    counselor	√	string	咨询师姓名
-//    img	√	string	咨询师头像
-//    refund	√	int	退款状态，0：未退款，1：退款中，2：已退款，-1：退款失败
-//    field	√	int	咨询方面(具体范围看状态码说明)
-//    sex	√	int	用户性别，1—男，2—女
-//    addr	√	string	用户所在城市
-//    need	√	string	问题描述
-//    remark	√	string	备注
-//    dizhi	√	string	咨询师地址
+
+
+    /**
+     * id : 408
+     * userId : qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N
+     * csId : EU5544SsWzmAKiMOrKdr78cZA1LxOIYG
+     * orderId : 155500299821539278022057
+     * serialId : 20181012011342711620
+     * method : 1
+     * field : 7
+     * money : 1600
+     * name :
+     * sex : 1
+     * addr :
+     * mobile :
+     * need : null
+     * time : 9
+     * day : 2018年10月20日
+     * state : 0
+     * dealTime : 2018-10-12 01:13:42
+     * operator : null
+     * remark :
+     * refund : null
+     * condition : null
+     * startDate : null
+     * endDate : null
+     * token : null
+     * counselor : null
+     * img : null
+     * dizhi : null
+     */
 
     private int id;
-    private String orderId;
-    private String serialId;
     private String userId;
     private String csId;
+    private String orderId;
+    private String serialId;
     private int method;
-    private double money;
-    private String name;
-    private int time;
-    private String day;
-    private String state;
-    private String counselor;
-    private String img;
-    private int refund;
     private int field;
+    private int money;
+    private String name;
     private int sex;
     private String addr;
-    private String need;
+    private String mobile;
+    private Object need;
+    private int time;
+    private String day;
+    private int state;
+    private String dealTime;
+    private Object operator;
     private String remark;
+    private Object refund;
+    private Object condition;
+    private Object startDate;
+    private Object endDate;
+    private String token;
+    private String counselor;
+    private String img;
     private String dizhi;
 
     public int getId() {
@@ -49,22 +67,6 @@ public class OrderDetailBean {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getSerialId() {
-        return serialId;
-    }
-
-    public void setSerialId(String serialId) {
-        this.serialId = serialId;
     }
 
     public String getUserId() {
@@ -83,6 +85,22 @@ public class OrderDetailBean {
         this.csId = csId;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getSerialId() {
+        return serialId;
+    }
+
+    public void setSerialId(String serialId) {
+        this.serialId = serialId;
+    }
+
     public int getMethod() {
         return method;
     }
@@ -91,11 +109,19 @@ public class OrderDetailBean {
         this.method = method;
     }
 
-    public double getMoney() {
+    public int getField() {
+        return field;
+    }
+
+    public void setField(int field) {
+        this.field = field;
+    }
+
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
@@ -105,62 +131,6 @@ public class OrderDetailBean {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCounselor() {
-        return counselor;
-    }
-
-    public void setCounselor(String counselor) {
-        this.counselor = counselor;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public int getRefund() {
-        return refund;
-    }
-
-    public void setRefund(int refund) {
-        this.refund = refund;
-    }
-
-    public int getField() {
-        return field;
-    }
-
-    public void setField(int field) {
-        this.field = field;
     }
 
     public int getSex() {
@@ -179,12 +149,60 @@ public class OrderDetailBean {
         this.addr = addr;
     }
 
-    public String getNeed() {
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public Object getNeed() {
         return need;
     }
 
-    public void setNeed(String need) {
+    public void setNeed(Object need) {
         this.need = need;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getDealTime() {
+        return dealTime;
+    }
+
+    public void setDealTime(String dealTime) {
+        this.dealTime = dealTime;
+    }
+
+    public Object getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Object operator) {
+        this.operator = operator;
     }
 
     public String getRemark() {
@@ -193,6 +211,62 @@ public class OrderDetailBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Object getRefund() {
+        return refund;
+    }
+
+    public void setRefund(Object refund) {
+        this.refund = refund;
+    }
+
+    public Object getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Object condition) {
+        this.condition = condition;
+    }
+
+    public Object getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Object startDate) {
+        this.startDate = startDate;
+    }
+
+    public Object getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Object endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getCounselor() {
+        return counselor;
+    }
+
+    public void setCounselor(String counselor) {
+        this.counselor = counselor;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getDizhi() {

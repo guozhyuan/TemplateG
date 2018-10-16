@@ -60,6 +60,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/et_name"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
@@ -96,6 +97,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/et_price"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
@@ -132,6 +134,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/et_count"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
@@ -193,7 +196,7 @@
             android:paddingEnd="15dp"
             android:paddingStart="15dp"
             android:paddingTop="5dp"
-            android:text="电话"
+            android:text="电询"
             android:textColor="@color/color_reservation_mode_text"
             android:textSize="16sp" />
 
@@ -218,6 +221,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/et_time"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"

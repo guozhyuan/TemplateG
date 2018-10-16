@@ -455,6 +455,7 @@
 
             <!-- 来访者信息表 -->
             <LinearLayout
+                android:id="@+id/ll_visitor_info"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
                 android:layout_marginTop="10dp"
@@ -482,6 +483,7 @@
 
             <!-- 咨询服务须知 -->
             <LinearLayout
+                android:id="@+id/ll_notice"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
                 android:layout_marginTop="10dp"

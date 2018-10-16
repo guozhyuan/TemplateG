@@ -28,13 +28,6 @@ public class EExtractMoneyActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Disposable d = ApiWrapper.getInstance().balanceQuery(App.info.getUserId()).subscribe(
-                ret -> {
-
-                }, err -> {
-
-                }
-        );
     }
 
     @Override
@@ -66,7 +59,7 @@ public class EExtractMoneyActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.extract:
-                // TODO 各种判断
+                // TODO 提现信息不足,余额?可提现余额?
                 ExtractParam param = new ExtractParam();
                 Disposable d = ApiWrapper.getInstance().cashExtract(param).subscribe(
                         ret -> {

@@ -7,6 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.psychological.cxks.R;
@@ -22,6 +27,7 @@ public class EDiscountCodeActivity extends BaseActivity {
     private ViewPager viewPager;
     private TabLayout tabs;
     private String[] titles = {"生成优惠码", "优惠码列表", "我的优惠码"};
+    private ImageView back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class EDiscountCodeActivity extends BaseActivity {
         list.add(codeListFragment);
         list.add(codeMyFragment);
         Adapter adapter = new Adapter(getSupportFragmentManager(), list);
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
         tabs.addTab(tabs.newTab().setText("生成优惠码"));
         tabs.addTab(tabs.newTab().setText("优惠码列表"));
@@ -50,10 +57,15 @@ public class EDiscountCodeActivity extends BaseActivity {
     public void findView() {
         viewPager = findViewById(R.id.viewpager);
         tabs = findViewById(R.id.tabs);
+        back = findViewById(R.id.back);
+
     }
 
     @Override
     public void initListener() {
+        back.setOnClickListener(v -> {
+            finish();
+        });
 
     }
 

@@ -6,6 +6,7 @@ import android.view.SurfaceView;
 import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.dao.DBManager;
 import com.psychological.cxks.http.HttpX;
+import com.psychological.cxks.sevice.GlobalEventReceiver;
 import com.psychological.cxks.sevice.JMRtcListenerImpl;
 import com.psychological.cxks.wxapi.WXSDKHelper;
 
@@ -29,6 +30,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        new GlobalEventReceiver(this);
         HttpX.Instance().init();
         DBManager.getInstance().init(this);
         WXSDKHelper.getInstance().init(this);

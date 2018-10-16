@@ -2,25 +2,26 @@ package com.psychological.cxks.bean;
 
 import java.util.List;
 
-public class OrderListBean {
+public class ZiXunShiOrderListBean {
+
     /**
      * begRow : 0
-     * endRow : 2
+     * endRow : 20
      * newsPageNo : 0
      * dyPageNo : 0
      * pageNo : 1
-     * pageSize : 2
-     * totalPage : 4
+     * pageSize : 20
+     * totalPage : 1
      * totalCount : 7
      * sort : null
      * order : null
      * condition1 : null
      * condition2 : null
-     * result : [{"id":408,"userId":"qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N","csId":"EU5544SsWzmAKiMOrKdr78cZA1LxOIYG","orderId":"155500299821539278022057","serialId":"20181012011342711620","method":1,"field":7,"money":null,"name":"","sex":1,"addr":"","mobile":"","need":null,"time":9,"day":"2018年10月20日","state":0,"dealTime":"2018-10-12 01:13:42","operator":null,"remark":"","refund":null,"condition":null,"startDate":null,"endDate":null,"token":null,"counselor":"蔡绮文","img":null,"dizhi":null},{"id":407,"userId":"qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N","csId":"EU5544SsWzmAKiMOrKdr78cZA1LxOIYG","orderId":"155500299821539277928549","serialId":"20181012011208055499","method":1,"field":7,"money":null,"name":"","sex":1,"addr":"","mobile":"","need":null,"time":9,"day":"2018年10月20日","state":0,"dealTime":"2018-10-12 01:12:08","operator":null,"remark":"","refund":null,"condition":null,"startDate":null,"endDate":null,"token":null,"counselor":"蔡绮文","img":null,"dizhi":null}]
+     * result : [{"id":214,"orderId":"139233401881538210922908","serialId":"20180929164938116412","userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","roomId":"gd52501003","day":"2018-10-01","time":7,"name":"测试帐号ken","mobile":"13923340188","state":2,"orderTime":"2018-09-29 16:49:39","dealTime":null,"operator":null,"remark":"","code":null,"startDate":null,"endDate":null,"token":null,"roomName":"东莞咨询室02"},{"id":213,"orderId":"139233401881538210922908","serialId":"20180929164938054195","userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","roomId":"gd52501003","day":"2018-10-01","time":7,"name":"测试帐号ken","mobile":"13923340188","state":2,"orderTime":"2018-09-29 16:49:39","dealTime":null,"operator":null,"remark":"","code":null,"startDate":null,"endDate":null,"token":null,"roomName":"东莞咨询室02"},{"id":212,"orderId":"189228607601538210629695","serialId":"20180929164442594450","userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","roomId":"gd52501003","day":"2018-10-01","time":7,"name":"测试帐号ken","mobile":"18922860760","state":2,"orderTime":"2018-09-29 16:44:42","dealTime":null,"operator":null,"remark":"","code":null,"startDate":null,"endDate":null,"token":null,"roomName":"东莞咨询室02"},{"id":211,"orderId":"189228607601538210629695","serialId":"20180929164442963071","userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","roomId":"gd52501003","day":"2018-10-01","time":7,"name":"测试帐号ken","mobile":"18922860760","state":2,"orderTime":"2018-09-29 16:44:42","dealTime":null,"operator":null,"remark":"","code":null,"startDate":null,"endDate":null,"token":null,"roomName":"东莞咨询室02"},{"id":210,"orderId":"139233401881538209209245","serialId":"20180929162051081843","userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","roomId":"gd52501003","day":"2018-09-30","time":7,"name":"测试帐号ken","mobile":"13923340188","state":2,"orderTime":"2018-09-29 16:20:51","dealTime":null,"operator":null,"remark":"","code":null,"startDate":null,"endDate":null,"token":null,"roomName":"东莞咨询室02"},{"id":209,"orderId":"139233401881538209209245","serialId":"20180929162051237170","userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","roomId":"gd52501003","day":"2018-09-30","time":7,"name":"测试帐号ken","mobile":"13923340188","state":0,"orderTime":"2018-09-29 16:20:51","dealTime":null,"operator":null,"remark":"","code":null,"startDate":null,"endDate":null,"token":null,"roomName":"东莞咨询室02"},{"id":186,"orderId":"139233401881531719037626","serialId":"20180716133041004489","userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","roomId":"sz52501002","day":"2018-07-16","time":9,"name":"测试帐号ken","mobile":"13923340188","state":0,"orderTime":"2018-07-16 13:30:41","dealTime":null,"operator":null,"remark":"通过免费优惠码购买","code":null,"startDate":null,"endDate":null,"token":null,"roomName":"深圳卓悦汇3号咨询室"}]
      * footer : null
-     * params : {"endDate":null,"pageSize":2,"state":null,"sort":"a.id","begRow":0,"userId":"qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N","startDate":null,"order":"desc"}
+     * params : {"serialId":null,"endDate":null,"pageSize":20,"state":null,"sort":"r.id","begRow":0,"userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","startDate":null,"order":"desc"}
      * collect : null
-     * paramsMap : {"endDate":null,"pageSize":2,"state":null,"sort":"a.id","begRow":0,"userId":"qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N","startDate":null,"order":"desc"}
+     * paramsMap : {"serialId":null,"endDate":null,"pageSize":20,"state":null,"sort":"r.id","begRow":0,"userId":"Gi24CWFuueQBUHPdP3PJir87nwYG4UIC","startDate":null,"order":"desc"}
      * page : true
      */
 
@@ -189,16 +190,18 @@ public class OrderListBean {
 
     public static class ParamsBean {
         /**
+         * serialId : null
          * endDate : null
-         * pageSize : 2
+         * pageSize : 20
          * state : null
-         * sort : a.id
+         * sort : r.id
          * begRow : 0
-         * userId : qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N
+         * userId : Gi24CWFuueQBUHPdP3PJir87nwYG4UIC
          * startDate : null
          * order : desc
          */
 
+        private Object serialId;
         private Object endDate;
         private int pageSize;
         private Object state;
@@ -207,6 +210,14 @@ public class OrderListBean {
         private String userId;
         private Object startDate;
         private String order;
+
+        public Object getSerialId() {
+            return serialId;
+        }
+
+        public void setSerialId(Object serialId) {
+            this.serialId = serialId;
+        }
 
         public Object getEndDate() {
             return endDate;
@@ -275,16 +286,18 @@ public class OrderListBean {
 
     public static class ParamsMapBean {
         /**
+         * serialId : null
          * endDate : null
-         * pageSize : 2
+         * pageSize : 20
          * state : null
-         * sort : a.id
+         * sort : r.id
          * begRow : 0
-         * userId : qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N
+         * userId : Gi24CWFuueQBUHPdP3PJir87nwYG4UIC
          * startDate : null
          * order : desc
          */
 
+        private Object serialId;
         private Object endDate;
         private int pageSize;
         private Object state;
@@ -293,6 +306,14 @@ public class OrderListBean {
         private String userId;
         private Object startDate;
         private String order;
+
+        public Object getSerialId() {
+            return serialId;
+        }
+
+        public void setSerialId(Object serialId) {
+            this.serialId = serialId;
+        }
 
         public Object getEndDate() {
             return endDate;
@@ -361,62 +382,46 @@ public class OrderListBean {
 
     public static class ResultBean {
         /**
-         * id : 408
-         * userId : qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N
-         * csId : EU5544SsWzmAKiMOrKdr78cZA1LxOIYG
-         * orderId : 155500299821539278022057
-         * serialId : 20181012011342711620
-         * method : 1
-         * field : 7
-         * money : null
-         * name :
-         * sex : 1
-         * addr :
-         * mobile :
-         * need : null
-         * time : 9
-         * day : 2018年10月20日
-         * state : 0
-         * dealTime : 2018-10-12 01:13:42
+         * id : 214
+         * orderId : 139233401881538210922908
+         * serialId : 20180929164938116412
+         * userId : Gi24CWFuueQBUHPdP3PJir87nwYG4UIC
+         * roomId : gd52501003
+         * day : 2018-10-01
+         * time : 7
+         * name : 测试帐号ken
+         * mobile : 13923340188
+         * state : 2
+         * orderTime : 2018-09-29 16:49:39
+         * dealTime : null
          * operator : null
          * remark :
-         * refund : null
-         * condition : null
+         * code : null
          * startDate : null
          * endDate : null
          * token : null
-         * counselor : 蔡绮文
-         * img : null
-         * dizhi : null
+         * roomName : 东莞咨询室02
          */
 
         private int id;
-        private String userId;
-        private String csId;
         private String orderId;
         private String serialId;
-        private int method;
-        private int field;
-        private Object money;
-        private String name;
-        private int sex;
-        private String addr;
-        private String mobile;
-        private Object need;
-        private int time;
+        private String userId;
+        private String roomId;
         private String day;
+        private int time;
+        private String name;
+        private String mobile;
         private int state;
-        private String dealTime;
+        private String orderTime;
+        private Object dealTime;
         private Object operator;
         private String remark;
-        private Object refund;
-        private Object condition;
+        private Object code;
         private Object startDate;
         private Object endDate;
         private Object token;
-        private String counselor;
-        private Object img;
-        private Object dizhi;
+        private String roomName;
 
         public int getId() {
             return id;
@@ -424,22 +429,6 @@ public class OrderListBean {
 
         public void setId(int id) {
             this.id = id;
-        }
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-        public String getCsId() {
-            return csId;
-        }
-
-        public void setCsId(String csId) {
-            this.csId = csId;
         }
 
         public String getOrderId() {
@@ -458,76 +447,20 @@ public class OrderListBean {
             this.serialId = serialId;
         }
 
-        public int getMethod() {
-            return method;
+        public String getUserId() {
+            return userId;
         }
 
-        public void setMethod(int method) {
-            this.method = method;
+        public void setUserId(String userId) {
+            this.userId = userId;
         }
 
-        public int getField() {
-            return field;
+        public String getRoomId() {
+            return roomId;
         }
 
-        public void setField(int field) {
-            this.field = field;
-        }
-
-        public Object getMoney() {
-            return money;
-        }
-
-        public void setMoney(Object money) {
-            this.money = money;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getSex() {
-            return sex;
-        }
-
-        public void setSex(int sex) {
-            this.sex = sex;
-        }
-
-        public String getAddr() {
-            return addr;
-        }
-
-        public void setAddr(String addr) {
-            this.addr = addr;
-        }
-
-        public String getMobile() {
-            return mobile;
-        }
-
-        public void setMobile(String mobile) {
-            this.mobile = mobile;
-        }
-
-        public Object getNeed() {
-            return need;
-        }
-
-        public void setNeed(Object need) {
-            this.need = need;
-        }
-
-        public int getTime() {
-            return time;
-        }
-
-        public void setTime(int time) {
-            this.time = time;
+        public void setRoomId(String roomId) {
+            this.roomId = roomId;
         }
 
         public String getDay() {
@@ -538,6 +471,30 @@ public class OrderListBean {
             this.day = day;
         }
 
+        public int getTime() {
+            return time;
+        }
+
+        public void setTime(int time) {
+            this.time = time;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getMobile() {
+            return mobile;
+        }
+
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
+
         public int getState() {
             return state;
         }
@@ -546,11 +503,19 @@ public class OrderListBean {
             this.state = state;
         }
 
-        public String getDealTime() {
+        public String getOrderTime() {
+            return orderTime;
+        }
+
+        public void setOrderTime(String orderTime) {
+            this.orderTime = orderTime;
+        }
+
+        public Object getDealTime() {
             return dealTime;
         }
 
-        public void setDealTime(String dealTime) {
+        public void setDealTime(Object dealTime) {
             this.dealTime = dealTime;
         }
 
@@ -570,20 +535,12 @@ public class OrderListBean {
             this.remark = remark;
         }
 
-        public Object getRefund() {
-            return refund;
+        public Object getCode() {
+            return code;
         }
 
-        public void setRefund(Object refund) {
-            this.refund = refund;
-        }
-
-        public Object getCondition() {
-            return condition;
-        }
-
-        public void setCondition(Object condition) {
-            this.condition = condition;
+        public void setCode(Object code) {
+            this.code = code;
         }
 
         public Object getStartDate() {
@@ -610,59 +567,12 @@ public class OrderListBean {
             this.token = token;
         }
 
-        public String getCounselor() {
-            return counselor;
+        public String getRoomName() {
+            return roomName;
         }
 
-        public void setCounselor(String counselor) {
-            this.counselor = counselor;
-        }
-
-        public Object getImg() {
-            return img;
-        }
-
-        public void setImg(Object img) {
-            this.img = img;
-        }
-
-        public Object getDizhi() {
-            return dizhi;
-        }
-
-        public void setDizhi(Object dizhi) {
-            this.dizhi = dizhi;
+        public void setRoomName(String roomName) {
+            this.roomName = roomName;
         }
     }
-//    id	√	int	主键
-//    orderId	√	string	订单号
-//    serialId	√	string	预约流水号
-//    userId	√	string	用户id
-//    csId	√	string	咨询师ID
-//    method	√	int	咨询方式，1—电话咨询，2—见面咨询
-//    money	√	double	订单金额
-//    name	√	string	姓名
-//    time	√	int	预约时间段(具体时间看状态码说明)
-//    day	√	string	日期
-//    state	√	string	状态，0：已预约，1：咨询结束，2：已取消
-//    counselor	√	string	咨询师姓名
-//    img	√	string	咨询师头像
-//    refund	√	int	退款状态，0：未退款，1：退款中，2：已退款，-1：退款失败
-//    private int id ;
-//    private String orderId ;
-//    private String serialId ;
-//    private String userId ;
-//    private String csId ;
-//    private int method ;
-//    private double money ;
-//    private String name ;
-//    private int time ;
-//    private String day ;
-//    private String state ;
-//    private String counselor ;
-//    private String img ;
-//    private int refund ;
-
-
-
 }

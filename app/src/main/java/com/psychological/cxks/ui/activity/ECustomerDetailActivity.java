@@ -7,10 +7,14 @@ import android.support.constraint.ConstraintLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.psychological.cxks.App;
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.CustomerListBean;
 import com.psychological.cxks.http.ApiWrapper;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.Conversation;
 import io.reactivex.disposables.Disposable;
 
 public class ECustomerDetailActivity extends BaseActivity {
@@ -26,13 +30,15 @@ public class ECustomerDetailActivity extends BaseActivity {
     private TextView count;             //咨询次数
     private ConstraintLayout info;
     private ConstraintLayout report;
+    private CustomerListBean.ResultBean bean;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //TODO 暂时写死
-        Disposable dis = ApiWrapper.getInstance().getCustomerInfo("qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N").subscribe(
+        bean = (CustomerListBean.ResultBean) getIntent().getSerializableExtra("customer");
+        nick.setText(bean.getName());
+        addr.setText(bean.getAddr());
+        Disposable dis = ApiWrapper.getInstance().getCustomerInfo(bean.getUserId()).subscribe(
                 ret -> {
 
                 },
@@ -40,6 +46,7 @@ public class ECustomerDetailActivity extends BaseActivity {
 
                 }
         );
+        compositeDisposable.add(dis);
 
     }
 
@@ -48,11 +55,13 @@ public class ECustomerDetailActivity extends BaseActivity {
         return R.layout.activity_e_customer_detail;
     }
 
+
     @Override
     public void findView() {
         back = findViewById(R.id.back);
         head = findViewById(R.id.head);
         gender = findViewById(R.id.gender);
+        addr = findViewById(R.id.addr);
         nick = findViewById(R.id.nick);
         chat = findViewById(R.id.chat);
 
@@ -68,14 +77,16 @@ public class ECustomerDetailActivity extends BaseActivity {
             finish();
         });
         chat.setOnClickListener((v) -> {
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("peer", bean.getUserId());
+            startActivity(intent);
         });
         histroy.setOnClickListener((v) -> {
             if (App.info == null) {
                 startActivity(new Intent(this, LoginActivity.class));
                 return;
             }
-            //TODO 暂时写死
-            Disposable dis = ApiWrapper.getInstance().getConsultNum(App.info.getUserId(), "qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N").subscribe(
+            Disposable dis = ApiWrapper.getInstance().getConsultNum(App.info.getUserId(), bean.getUserId()).subscribe(
                     ret -> {
 
                     },

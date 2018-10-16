@@ -12,9 +12,13 @@ import android.widget.ImageView;
 import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 
+import com.psychological.cxks.bean.FavoriteBean;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.FavoriteAdapter;
 import com.psychological.cxks.util.DeviceUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
@@ -23,6 +27,7 @@ public class FavoriteActivity extends BaseActivity {
 
     private ImageView back;
     private RecyclerView recyclerView;
+    private List<FavoriteBean> list;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +39,8 @@ public class FavoriteActivity extends BaseActivity {
                 outRect.top = DeviceUtils.dip2px(FavoriteActivity.this, 5);
             }
         });
-        FavoriteAdapter adapter = new FavoriteAdapter(this);
+        list = new ArrayList<>();
+        FavoriteAdapter adapter = new FavoriteAdapter(this, list);
         recyclerView.setAdapter(adapter);
         if (App.info == null) {
             startActivity(new Intent(FavoriteActivity.this, LoginActivity.class));

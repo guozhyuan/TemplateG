@@ -22,6 +22,7 @@ import com.psychological.cxks.bean.CouponPackgeBean;
 import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.ExpertBean2;
 import com.psychological.cxks.bean.ExpertDetailBean;
+import com.psychological.cxks.bean.ExpertDetailBean2;
 import com.psychological.cxks.bean.param.EvaluateParam;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.adapter.OnSalePackgeAdapter;
@@ -79,7 +80,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
 
     private ExpertBean2 transData; //传递的咨询师信息
     private MediaPlayer mediaPlayer;
-    private ExpertDetailBean detailBean;
+    private ExpertDetailBean2.ExpertBean detailBean;
     private OnSalePackgeAdapter onSalePackgeAdapter;
     private List<CouponPackgeBean> couponPackgeBeanList = new ArrayList<>();
 
@@ -140,13 +141,14 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
         trainingExperience = findViewById(R.id.trainingExperience);
         workExprience = findViewById(R.id.workExprience);
 
-        recyclerPackge = findViewById(R.id.recycler_packge);
 
         consumerHead = findViewById(R.id.consumer_head);
         consumerNick = findViewById(R.id.consumer_nick);
         consumerEvaluate = findViewById(R.id.consumer_evaluate);
         ratingbar = findViewById(R.id.ratingbar);
         ratingbar.setmClickable(false);
+
+        recyclerPackge = findViewById(R.id.recycler_packge);
     }
 
     @Override
@@ -161,19 +163,22 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
 
     private void getDetail(String userId) {
         Disposable subscribe = ApiWrapper.getInstance().expertDetail(userId).subscribe(ret -> {
-            detailBean = ret;
-            peer_name.setText(ret.getName());
-            nick.setText(ret.getName());
-            Glide.with(ExpertDetailActivity.this).load(ret.getImg()).apply(RequestOptions.circleCropTransform()).into(head);
-            jobTitle.setText(ret.getRank());
-            jobTime.setText(String.format("从业%s年", ret.getWorkTime()));
-            rank.setText(ret.getDiploma());
-            diploma.setText(ret.getDiploma());
-            Glide.with(ExpertDetailActivity.this).load(ret.getImg()).into(imgBig);
-            introduction.setText(ret.getDetail());
-            ArrayList<String> tagList = new ArrayList<>(Arrays.asList(ret.getLabels().split(",")));
+            detailBean = ret.getExpert();
+            peer_name.setText(detailBean.getName());
+            nick.setText(detailBean.getName());
+            Glide.with(ExpertDetailActivity.this).load(detailBean.getImg()).apply(RequestOptions.circleCropTransform()).into(head);
+            jobTitle.setText(detailBean.getRank() + "");
+            jobTime.setText(String.format("从业%s年", detailBean.getWorkTime()));
+            rank.setText(detailBean.getDiploma());
+            diploma.setText(detailBean.getDiploma());
+            Glide.with(ExpertDetailActivity.this).load(detailBean.getImg()).into(imgBig);
+            introduction.setText(detailBean.getDetail());
+            educationBackground.setText(detailBean.getEducationBackground());
+            trainingExperience.setText(detailBean.getTrainingExperience());
+            workExprience.setText(detailBean.getWorkExprience());
+            ArrayList<String> tagList = new ArrayList<>(Arrays.asList(detailBean.getLabels().split(",")));
             tagLayout.setTags(tagList);
-            recordUrl = ret.getPath(); // TODO 字段不匹配?
+            recordUrl = detailBean.getPath(); // TODO 字段不匹配?
         }, err -> {
 
         });
@@ -189,7 +194,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             consumerEvaluate.setText(ret.get(0).getContent());
             ratingbar.setStar(ret.get(0).getLevel());
         }, err -> {
-            Utils.handleErr(ExpertDetailActivity.this, err.getMessage());
+            // Utils.handleErr(ExpertDetailActivity.this, err.getMessage());
         });
         compositeDisposable.add(subscribe);
     }
@@ -263,8 +268,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.talk:
-//                Conversation conv = JMessageClient.getSingleConversation(transData.getUserId());
-                Conversation conv = JMessageClient.getSingleConversation("Gi24CWFuueQBUHPdP3PJir87nwYG4UIC");
+                Conversation conv = JMessageClient.getSingleConversation(transData.getUserId());
                 if (conv == null) {
                     conv = Conversation.createSingleConversation(transData.getUserId());
                 }

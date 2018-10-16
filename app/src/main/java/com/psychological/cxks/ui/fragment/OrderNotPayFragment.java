@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.psychological.cxks.App;
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.OrderListBean;
 import com.psychological.cxks.bean.param.OrderListParam;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.activity.LoginActivity;
@@ -20,7 +21,9 @@ import com.psychological.cxks.ui.adapter.OrderListAdapter;
 import com.psychological.cxks.ui.view.RecyclerViewOnLoadHelper;
 import com.psychological.cxks.util.DeviceUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
@@ -34,6 +37,8 @@ public class OrderNotPayFragment extends BaseFragment {
     private RecyclerView recycler;
     private OrderListParam param = new OrderListParam();
     private boolean isRefresh = true;
+    private List<OrderListBean.ResultBean> list;
+    private OrderListAdapter adapter;
 
 
     @Override
@@ -61,7 +66,8 @@ public class OrderNotPayFragment extends BaseFragment {
                 outRect.top = DeviceUtils.dip2px(getActivity(), 5);
             }
         });
-        OrderListAdapter adapter = new OrderListAdapter(getActivity());
+        list = new ArrayList<>();
+        adapter = new OrderListAdapter(getActivity(), list);
         recycler.setAdapter(adapter);
         swipe.setOnRefreshListener(() -> {
             param = new OrderListParam();
@@ -92,6 +98,11 @@ public class OrderNotPayFragment extends BaseFragment {
             if (swipe.isRefreshing()) {
                 swipe.setRefreshing(false);
             }
+            if (isRefresh) {
+                list.clear();
+            }
+            list.addAll(ret.getResult());
+            adapter.notifyDataSetChanged();
 
         });
         compositeDisposable.add(disposable);

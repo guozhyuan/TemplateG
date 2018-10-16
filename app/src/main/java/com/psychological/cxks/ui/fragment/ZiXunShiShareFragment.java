@@ -15,10 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.RoomListBean;
+import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.activity.EZiXunShiDetailActivity;
 import com.psychological.cxks.util.DeviceUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+
 public class ZiXunShiShareFragment extends BaseFragment {
+    private List<RoomListBean.ResultBean> list = new ArrayList<>();
+    private Adapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,8 +47,22 @@ public class ZiXunShiShareFragment extends BaseFragment {
                 outRect.top = DeviceUtils.dip2px(getActivity(), 8);
             }
         });
+        adapter = new Adapter();
+        recyclerView.setAdapter(adapter);
+        getRoomList();
+    }
 
-        recyclerView.setAdapter(new Adapter());
+    public void getRoomList() {
+        Disposable dis = ApiWrapper.getInstance().roomList(0, "").subscribe(
+                ret -> {
+                    list.addAll(ret.getResult());
+                    adapter.notifyDataSetChanged();
+                },
+                err -> {
+
+                }
+        );
+        compositeDisposable.add(dis);
     }
 
 
@@ -60,7 +84,7 @@ public class ZiXunShiShareFragment extends BaseFragment {
 
         @Override
         public int getItemCount() {
-            return 40;
+            return list.size();
         }
     }
 

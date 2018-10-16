@@ -11,10 +11,13 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.psychological.cxks.R;
+import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.fragment.ZiXunShiShareFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 public class EZiXunShiShareActivity extends BaseActivity implements View.OnClickListener {
 
@@ -27,6 +30,15 @@ public class EZiXunShiShareActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Disposable dis = ApiWrapper.getInstance().getCustomerAddr().subscribe(
+                ret -> {
+
+                },
+                err -> {
+
+                }
+        );
+        compositeDisposable.add(dis);
         fragments = new ArrayList<>();
         for (String str : titles) {
             tabs.addTab(tabs.newTab().setText(str));

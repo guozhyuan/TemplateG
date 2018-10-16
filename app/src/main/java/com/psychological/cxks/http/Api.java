@@ -1,19 +1,25 @@
 package com.psychological.cxks.http;
 
 
-import com.google.gson.JsonArray;
 import com.psychological.cxks.bean.BannerBean;
 import com.psychological.cxks.bean.CouponCodeListBean;
 import com.psychological.cxks.bean.CouponPackageListBean;
 import com.psychological.cxks.bean.CouponPackgeBean;
+import com.psychological.cxks.bean.CustomerInfoBean;
+import com.psychological.cxks.bean.CustomerListBean;
 import com.psychological.cxks.bean.EvaluateBean;
-import com.psychological.cxks.bean.ExpertBean;
 import com.psychological.cxks.bean.ExpertBean2;
 import com.psychological.cxks.bean.ExpertDetailBean;
+import com.psychological.cxks.bean.ExpertDetailBean2;
+import com.psychological.cxks.bean.FavoriteBean;
+import com.psychological.cxks.bean.OrderDetailBean;
+import com.psychological.cxks.bean.OrderListBean;
+import com.psychological.cxks.bean.RoomListBean;
 import com.psychological.cxks.bean.UseableCouponBean;
 import com.psychological.cxks.bean.UserInfoBean;
 import com.psychological.cxks.bean.QueryOrderStateBean;
 import com.psychological.cxks.bean.TestBean;
+import com.psychological.cxks.bean.ZiXunShiOrderListBean;
 import com.psychological.cxks.bean.param.AddAllOrderParam;
 import com.psychological.cxks.bean.param.AddVisitorInfoParam;
 import com.psychological.cxks.bean.param.BuyPackgeParam;
@@ -90,6 +96,10 @@ public interface Api {
     @POST("reset")
     Observable<HttpResp<Boolean>> reset(@Field("mobile") String mobile, @Field("code") String code, @Field("password") String password);
 
+    // 3.2.0 所有咨询师的地址(/expert/getCustomerAddr)
+    @POST("expert/getCustomerAddr")
+    Observable<HttpResp<Object>> getCustomerAddr();
+
     // 3.2.1 获取主页的banner图片(/banner/list)
     @POST("banner/list")
     Observable<HttpResp<List<BannerBean>>> bannerList();
@@ -101,7 +111,7 @@ public interface Api {
     // 3.2.2.1 咨询师详情(/expert/detail)
     @FormUrlEncoded
     @POST("expert/detail")
-    Observable<HttpResp<ExpertDetailBean>> expertDetail(@Field("userId") String userId);
+    Observable<HttpResp<ExpertDetailBean2>> expertDetail(@Field("userId") String userId);
 
     // 3.2.3.2 评价列表(/cmt/getCmtList)
     @POST("cmt/getCmtList")
@@ -116,9 +126,17 @@ public interface Api {
     @POST("wxPay/order")
     Observable<HttpResp<String>> addAllOrder(@Body AddAllOrderParam param);
 
+    @FormUrlEncoded
+    @POST("wxPay/order")
+    Observable<HttpResp<String>> addAllOrder2(@FieldMap Map<String, Object> map);
+
     //3.2.4.1 锁定时间段(/expert/lock)
     @POST("expert/lock")
     Observable<HttpResp<Boolean>> lockTime(@Body LockParam param);
+
+    @FormUrlEncoded
+    @POST("expert/lock")
+    Observable<HttpResp<Boolean>> lockTime2(@FieldMap Map<String, Object> map);
 
     //3.2.4.2 解锁时间段(/expert/unlock)
     @POST("expert/unlock")
@@ -127,6 +145,10 @@ public interface Api {
     // 3.2.4.3 预约(/expert/addApptOrder)
     @POST("expert/addApptOrder")
     Observable<HttpResp<String>> reservation(@Body ReservationParam param);
+
+    @FormUrlEncoded
+    @POST("expert/addApptOrder")
+    Observable<HttpResp<String>> reservation2(@FieldMap Map<String, Object> param);
 
     // 3.2.4.4 咨询师订单金额分成(/expert/recharge)
     @Deprecated
@@ -142,9 +164,10 @@ public interface Api {
 
     @POST("wxPay/appPay")
     Observable<HttpResp<String>> discountCodePay(@Body DisCodePayParam param);
+
     @POST("wxPay/appPay")
     @FormUrlEncoded
-    Observable<HttpResp<String>> discountCodePay2(@FieldMap Map<String, Object> map);
+    Observable<HttpResp<String>> discountCodePay2(@FieldMap Map<String, String> map);  //(encoded = false)
 
     // 3.2.5.2 查询优惠券信息(/expert/disInfo) (注：用于展示优惠码的折扣)
     @FormUrlEncoded
@@ -195,7 +218,7 @@ public interface Api {
 
     //3.2.7.2 生成优惠码(/cp/addPackageCoupon)
     @POST("cp/addPackageCoupon")
-    Observable<HttpResp<String>> generateDisCode(@Body GeneDisCodeParam param);
+    Observable<HttpResp<Object>> generateDisCode(@Body GeneDisCodeParam param);
 
     //3.3.1 搜索(/search)
     @FormUrlEncoded
@@ -211,7 +234,7 @@ public interface Api {
 
     //3.5.1 用户获取预约订单列表(/verify/sAppt)
     @POST("verify/sAppt")
-    Observable<HttpResp<Object>> allOrder(@Body OrderListParam param);
+    Observable<HttpResp<OrderListBean>> allOrder(@Body OrderListParam param);
 
     // 3.5.1.1 订单详情(/verify/getApptOrder)
     @FormUrlEncoded
@@ -221,7 +244,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("verify/sAppt")
-    Observable<HttpResp<Object>> allOrder2(@FieldMap Map<String, Object> param);
+    Observable<HttpResp<OrderListBean>> allOrder2(@FieldMap Map<String, Object> param);
 
 
     //3.5.3 用户获取购买的咨询师套餐订单列表(/cp/selectPoList)
@@ -240,7 +263,7 @@ public interface Api {
     //3.6.2 收藏列表(/collecttList)
     @FormUrlEncoded
     @POST("collecttList")
-    Observable<HttpResp<Object>> collectList(@Field("uId") String uId);
+    Observable<HttpResp<FavoriteBean>> collectList(@Field("uId") String uId);
 
 
     // 3.8.2 购买者获取购买咨询师套餐后所得的优惠码列表(/cp/selectPcList)
@@ -281,11 +304,15 @@ public interface Api {
 
     @Multipart
     @POST("uploadFile")
-    Observable<HttpResp<String>> uploadFile3(@Part("moduleid")  RequestBody moduleid,@Part("oldImg")  RequestBody oldImg, @Part MultipartBody.Part p);
+    Observable<HttpResp<String>> uploadFile3(@Part("moduleid") RequestBody moduleid, @Part("oldImg") RequestBody oldImg, @Part MultipartBody.Part p);
 
     // 3.10.8 客户列表(/getCustomerList)
     @POST("getCustomerList")
-    Observable<HttpResp<Object>> getCustomerList(@Body CustomerParam param);
+    Observable<HttpResp<CustomerListBean>> getCustomerList(@Body CustomerParam param);
+
+    @FormUrlEncoded
+    @POST("getCustomerList")
+    Observable<HttpResp<CustomerListBean>> getCustomerList2(@FieldMap Map<String, Object> param);
 
     // 3.10.9 咨询记录(/getConsultNum)
     @FormUrlEncoded
@@ -295,12 +322,13 @@ public interface Api {
     // 3.10.10 根据用户id查询用户填写的来访者信息(/client/selectClientAll)
     @FormUrlEncoded
     @POST("client/selectClientAll")
-    Observable<HttpResp<Object>> getCustomerInfo(@Field("userId") String userId);
+    Observable<HttpResp<List<CustomerInfoBean>>> getCustomerInfo(@Field("userId") String userId);
 
     // 3.11.1 获取咨询室列表(/room/list)
     @FormUrlEncoded
     @POST("room/list")
-    Observable<HttpResp<Object>> roomList(@Field("type") int type, @Field("addr") String addr);
+    Observable<HttpResp<RoomListBean>> roomList(@Field("type") int type, @Field("addr") String addr);
+
 
     // 3.11.2 咨询室详情(/room/detail)
     @FormUrlEncoded
@@ -309,7 +337,7 @@ public interface Api {
 
     // 3.11.3 我的咨询室预约(/verify/queryRoomList)
     @POST("verify/queryRoomList")
-    Observable<HttpResp<Object>> getRoomOrderList(@Body RoomOrderParam param);
+    Observable<HttpResp<ZiXunShiOrderListBean>> getRoomOrderList(@Body RoomOrderParam param);
 
     // 3.12.1 获取套餐产品(/cp/getTcAll)
     @POST("cp/getTcAll")
@@ -323,10 +351,21 @@ public interface Api {
     Observable<HttpResp<List<CouponPackgeBean>>> getExpertCouponPackge(@Field("consultId") String consultId, @Field("packageState") int packageState);
 
     // 3.12.3 设置咨询师套餐(/cp/addConsultPackage)
+    @POST("cp/addConsultPackage")
+    Observable<HttpResp<Object>> addConsultPackage(@Field("consultId") String consultId, @Field("tcId") int tcId);
+
+    // 3.12.4 修改套餐内容、发布/下架套餐(/cp/setCpState)
+    @POST("cp/setCpState")
+    Observable<HttpResp<Object>> setCpState(@Field("consultId") String consultId, @Field("packageState") int packageState, @Field("tcId") int tcId);
 
     // 3.12.4 修改套餐内容、更改套餐排序、发布/下架套餐(/cp/setCpState)
     @POST("cp/setCpState")
-    Observable<HttpResp<Boolean>> setCouponPackge(@Body ModifyCouponParam param);
+    Observable<HttpResp<Boolean>> setCpState(@Body ModifyCouponParam param);
+
+    //  3.11.12 查询订单状态(/expert/query/state)
+    @FormUrlEncoded
+    @POST("expert/query/state")
+    Observable<HttpResp<OrderDetailBean>> queryOrderState(@Field("serialId") String serialId);
 
     // 3.13.1 收支明细列表(/balance/query)  consultId
     @FormUrlEncoded
@@ -338,16 +377,21 @@ public interface Api {
     Observable<HttpResp<Object>> cashExtract(@Body ExtractParam param);
 
     // 3.13.3 获取提现记录(/cash/query)
+    @FormUrlEncoded
+    @POST("cash/query")
+    Observable<HttpResp<Object>> queryExtract(@Field("counselorId") String counselorId);
 
 
-    // 3.13.4 获取提现信息(/bank/query)
+    // 3.13.4 获取银行卡信息(/bank/query)
     @FormUrlEncoded
     @POST("bank/query")
-    Observable<HttpResp<Object>> balanceQuery(@Field("userId") String userId);
+    Observable<HttpResp<Object>> bankQuery(@Field("userId") String userId);
 
     // 3.13.5 添加提现信息(/bank/insert) userId
 
     // 3.13.6 修改提现信息(/bank/update)
+
+
 }
 
 

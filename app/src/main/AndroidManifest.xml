@@ -59,6 +59,8 @@
         <activity android:name=".ui.activity.EEditPackgeActivity" />
         <activity android:name=".ui.activity.EZiXunShiDetailActivity" />
         <activity android:name=".ui.activity.EExtractMoneyActivity" />
+        <activity android:name=".ui.activity.EExtractHistoryActivity" />
+        <activity android:name=".ui.activity.EIncomHistoryActivity" />
 
         <activity android:name=".wxapi.WXPayEntryActivity" />
     </application>

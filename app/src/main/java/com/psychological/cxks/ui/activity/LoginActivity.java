@@ -160,7 +160,7 @@ public class LoginActivity extends BaseActivity {
                                 SPUtil.saveString(LoginActivity.this, "name", ret.getUsername());
                                 SPUtil.saveString(LoginActivity.this, "userId", ret.getUserId());
                                 SPUtil.saveString(LoginActivity.this, "img", ret.getImg());
-                                // TODO 极光信息时候需要存储?
+
                                 SPUtil.saveInt(LoginActivity.this, "jg_id", ret.getJiguang().getId());
                                 SPUtil.saveString(LoginActivity.this, "jg_nickname", ret.getJiguang().getNickname());
                                 SPUtil.saveString(LoginActivity.this, "jg_password", ret.getJiguang().getPassword());
@@ -195,7 +195,7 @@ public class LoginActivity extends BaseActivity {
                                 SPUtil.saveString(LoginActivity.this, "name", ret.getUsername());
                                 SPUtil.saveString(LoginActivity.this, "userId", ret.getUserId());
                                 SPUtil.saveString(LoginActivity.this, "img", ret.getImg());
-                                // TODO 极光信息时候需要存储?
+
                                 SPUtil.saveInt(LoginActivity.this, "jg_id", ret.getJiguang().getId());
                                 SPUtil.saveString(LoginActivity.this, "jg_nickname", ret.getJiguang().getNickname());
                                 SPUtil.saveString(LoginActivity.this, "jg_password", ret.getJiguang().getPassword());

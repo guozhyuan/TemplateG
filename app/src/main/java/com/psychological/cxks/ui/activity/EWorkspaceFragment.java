@@ -93,7 +93,7 @@ public class EWorkspaceFragment extends BaseFragment {
 
                         break;
                     case 9:// 评价
-
+                        startActivity(new Intent(getActivity(), ConsumerEvaluateActivity.class));
                         break;
                 }
             });

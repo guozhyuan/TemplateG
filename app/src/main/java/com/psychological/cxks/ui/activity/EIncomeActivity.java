@@ -30,14 +30,14 @@ public class EIncomeActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Disposable d = ApiWrapper.getInstance().balanceQuery(App.info.getUserId()).subscribe(
-                ret -> {
-
-                }, err -> {
-
-                }
-        );
-        compositeDisposable.add(d);
+//        Disposable d = ApiWrapper.getInstance().balanceQuery(App.info.getUserId()).subscribe(
+//                ret -> {
+//
+//                }, err -> {
+//
+//                }
+//        );
+//        compositeDisposable.add(d);
     }
 
     @Override
@@ -70,20 +70,24 @@ public class EIncomeActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;
 
             case R.id.extract:
-                startActivity(new Intent(this, EExtractMoneyActivity.class));
+                intent = new Intent(this, EExtractMoneyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.history:
-
+                intent = new Intent(this, EExtractHistoryActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.desc:
-
+                intent = new Intent(this, EIncomHistoryActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.rule:

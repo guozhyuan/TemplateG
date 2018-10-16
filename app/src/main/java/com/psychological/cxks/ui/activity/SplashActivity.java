@@ -31,7 +31,7 @@ public class SplashActivity extends BaseActivity {
         String jg_nickname = SPUtil.getString(this, "jg_nickname");
         String jg_password = SPUtil.getString(this, "jg_password");
         String jg_username = SPUtil.getString(this, "jg_username");
-        // TODO 极光信息时候需要存储?
+
         if (App.info != null) {
             startActivity(new Intent(this, type == 1 ? MainActivity.class : EMainActivity.class));
         } else {

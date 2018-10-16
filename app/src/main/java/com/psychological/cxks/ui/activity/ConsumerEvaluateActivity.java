@@ -6,10 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 
 import com.psychological.cxks.bean.EvaluateBean;
@@ -47,6 +49,12 @@ public class ConsumerEvaluateActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userId = getIntent().getStringExtra("userId");
+        if (TextUtils.isEmpty(userId)) {
+            if (App.info != null && App.info.getType() == 2) {
+                userId = App.info.getUserId();
+            }
+        }
+        if (TextUtils.isEmpty(userId)) return;
         getEvaluateList();
         getScore();
     }

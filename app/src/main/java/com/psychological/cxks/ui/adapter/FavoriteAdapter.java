@@ -9,13 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.FavoriteBean;
+
+import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.VH> {
 
     private Context context;
+    private List<FavoriteBean> list;
 
-    public FavoriteAdapter(Context context) {
+    public FavoriteAdapter(Context context, List<FavoriteBean> list) {
         this.context = context;
+        this.list = list;
     }
 
     @Override
@@ -31,7 +36,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.VH> {
 
     @Override
     public int getItemCount() {
-        return 50;
+        return list.size();
     }
 
     class VH extends RecyclerView.ViewHolder {

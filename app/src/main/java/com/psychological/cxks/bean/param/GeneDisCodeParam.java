@@ -6,11 +6,14 @@ public class GeneDisCodeParam {
     obtainId	√	string	32	获取人id(购买者id)
     obtainName	√	string	16	获取人姓名(购买者姓名)
     packageId	√	int		套餐id
-    num	√	int		次数(套餐里的次数)*/
+    num	√	int		次数(套餐里的次数)
+    price	√	int	套餐价格*/
 
     public String consultId;
     public String obtainId;
     public String obtainName;
     public int packageId;
     public int num;
+    public int price;
+
 }

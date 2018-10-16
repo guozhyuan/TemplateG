@@ -7,8 +7,12 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.psychological.cxks.App;
 import com.psychological.cxks.R;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.view.stepview.HorizontalStepView;
@@ -23,16 +27,55 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     private static final String TAG = "OrderDetail";
     private TextView tv_evaluate;
+    private ImageView back;
     private HorizontalStepView stepView;
+    private TextView time;
+    private ImageView avater;
+    private TextView nick;
+    private TextView addr;
+    private TextView title;
+    private TextView chat;
+    private TextView method;
+    private TextView tv_book_field;
+    private TextView tv_reduce_info;
+    private TextView tv_pay;
+    private TextView tv_my_name;
+    private TextView my_gender;
+    private TextView my_addr;
+    private TextView my_phone;
+    private LinearLayout ll_visitor_info;
+    private LinearLayout ll_notice;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (App.info != null) {
+            tv_my_name.setText(App.info.getUsername());
+            my_gender.setText("");
+            my_addr.setText("");
+            my_phone.setText(App.info.getMobil());
+        }
+
         String serialId = getIntent().getStringExtra("serialId");
-//        Disposable dis = ApiWrapper.getInstance().orderDetail(serialId).subscribe(ret -> {
-//
-//        });
-//        compositeDisposable.add(dis);
+        Disposable dis = ApiWrapper.getInstance().queryOrderState(serialId).subscribe(
+                ret -> {
+                    time.setText(ret.getDealTime());
+                    Glide.with(OrderDetailActivity.this).load(ret.getImg()).apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.launcher)).into(avater);
+                    nick.setText(ret.getName());
+                    addr.setText(ret.getDizhi());
+                    title.setText("");
+                    // 1—电话咨询，2—见面咨询
+                    method.setText(ret.getMethod() == 1 ? "电咨" : "面询");
+                    tv_book_field.setText("");
+                    tv_reduce_info.setText("");
+                    tv_pay.setText("");
+                    // 订单状态，-1:已下单；0：已付款；1：已取消；2：已确定接单；3：咨询结束；4：已评价
+                    setupStepView(ret.getState());
+                },
+                err -> {
+                    Log.e(TAG, "queryOrderState: err " + err);
+                });
+        compositeDisposable.add(dis);
     }
 
     @Override
@@ -43,26 +86,34 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void findView() {
         stepView = findViewById(R.id.stepview);
-        setupStepView();
 
-        TextView time = findViewById(R.id.time);
-        ImageView head = findViewById(R.id.head);
-        TextView nick = findViewById(R.id.nick);
-        TextView addr = findViewById(R.id.addr);
-        TextView title = findViewById(R.id.title);
-        TextView chat = findViewById(R.id.chat);
 
-        //
-        TextView method = findViewById(R.id.method);                 //咨询方式
-        TextView tv_book_field = findViewById(R.id.tv_book_field);  //咨询领域
-        TextView tv_reduce_info = findViewById(R.id.tv_reduce_info);//减免金额
-        TextView tv_pay = findViewById(R.id.tv_pay);                 //支付金额
+        back = findViewById(R.id.back);
+        time = findViewById(R.id.time);
+        avater = findViewById(R.id.head);
+        nick = findViewById(R.id.nick);
+        addr = findViewById(R.id.addr);
+        title = findViewById(R.id.title);
+        chat = findViewById(R.id.chat);
 
         //
-        TextView tv_my_name = findViewById(R.id.tv_my_name);
-        TextView my_gender = findViewById(R.id.my_gender);
-        TextView my_addr = findViewById(R.id.my_addr);
-        TextView my_phone = findViewById(R.id.my_phone);
+        //咨询方式
+        method = findViewById(R.id.method);
+        //咨询领域
+        tv_book_field = findViewById(R.id.tv_book_field);
+        //减免金额
+        tv_reduce_info = findViewById(R.id.tv_reduce_info);
+        //支付金额
+        tv_pay = findViewById(R.id.tv_pay);
+
+        //
+        tv_my_name = findViewById(R.id.tv_my_name);
+        my_gender = findViewById(R.id.my_gender);
+        my_addr = findViewById(R.id.my_addr);
+        my_phone = findViewById(R.id.my_phone);
+
+        ll_visitor_info = findViewById(R.id.ll_visitor_info);
+        ll_notice = findViewById(R.id.ll_notice);
 
         //
         TextView tv_question = findViewById(R.id.tv_question);
@@ -79,11 +130,12 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     }
 
-    private void setupStepView() {
+    private void setupStepView(int state) {
+        // 订单状态，-1:已下单；0：已付款；1：已取消；2：已确定接单；3：咨询结束；4：已评价
         List<StepBean> stepsBeanList = new ArrayList<>();
-        StepBean stepBean0 = new StepBean("已下单", 1);
-        StepBean stepBean1 = new StepBean("已付款", 1);
-        StepBean stepBean2 = new StepBean("待确认", 1);
+        StepBean stepBean0 = new StepBean("已下单", -1);
+        StepBean stepBean1 = new StepBean("已付款", -1);
+        StepBean stepBean2 = new StepBean("待确认", -1);
         StepBean stepBean3 = new StepBean("待咨询", -1);
         StepBean stepBean4 = new StepBean("待评价", -1);
         stepsBeanList.add(stepBean0);
@@ -91,7 +143,11 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         stepsBeanList.add(stepBean2);
         stepsBeanList.add(stepBean3);
         stepsBeanList.add(stepBean4);
-
+        for (int i = 0; i < stepsBeanList.size(); i++) {
+            if (state + 1 >= i) {
+                stepsBeanList.get(i).setState(1);
+            }
+        }
         stepView
                 .setStepViewTexts(stepsBeanList)//总步骤
                 .setTextSize(16)//set textSize
@@ -108,15 +164,34 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initListener() {
+        back.setOnClickListener(this);
+        chat.setOnClickListener(this);
+        ll_visitor_info.setOnClickListener(this);
+        ll_notice.setOnClickListener(this);
         tv_evaluate.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.back:
+                finish();
+                break;
+
             case R.id.tv_evaluate:
                 Log.e(TAG, "onClick: 去评价");
-                startActivity(new Intent(OrderDetailActivity.this, EvaluateActivity.class));
+                Intent intent = new Intent(OrderDetailActivity.this, EvaluateActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.chat:
+
+                break;
+            case R.id.ll_visitor_info:
+
+                break;
+            case R.id.ll_notice:
+
                 break;
         }
     }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.psychological.cxks.App;
 import com.psychological.cxks.R;
+import com.psychological.cxks.bean.ZiXunShiOrderListBean;
 import com.psychological.cxks.bean.param.RoomOrderParam;
 import com.psychological.cxks.http.ApiWrapper;
 import com.psychological.cxks.ui.activity.LoginActivity;
@@ -35,7 +36,7 @@ public class EZiXunShiOrderFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipe;
     private RoomOrderParam param = new RoomOrderParam();
-    private List<Object> list = new ArrayList<>();
+    private List<ZiXunShiOrderListBean.ResultBean> list = new ArrayList<>();
 
 
     @Override
@@ -75,6 +76,7 @@ public class EZiXunShiOrderFragment extends BaseFragment {
                 getRoomOrder();
             }
         });
+
         adapter = new Adapter();
         recyclerView.setAdapter(adapter);
         if (App.info == null) {
@@ -92,6 +94,8 @@ public class EZiXunShiOrderFragment extends BaseFragment {
                     if (swipe.isRefreshing()) {
                         swipe.setRefreshing(false);
                     }
+                    list.addAll(ret.getResult());
+                    adapter.notifyDataSetChanged();
                 },
                 err -> {
                     if (swipe.isRefreshing()) {
@@ -104,6 +108,7 @@ public class EZiXunShiOrderFragment extends BaseFragment {
 
     class Adapter extends RecyclerView.Adapter<Adapter.VH> {
 
+
         @Override
         public VH onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_order_zixunshi, parent, false);
@@ -112,31 +117,34 @@ public class EZiXunShiOrderFragment extends BaseFragment {
 
         @Override
         public void onBindViewHolder(VH holder, int position) {
-            holder.method.setText(String.format("咨询方式:%s", ""));
-            holder.time.setText(String.format("咨询时间:%s", ""));
-            holder.orderNum.setText(String.format("订单号:%s", ""));
+            ZiXunShiOrderListBean.ResultBean bean = list.get(position);
+            holder.name.setText(bean.getRoomName());
+            holder.time.setText(String.format("咨询时间:%s", bean.getOrderTime()));
+            holder.orderNum.setText(String.format("订单号:%s", bean.getSerialId()));
             holder.detail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().startActivity(new Intent(getActivity(), OrderDetailActivity.class));
+                    Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                    intent.putExtra("serialId", bean.getSerialId());
+                    getActivity().startActivity(intent);
                 }
             });
         }
 
         @Override
         public int getItemCount() {
-            return 10;
+            return list.size();
         }
 
         class VH extends RecyclerView.ViewHolder {
-            private TextView method;
+            private TextView name;
             private TextView time;
             private TextView orderNum;
             private TextView detail;
 
             public VH(View itemView) {
                 super(itemView);
-                method = itemView.findViewById(R.id.packge_name);
+                name = itemView.findViewById(R.id.name);
                 time = itemView.findViewById(R.id.time);
                 orderNum = itemView.findViewById(R.id.orderNum);
                 detail = itemView.findViewById(R.id.chat);

@@ -2,7 +2,7 @@ package com.psychological.cxks.bean;
 
 import java.util.List;
 
-public class FavoriteBean {
+public class RoomListBean {
 
     /**
      * begRow : 0
@@ -19,9 +19,9 @@ public class FavoriteBean {
      * condition2 : null
      * result : []
      * footer : null
-     * params : {"uId":"qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N","pageSize":20,"sort":"co.create_time","begRow":0,"order":"desc"}
+     * params : {"pageSize":20,"sort":"create_time","type":0,"addr":"","begRow":0,"order":"desc"}
      * collect : null
-     * paramsMap : {"uId":"qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N","pageSize":20,"sort":"co.create_time","begRow":0,"order":"desc"}
+     * paramsMap : {"pageSize":20,"sort":"create_time","type":0,"addr":"","begRow":0,"order":"desc"}
      * page : true
      */
 
@@ -43,10 +43,6 @@ public class FavoriteBean {
     private ParamsMapBean paramsMap;
     private boolean page;
     private List<ResultBean> result;
-
-    public static class ResultBean{
-
-    }
 
     public int getBegRow() {
         return begRow;
@@ -194,26 +190,20 @@ public class FavoriteBean {
 
     public static class ParamsBean {
         /**
-         * uId : qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N
          * pageSize : 20
-         * sort : co.create_time
+         * sort : create_time
+         * type : 0
+         * addr :
          * begRow : 0
          * order : desc
          */
 
-        private String uId;
         private int pageSize;
         private String sort;
+        private int type;
+        private String addr;
         private int begRow;
         private String order;
-
-        public String getUId() {
-            return uId;
-        }
-
-        public void setUId(String uId) {
-            this.uId = uId;
-        }
 
         public int getPageSize() {
             return pageSize;
@@ -229,6 +219,22 @@ public class FavoriteBean {
 
         public void setSort(String sort) {
             this.sort = sort;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public String getAddr() {
+            return addr;
+        }
+
+        public void setAddr(String addr) {
+            this.addr = addr;
         }
 
         public int getBegRow() {
@@ -250,26 +256,20 @@ public class FavoriteBean {
 
     public static class ParamsMapBean {
         /**
-         * uId : qWpz8EbK8VQ91EKzdcyYdrGVx9oNtY5N
          * pageSize : 20
-         * sort : co.create_time
+         * sort : create_time
+         * type : 0
+         * addr :
          * begRow : 0
          * order : desc
          */
 
-        private String uId;
         private int pageSize;
         private String sort;
+        private int type;
+        private String addr;
         private int begRow;
         private String order;
-
-        public String getUId() {
-            return uId;
-        }
-
-        public void setUId(String uId) {
-            this.uId = uId;
-        }
 
         public int getPageSize() {
             return pageSize;
@@ -287,6 +287,22 @@ public class FavoriteBean {
             this.sort = sort;
         }
 
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public String getAddr() {
+            return addr;
+        }
+
+        public void setAddr(String addr) {
+            this.addr = addr;
+        }
+
         public int getBegRow() {
             return begRow;
         }
@@ -302,5 +318,9 @@ public class FavoriteBean {
         public void setOrder(String order) {
             this.order = order;
         }
+    }
+
+    public static class ResultBean {
+
     }
 }

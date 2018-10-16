@@ -33,7 +33,7 @@ public class ECodeListFragment extends BaseFragment {
         });
         Adapter adapter = new Adapter();
         recyclerView.setAdapter(adapter);
-
+        // TODO 对用什么接口?
     }
 
 

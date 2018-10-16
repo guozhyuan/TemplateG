@@ -93,7 +93,7 @@ public class JMRtcListenerImpl extends JMRtcListener {
     @Override
     public void onCallError(int i, String s) {
         super.onCallError(i, s);
-        Log.e(TAG, "onCallError");
+        Log.e(TAG, "onCallError" + i + s);
     }
 
     @Override

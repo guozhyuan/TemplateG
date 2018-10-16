@@ -8,7 +8,7 @@ public class DisCodePayParam {
 //    discount		string	10	如果是使用折扣优惠码就传值
 //    userId		string	32	如果是使用折扣优惠码就传值
 //    ip	√	string		用户端实际ip
-    public Double amount;
+    public int amount;
     public String title;
     public String orderId;
     public int count;
