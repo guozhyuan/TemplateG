@@ -41,6 +41,7 @@ public class ConsumerEvaluateActivity extends BaseActivity {
 
     private RatingBar ratingBar;
     private SwipeRefreshLayout swipe;
+    private ImageView back;
 
     private boolean isRefresh = false;
     private String userId;
@@ -66,6 +67,7 @@ public class ConsumerEvaluateActivity extends BaseActivity {
 
     @Override
     public void findView() {
+        back = findViewById(R.id.back);
         recyclerView = findViewById(R.id.recycler);
         swipe = findViewById(R.id.swipe);
         swipe.setOnRefreshListener(() -> {
@@ -101,7 +103,7 @@ public class ConsumerEvaluateActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        back.setOnClickListener(v -> finish());
     }
 
     private void getEvaluateList() {

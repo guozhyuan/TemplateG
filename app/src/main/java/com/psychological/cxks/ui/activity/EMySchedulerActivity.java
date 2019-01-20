@@ -11,7 +11,7 @@ public class EMySchedulerActivity extends BaseActivity {
 
     @Override
     public void findView() {
-
+        findViewById(R.id.back).setOnClickListener(v -> finish());
     }
 
     @Override

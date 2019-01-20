@@ -18,6 +18,7 @@ import com.psychological.cxks.ui.adapter.MsgAdapter;
 import com.psychological.cxks.util.DeviceUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.jpush.im.android.api.JMessageClient;
@@ -93,6 +94,9 @@ public class MsgFragment extends BaseFragment {
 
     private void initData() {
         conversationList = JMessageClient.getConversationList();
+        if (conversationList == null) {
+            conversationList = new ArrayList<>();
+        }
         initView();
     }
 

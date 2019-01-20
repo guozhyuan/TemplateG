@@ -161,7 +161,6 @@ public interface Api {
     Observable<HttpResp<Boolean>> cancelAppt(@Body ChangeOrderStateParam param);
 
     // 3.2.5.1 APP支付(折扣优惠码支付)(/wxPay/appPay)
-
     @POST("wxPay/appPay")
     Observable<HttpResp<String>> discountCodePay(@Body DisCodePayParam param);
 
@@ -215,6 +214,10 @@ public interface Api {
     //3.2.7.1 购买套餐(/cp/addPackageOrder) (注：先添加总订单)
     @POST("cp/addPackageOrder")
     Observable<HttpResp<Boolean>> buyPackge(@Body BuyPackgeParam param);
+
+    @FormUrlEncoded
+    @POST("cp/addPackageOrder")
+    Observable<HttpResp<Boolean>> buyPackge2(@FieldMap Map<String, Object> map);
 
     //3.2.7.2 生成优惠码(/cp/addPackageCoupon)
     @POST("cp/addPackageCoupon")

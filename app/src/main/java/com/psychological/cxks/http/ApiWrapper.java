@@ -8,7 +8,6 @@ import com.psychological.cxks.bean.CustomerInfoBean;
 import com.psychological.cxks.bean.CustomerListBean;
 import com.psychological.cxks.bean.EvaluateBean;
 import com.psychological.cxks.bean.ExpertBean2;
-import com.psychological.cxks.bean.ExpertDetailBean;
 import com.psychological.cxks.bean.ExpertDetailBean2;
 import com.psychological.cxks.bean.FavoriteBean;
 import com.psychological.cxks.bean.OrderDetailBean;
@@ -39,7 +38,7 @@ import com.psychological.cxks.bean.param.QueryOrderStateParam;
 import com.psychological.cxks.bean.param.ReservationParam;
 import com.psychological.cxks.bean.param.RoomOrderParam;
 import com.psychological.cxks.bean.param.UnlockParam;
-import com.psychological.cxks.sevice.Http501Event;
+import com.psychological.cxks.sevice.HttpExceptionEvent;
 
 import org.greenrobot.greendao.annotation.NotNull;
 
@@ -79,9 +78,24 @@ public class ApiWrapper {
                     @Override
                     public void subscribe(ObservableEmitter<T> emitter) throws Exception {
 
-                        if (r.code == 501) {
-                            EventBus.getDefault().post(new Http501Event());
-                            emitter.onError(new HttpDataNullException("Resp : 501"));
+                        if (r.code == 300
+                                || r.code == 500
+                                || r.code == 1001
+                                || r.code == 1002
+                                || r.code == 1003
+                                || r.code == 1004
+                                || r.code == 1005
+                                || r.code == 1006
+                                || r.code == 1007
+                                || r.code == 1008
+                                || r.code == 501
+                                || r.code == 502
+                                || r.code == 503
+                                || r.code == 504
+                                || r.code == 505
+                                || r.code == 506) {
+                            EventBus.getDefault().post(new HttpExceptionEvent(r.code, r.message));
+//                            emitter.onError(new HttpDataNullException(r.code + " : " + r.message));
                             return;
                         }
                         if (r.data == null) {
@@ -275,6 +289,11 @@ public class ApiWrapper {
 
     public Observable<Boolean> buyPackge(BuyPackgeParam param) {
         Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().buyPackge(param).compose(HttpScheduler.applyIO());
+        return transform(observable);
+    }
+
+    public Observable<Boolean> buyPackge2(Map<String, Object> map) {
+        Observable<HttpResp<Boolean>> observable = HttpX.Instance().Api().buyPackge2(map).compose(HttpScheduler.applyIO());
         return transform(observable);
     }
 

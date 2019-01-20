@@ -53,6 +53,7 @@ public class OrderListActivity extends BaseActivity {
     public void findView() {
         viewPager = findViewById(R.id.viewpager);
         tabs = findViewById(R.id.tabs);
+        findViewById(R.id.back).setOnClickListener(v -> finish());
     }
 
     @Override

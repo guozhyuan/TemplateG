@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -70,6 +73,8 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
     private TextView trainingExperience;
     private TextView workExprience;
 
+    private FrameLayout fl_talk;
+    private FrameLayout fl_message;
 
     private RecyclerView recyclerPackge;
     private ImageView consumerHead;
@@ -89,10 +94,6 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         transData = (ExpertBean2) getIntent().getSerializableExtra("expert");
-
-//        peer_name.setText(Objects.requireNonNull(transData).getName());
-//        nick.setText(Objects.requireNonNull(transData).getName());
-//        Glide.with(this).load(Objects.requireNonNull(transData).getImg()).apply(RequestOptions.circleCropTransform()).into(head);
 
         onSalePackgeAdapter = new OnSalePackgeAdapter(this, couponPackgeBeanList);
         onSalePackgeAdapter.setOnPackgeClickListener(position -> {
@@ -123,6 +124,8 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
         back = findViewById(R.id.back);
         message = findViewById(R.id.message);
         talk = findViewById(R.id.talk);
+        fl_talk = findViewById(R.id.fl_talk);
+        fl_message = findViewById(R.id.fl_message);
         order = findViewById(R.id.order);
         needMore = findViewById(R.id.need_more);
 
@@ -154,8 +157,8 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void initListener() {
         back.setOnClickListener(this);
-        message.setOnClickListener(this);
-        talk.setOnClickListener(this);
+        fl_message.setOnClickListener(this);
+        fl_talk.setOnClickListener(this);
         order.setOnClickListener(this);
         needMore.setOnClickListener(this);
         play.setOnClickListener(this);
@@ -172,7 +175,7 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             rank.setText(detailBean.getDiploma());
             diploma.setText(detailBean.getDiploma());
             Glide.with(ExpertDetailActivity.this).load(detailBean.getImg()).into(imgBig);
-            introduction.setText(detailBean.getDetail());
+            introduction.setText(Html.fromHtml(detailBean.getDetail()));
             educationBackground.setText(detailBean.getEducationBackground());
             trainingExperience.setText(detailBean.getTrainingExperience());
             workExprience.setText(detailBean.getWorkExprience());
@@ -201,10 +204,13 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
 
     private void getCouponPackgeList(String userId) {
         Disposable disposable = ApiWrapper.getInstance().getExpertCouponPackge(userId, 1).subscribe(ret -> {
-            couponPackgeBeanList.clear();
-            couponPackgeBeanList.addAll(ret);
-            onSalePackgeAdapter.notifyDataSetChanged();
-        });
+                    couponPackgeBeanList.clear();
+                    couponPackgeBeanList.addAll(ret);
+                    onSalePackgeAdapter.notifyDataSetChanged();
+                },
+                err -> {
+                    Log.e("getCouponPackgeList", "err: " + err);
+                });
         compositeDisposable.add(disposable);
     }
 
@@ -262,12 +268,12 @@ public class ExpertDetailActivity extends BaseActivity implements View.OnClickLi
             case R.id.back:
                 finish();
                 break;
-            case R.id.message:
+            case R.id.fl_message:
                 intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("peer", transData.getUserId());
                 startActivity(intent);
                 break;
-            case R.id.talk:
+            case R.id.fl_talk:
                 Conversation conv = JMessageClient.getSingleConversation(transData.getUserId());
                 if (conv == null) {
                     conv = Conversation.createSingleConversation(transData.getUserId());

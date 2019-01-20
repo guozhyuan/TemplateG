@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 
 import com.psychological.cxks.R;
 
@@ -19,6 +20,7 @@ public class CouponsListActivity extends BaseActivity {
     private ViewPager viewPager;
     private TabLayout tabs;
     private String[] titles = {"优惠券", "优惠套餐"};
+    private ImageView back;
 
 
     @Override
@@ -46,6 +48,8 @@ public class CouponsListActivity extends BaseActivity {
     public void findView() {
         viewPager = findViewById(R.id.viewpager);
         tabs = findViewById(R.id.tabs);
+        ImageView back = findViewById(R.id.back);
+        back.setOnClickListener(v -> finish());
     }
 
     @Override

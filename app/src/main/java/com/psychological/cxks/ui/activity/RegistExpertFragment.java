@@ -2,6 +2,7 @@ package com.psychological.cxks.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -49,12 +50,38 @@ public class RegistExpertFragment extends BaseFragment {
 
     }
 
+
+    private CountDownTimer timer = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            resend.setText(String.format("重新发送(%s)", millisUntilFinished / 1000));
+        }
+
+        @Override
+        public void onFinish() {
+            resend.setClickable(true);
+            resend.setText("重新发送");
+            resend.setSelected(false);
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
     private void setupListener() {
         resend.setOnClickListener(v -> {
             if (TextUtils.isEmpty(etPhone.getText())) {
                 Toast.makeText(getActivity(), "电话不能为空", Toast.LENGTH_SHORT).show();
                 return;
             }
+            timer.start();
+            resend.setClickable(false);
+            resend.setSelected(true);
             ApiWrapper.getInstance().send(etPhone.getText().toString()).subscribe(c -> {
             });
 

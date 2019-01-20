@@ -46,6 +46,7 @@ public class EvaluateActivity extends BaseActivity {
         tvEvaluate = findViewById(R.id.tv_evaluate);
         tagLayout = findViewById(R.id.tagLayout);
         ratingBar = findViewById(R.id.ratingbar);
+        findViewById(R.id.back).setOnClickListener(v -> finish());
     }
 
     @Override

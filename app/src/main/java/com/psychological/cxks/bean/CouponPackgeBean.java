@@ -7,17 +7,35 @@ import java.io.Serializable;
  * 咨询师:  我的套餐中套餐
  */
 public class CouponPackgeBean implements Serializable{
-    //    id	√	int	套餐主键id
-//    taocan	√	string	订单号
-//    price	√	int	套餐价格
-//    num	√	int	咨询次数
-//    level	√	int	咨询师级别
-//    explain	√	string	套餐说明
+    /**
+     * id : 13
+     * tcId : 2
+     * consultId : asFsfibeSVxWDz1xV8hsHbQczU5lP7XI
+     * state : 0
+     * packageState : 1
+     * creator : null
+     * createTime : null
+     * operator : null
+     * operateTime : null
+     * taocan : 普通级10次咨询套餐
+     * price : 850
+     * num : 10
+     * explain : 电话咨询，面询
+     */
+
+
     private int id;
+    private int tcId;
+    private String consultId;
+    private int state;
+    private int packageState;
+    private Object creator;
+    private Object createTime;
+    private Object operator;
+    private Object operateTime;
     private String taocan;
     private int price;
     private int num;
-    private int level;
     private String explain;
 
     public int getId() {
@@ -26,6 +44,70 @@ public class CouponPackgeBean implements Serializable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getTcId() {
+        return tcId;
+    }
+
+    public void setTcId(int tcId) {
+        this.tcId = tcId;
+    }
+
+    public String getConsultId() {
+        return consultId;
+    }
+
+    public void setConsultId(String consultId) {
+        this.consultId = consultId;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getPackageState() {
+        return packageState;
+    }
+
+    public void setPackageState(int packageState) {
+        this.packageState = packageState;
+    }
+
+    public Object getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Object creator) {
+        this.creator = creator;
+    }
+
+    public Object getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Object createTime) {
+        this.createTime = createTime;
+    }
+
+    public Object getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Object operator) {
+        this.operator = operator;
+    }
+
+    public Object getOperateTime() {
+        return operateTime;
+    }
+
+    public void setOperateTime(Object operateTime) {
+        this.operateTime = operateTime;
     }
 
     public String getTaocan() {
@@ -52,14 +134,6 @@ public class CouponPackgeBean implements Serializable{
         this.num = num;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     public String getExplain() {
         return explain;
     }
@@ -67,4 +141,5 @@ public class CouponPackgeBean implements Serializable{
     public void setExplain(String explain) {
         this.explain = explain;
     }
+
 }

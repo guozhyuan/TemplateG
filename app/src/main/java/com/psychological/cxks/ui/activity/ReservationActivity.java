@@ -251,7 +251,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                 addAllOrderParam.body = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());
                 if (mode_phone.isSelected()) {
                     addAllOrderParam.price = transData.getPhone();
-                } else if (mode_phone.isSelected()) {
+                } else if (mode_meeting.isSelected()) {
                     addAllOrderParam.price = transData.getMeet();
                 }
                 addAllOrderParam.isPay = 0; // TODO isPay????
@@ -508,7 +508,7 @@ public class ReservationActivity extends BaseActivity implements View.OnClickLis
                                                     DisCodePayParam disCodePayParam = new DisCodePayParam();
                                                     if (mode_phone.isSelected()) {
                                                         disCodePayParam.amount = transData.getPhone();
-                                                    } else if (mode_phone.isSelected()) {
+                                                    } else if (mode_meeting.isSelected()) {
                                                         disCodePayParam.amount = transData.getMeet();
                                                     }
                                                     disCodePayParam.title = CSLevelEnum.getName(transData.getCsLevel()) + "-" + CSTypeEnum.getName(transData.getCsType());

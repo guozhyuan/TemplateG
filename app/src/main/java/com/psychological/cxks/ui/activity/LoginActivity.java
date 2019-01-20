@@ -3,6 +3,7 @@ package com.psychological.cxks.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
@@ -118,10 +119,13 @@ public class LoginActivity extends BaseActivity {
         });
 
         send.setOnClickListener((v) -> {
-            if (TextUtils.isEmpty(code.getText())) {
+            if (TextUtils.isEmpty(phone.getText())) {
                 Toast.makeText(this, "电话不能为空", Toast.LENGTH_SHORT).show();
                 return;
             }
+            timer.start();
+            send.setClickable(false);
+            send.setSelected(true);
             ApiWrapper.getInstance().send(code.getText().toString()).subscribe(c -> {
 
                     },
@@ -222,5 +226,27 @@ public class LoginActivity extends BaseActivity {
             }
 
         });
+    }
+
+    private CountDownTimer timer = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            send.setText(String.format("发送验证码(%s)", millisUntilFinished / 1000));
+        }
+
+        @Override
+        public void onFinish() {
+            send.setClickable(true);
+            send.setText("发送验证码");
+            send.setSelected(false);
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }
